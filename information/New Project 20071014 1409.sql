@@ -162,21 +162,22 @@ CREATE TABLE `toadmincomment` (
 --
 
 DROP TABLE IF EXISTS `userinformation`;
-CREATE TABLE `userinformation` (
-  `idUser` int(10) unsigned NOT NULL auto_increment,
-  `username` varchar(30) NOT NULL default '',
-  `password` varchar(30) NOT NULL default '',
-  `trueName` varchar(10) NOT NULL default '',
-  `college` varchar(20) NOT NULL default '',
-  `address` varchar(60) NOT NULL default '',
-  `birthday` datetime NOT NULL default '0000-00-00 00:00:00',
-  `sex` enum('MALE','FEMALE') NOT NULL default 'MALE',
-  `email` varchar(40) NOT NULL default '',
-  `telnumber` varchar(15) default NULL,
-  `discription` varchar(300) default NULL,
-  `mark` int(10) unsigned NOT NULL default '0',
-  PRIMARY KEY  (`idUser`,`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=gb2312;
+CREATE TABLE userinformation (
+  idUser int  NOT NULL ,
+  username varchar(30) NOT NULL default '',
+  password varchar(30) NOT NULL default '',
+  trueName varchar(10) NOT NULL default '',
+  college varchar(20) NOT NULL default '',
+  address varchar(60) NOT NULL default '',
+  birthday datetime NOT NULL default '0000-00-00 00:00:00',
+  sex varchar(10) NOT NULL default 'MALE',
+  email varchar(40) NOT NULL default '',
+  telnumber varchar(15) default NULL,
+  discription varchar(300) default NULL,
+  mark int NOT NULL default '0',
+  PRIMARY KEY  (idUser,username)
+  CHECK sex in ('MALE','FEMALE')
+)
 
 --
 -- Dumping data for table `libruary`.`userinformation`

@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 /// <summary>
 /// UserDao 的摘要说明
 /// </summary>
-public interface UserDao
+public interface IUserDao
 {
-    public bool confirmUser(string username, string password);
+    bool confirmUser(string username, string password);
 }
