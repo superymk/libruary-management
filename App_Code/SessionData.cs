@@ -17,7 +17,9 @@ public class SessionData
     private User currentUser;
 
 	private SessionData(){}
-    public static SessionData getInstance() { 
+    public static SessionData getInstance() {
+        if (instance == null)
+            instance = new SessionData();
         return instance;
     }
 

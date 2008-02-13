@@ -19,7 +19,7 @@ public partial class _Default : System.Web.UI.Page
         string name = username.Text;
         string psw = password.Text;
         IUserDao dao = new UserDaoImpl();
-        if (dao.confirmUser(name, psw))
+        if (dao.confirmUser(name, psw)!=-1)
         {
             //do something 
         }
