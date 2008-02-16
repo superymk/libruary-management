@@ -16,14 +16,7 @@ using System.Collections.Generic;
 public class UserDaoImpl : IUserDao
 {
     private string connsql = "server=.\\sqlexpress;uid=sa;pwd=admin1;database=libruary";
-	public UserDaoImpl()
-	{
-		//
-		// TODO: 在此处添加构造函数逻辑
-		//
-	}
-
-
+	public UserDaoImpl(){}
 
     #region UserDao 成员
 
@@ -44,7 +37,7 @@ public class UserDaoImpl : IUserDao
         return -1;
     }
 
-    public bool registerUser(User user, Label l) {
+    public bool registerUser(User user) {
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
@@ -52,12 +45,12 @@ public class UserDaoImpl : IUserDao
         if (!(user.Birthday > new DateTime())) { user.Birthday = DateTime.Now; }
         cmd.CommandText = "insert into userinformation values('" + user.Username + "','"+user.Password+"','"+user.TrueName+"','"
             +user.College+"','"+user.Address+"','"+user.Birthday.ToString()+"','"+user.Sex+"','"+user.Email+"','"+user.Telnumber+"','"+user.Description+"','"+user.Mark+"')";
-        l.Text = cmd.CommandText;
+        //l.Text = cmd.CommandText;
         int result = cmd.ExecuteNonQuery();
         return result != 0;
     }
 
-    public bool updateUser(User user, Label l)
+    public bool updateUser(User user)
     {
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
@@ -67,7 +60,7 @@ public class UserDaoImpl : IUserDao
         cmd.CommandText = "update userinformation set username = '"  + user.Username + "' , password = '" + user.Password + "' , trueName = '" + user.TrueName + "' , college = '"
             + user.College + "' , address = '" + user.Address + "' , birthday = '" + user.Birthday + "' , sex = '" + user.Sex + "' , email = '" + user.Email + 
             "' , telnumber = '" + user.Telnumber + "' , description = '" + user.Description + "' , mark = '" + user.Mark + "' where idUser = "+user.IdUser;
-        l.Text = cmd.CommandText;
+        //l.Text = cmd.CommandText;
         int result = cmd.ExecuteNonQuery();
         return result != 0;
     }
@@ -83,13 +76,40 @@ public class UserDaoImpl : IUserDao
         return result != 0;
     }
 
+    public User getUser(int idUser) {
+        SqlConnection sconn = new SqlConnection(connsql);
+        SqlCommand cmd = new SqlCommand();
+        sconn.Open();
+        cmd.Connection = sconn;
+        string sqlquery = "select * from userinformation where idUser = " + idUser;
+        cmd.CommandText = sqlquery;
+        SqlDataReader reader = cmd.ExecuteReader();
+        if (reader.Read())
+        {
+            User u = new User();
+            u.IdUser = (int)reader["idUser"];
+            u.Username = (string)reader["userName"];
+            u.Password = (string)reader["password"];
+            u.TrueName = (string)reader["trueName"];
+            u.College = (string)reader["college"];
+            u.Birthday = (DateTime)reader["birthday"];
+            u.Address = (string)reader["address"];
+            u.Sex = (string)reader["sex"];
+            u.Email = (string)reader["email"];
+            u.Description = (string)reader["description"];
+            u.Mark = (int)reader["mark"];
+            return u;
+        }
+        return null;
+    }
+
     public IList<User> findUser(User info)
     {
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
         cmd.Connection = sconn;
-        string sqlquery = "select from userinformation where 1=1";
+        string sqlquery = "select * from userinformation where 1=1";
         if (info.Username != null&&!info.Username.Equals("")){
             sqlquery = sqlquery + " and username like '" + info.Username + "'";
         }
@@ -131,6 +151,7 @@ public class UserDaoImpl : IUserDao
             u.Password = (string)reader["password"];
             u.TrueName = (string)reader["trueName"];
             u.College = (string)reader["college"];
+            u.Birthday = (DateTime)reader["birthday"];
             u.Address = (string)reader["address"];
             u.Sex = (string)reader["sex"];
             u.Email = (string)reader["email"];

@@ -15,8 +15,9 @@ using System.Collections.Generic;
 public interface IUserDao
 {
     int confirmUser(string username, string password);
-    bool registerUser(User user,Label l);
+    bool registerUser(User user);
     bool deleteUser(int idUser);
-    bool updateUser(User user, Label l);
+    bool updateUser(User user);
+    User getUser(int idUser);
     IList<User> findUser(User information);
 }

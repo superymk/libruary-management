@@ -12,7 +12,8 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        lblMessage.Text = "Hello World again!";
+        
+        lblMessage.Text += "Hello World again!";
     }
     protected void Log_In(object sender, EventArgs e)
     {
@@ -27,7 +28,8 @@ public partial class _Default : System.Web.UI.Page
         {
             //dosomething
         }
-        nameserver.Text = name;
+        nameserver.Text = lblMessage.Text;
+        //nameserver.Text = name;
         pswserver.Text = psw;
     }
 }
