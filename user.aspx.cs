@@ -12,11 +12,18 @@ using System.Collections.Generic;
 
 public partial class UserManager : System.Web.UI.Page
 {
+    
     protected void Page_Load(object sender, EventArgs e)
     {
         if (IsPostBack)
         {
             description.Text = "postBack";
+            return;
+        }
+        string mode = Request.QueryString["mode"];
+        if (mode!=null && mode.Equals("search"))
+        {
+            searchMode();
             return;
         }
         try{
@@ -25,6 +32,7 @@ public partial class UserManager : System.Web.UI.Page
         }catch (Exception ee)
         {
             updateConfirm.Visible = false;
+            searchConfirm.Visible = false;
         }
     }
 
@@ -93,5 +101,36 @@ public partial class UserManager : System.Web.UI.Page
         email.Text = u.Email;
         description.Text = idUser.Text;
         registerConfirm.Visible = false;
+        searchConfirm.Visible = false;
+    }
+
+    private void searchMode()
+    {
+        updateConfirm.Visible = false;
+        registerConfirm.Visible = false;
+        password.Visible = false;
+        password2.Visible = false;
+        Label1.Visible = false;
+        Label2.Visible = false;
+    }
+
+    protected void search(object sender, EventArgs e) {
+        User u = new User();
+        //u.Username = "as";
+        IUserDao dao = DaoFactory.getUserDao();
+        IList<User> list = dao.findUser(u);
+        username.Text = list.Count+"";
+        for(int i=0; i<list.Count; i++){
+            User user = list[i];
+            TableRow row = new TableRow();
+            TableCell cell1 = new TableCell();
+            Label box = new Label();
+            box.Text = "<a href=user.aspx?id="+user.IdUser+" >"+user.Username+"</a>";
+            cell1.Controls.Add(box);
+            row.Controls.Add(cell1);
+            users.Controls.Add(row);
+            //description.Text += u.ToString();
+        }
+        
     }
 }

@@ -95,6 +95,11 @@
         </asp:Table>
     <asp:Button ID="registerConfirm" Text="Register" runat="server" OnClick="register" />
     <asp:Button ID="updateConfirm" Text="Update" runat="server" OnClick="update" />
+    <asp:Button ID="searchConfirm" Text="Search" runat="server" OnClick="search" />
+    
+    
+    
+    <asp:Table ID="users" runat="server"></asp:Table>
     </div>
     </form>
 </body>
