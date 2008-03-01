@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 /// <summary>
 /// User 的摘要说明
 /// </summary>
-public class User
+public class User : BaseObject
 {
     private int idUser;
 
@@ -111,8 +111,6 @@ public class User
 
 	public User()
 	{
-		//
-		// TODO: 在此处添加构造函数逻辑
-		//
+        
 	}
 }

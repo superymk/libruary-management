@@ -51,7 +51,7 @@ public partial class UserManager : System.Web.UI.Page
         u.Sex = sex.Text;
         u.Email = email.Text;
         u.Description = description.Text;
-        DaoFactory.getUserDao().registerUser(u);
+        DaoFactory.getUserDao().register(u);
         Response.Redirect("default.aspx?name="+u.Username);
     }
 
@@ -80,7 +80,7 @@ public partial class UserManager : System.Web.UI.Page
         catch (FormatException ee){
             description.Text = ee.Message;
         }
-        DaoFactory.getUserDao().updateUser(u);
+        DaoFactory.getUserDao().update(u);
         reload(u.IdUser);
         //Response.Redirect("default.aspx?name=" + u.Password);
     }
@@ -88,7 +88,7 @@ public partial class UserManager : System.Web.UI.Page
     private void reload(int id)
     {
         IUserDao dao = DaoFactory.getUserDao();
-        User u = dao.getUser(id);
+        User u = dao.getById(id);
         idUser.Text = u.IdUser.ToString();
         username.Text = u.Username;
         //password.Text = password2.Text = u.Password;
@@ -118,7 +118,7 @@ public partial class UserManager : System.Web.UI.Page
         User u = new User();
         //u.Username = "as";
         IUserDao dao = DaoFactory.getUserDao();
-        IList<User> list = dao.findUser(u);
+        IList<User> list = dao.find(u);
         username.Text = list.Count+"";
         for(int i=0; i<list.Count; i++){
             User user = list[i];

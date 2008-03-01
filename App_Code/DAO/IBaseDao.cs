@@ -10,9 +10,13 @@ using System.Web.UI.HtmlControls;
 using System.Collections.Generic;
 
 /// <summary>
-/// UserDao 的摘要说明
+/// IBaseDao 的摘要说明
 /// </summary>
-public interface IUserDao : IBaseDao
+public interface IBaseDao
 {
-    int confirmUser(string username, string password);
+    bool register(BaseObject user);
+    bool delete(int id);
+    bool update(BaseObject user);
+    User getById(int id);
+    IList<User> find(BaseObject information);
 }

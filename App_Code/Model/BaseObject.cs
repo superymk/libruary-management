@@ -7,12 +7,17 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
-using System.Collections.Generic;
 
 /// <summary>
-/// UserDao 的摘要说明
+/// BaseObject 的摘要说明
 /// </summary>
-public interface IUserDao : IBaseDao
+public class BaseObject
 {
-    int confirmUser(string username, string password);
+   
+	public BaseObject()
+	{
+		//
+		// TODO: 在此处添加构造函数逻辑
+		//
+	}
 }

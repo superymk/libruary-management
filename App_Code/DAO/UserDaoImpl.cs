@@ -13,12 +13,14 @@ using System.Collections.Generic;
 /// <summary>
 /// UserDaoImpl 的摘要说明
 /// </summary>
-public class UserDaoImpl : IUserDao
-{
-    private string connsql = "server=.\\sqlexpress;uid=sa;pwd=admin1;database=libruary";
-	public UserDaoImpl(){}
+public class UserDaoImpl : BaseDao, IUserDao{
+    //private string connsql = "server=.\\sqlexpress;uid=sa;pwd=admin1;database=libruary";
+	public UserDaoImpl(){
+        relateTable = "userinformation";
+        key = "IdUser";
+    }
 
-    #region UserDao 成员
+    #region IUserDao 成员
 
     public int confirmUser(string username, string password)
     {
@@ -37,20 +39,20 @@ public class UserDaoImpl : IUserDao
         return -1;
     }
 
-    public bool registerUser(User user) {
-        SqlConnection sconn = new SqlConnection(connsql);
-        SqlCommand cmd = new SqlCommand();
-        sconn.Open();
-        cmd.Connection = sconn;
-        if (!(user.Birthday > new DateTime())) { user.Birthday = DateTime.Now; }
-        cmd.CommandText = "insert into userinformation values('" + user.Username + "','"+user.Password+"','"+user.TrueName+"','"
-            +user.College+"','"+user.Address+"','"+user.Birthday.ToString()+"','"+user.Sex+"','"+user.Email+"','"+user.Telnumber+"','"+user.Description+"','"+user.Mark+"')";
-        //l.Text = cmd.CommandText;
-        int result = cmd.ExecuteNonQuery();
-        return result != 0;
-    }
+    //public bool register(User user) {
+    //    SqlConnection sconn = new SqlConnection(connsql);
+    //    SqlCommand cmd = new SqlCommand();
+    //    sconn.Open();
+    //    cmd.Connection = sconn;
+    //    if (!(user.Birthday > new DateTime())) { user.Birthday = DateTime.Now; }
+    //    cmd.CommandText = "insert into userinformation values('" + user.Username + "','"+user.Password+"','"+user.TrueName+"','"
+    //        +user.College+"','"+user.Address+"','"+user.Birthday.ToString()+"','"+user.Sex+"','"+user.Email+"','"+user.Telnumber+"','"+user.Description+"','"+user.Mark+"')";
+    //    //l.Text = cmd.CommandText;
+    //    int result = cmd.ExecuteNonQuery();
+    //    return result != 0;
+    //}
 
-    public bool updateUser(User user)
+    public bool update(User user)
     {
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
@@ -65,18 +67,18 @@ public class UserDaoImpl : IUserDao
         return result != 0;
     }
 
-    public bool deleteUser(int idUser)
-    {
-        SqlConnection sconn = new SqlConnection(connsql);
-        SqlCommand cmd = new SqlCommand();
-        sconn.Open();
-        cmd.Connection = sconn;
-        cmd.CommandText = "delete from userinformation where idUser = " + idUser;
-        int result = cmd.ExecuteNonQuery();
-        return result != 0;
-    }
+    //public bool delete(int idUser)
+    //{
+    //    SqlConnection sconn = new SqlConnection(connsql);
+    //    SqlCommand cmd = new SqlCommand();
+    //    sconn.Open();
+    //    cmd.Connection = sconn;
+    //    cmd.CommandText = "delete from userinformation where idUser = " + idUser;
+    //    int result = cmd.ExecuteNonQuery();
+    //    return result != 0;
+    //}
 
-    public User getUser(int idUser) {
+    public User getById(int idUser) {
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
@@ -103,7 +105,7 @@ public class UserDaoImpl : IUserDao
         return null;
     }
 
-    public IList<User> findUser(User info)
+    public IList<User> find(User info)
     {
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
@@ -162,4 +164,6 @@ public class UserDaoImpl : IUserDao
         return result ;
     }
     #endregion
+
+ 
 }
