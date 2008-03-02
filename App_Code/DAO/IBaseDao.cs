@@ -17,6 +17,6 @@ public interface IBaseDao
     bool register(BaseObject user);
     bool delete(int id);
     bool update(BaseObject user);
-    User getById(int id);
-    IList<User> find(BaseObject information);
+    BaseObject getById(int id);
+    IList<BaseObject> find(BaseObject information);
 }

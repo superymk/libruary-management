@@ -31,7 +31,7 @@ public partial class test : System.Web.UI.Page
         }
         catch (SqlException ex) { lblMessage.Text += "\n" + ex.Message; }
 
-        IList<User> us = dao.find(u);
+        IList<BaseObject> us = dao.find(u);
         lblMessage.Text += us.Count;
     }
     protected void Page_Load()

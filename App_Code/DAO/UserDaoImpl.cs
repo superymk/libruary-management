@@ -18,6 +18,7 @@ public class UserDaoImpl : BaseDao, IUserDao{
 	public UserDaoImpl(){
         relateTable = "userinformation";
         key = "IdUser";
+        objectName = "User";
     }
 
     #region IUserDao 成员
@@ -52,20 +53,20 @@ public class UserDaoImpl : BaseDao, IUserDao{
     //    return result != 0;
     //}
 
-    public bool update(User user)
-    {
-        SqlConnection sconn = new SqlConnection(connsql);
-        SqlCommand cmd = new SqlCommand();
-        sconn.Open();
-        cmd.Connection = sconn;
-        if (!(user.Birthday > new DateTime())) { user.Birthday = DateTime.Now; }
-        cmd.CommandText = "update userinformation set username = '"  + user.Username + "' , password = '" + user.Password + "' , trueName = '" + user.TrueName + "' , college = '"
-            + user.College + "' , address = '" + user.Address + "' , birthday = '" + user.Birthday + "' , sex = '" + user.Sex + "' , email = '" + user.Email + 
-            "' , telnumber = '" + user.Telnumber + "' , description = '" + user.Description + "' , mark = '" + user.Mark + "' where idUser = "+user.IdUser;
-        //l.Text = cmd.CommandText;
-        int result = cmd.ExecuteNonQuery();
-        return result != 0;
-    }
+    //public bool update(User user)
+    //{
+    //    SqlConnection sconn = new SqlConnection(connsql);
+    //    SqlCommand cmd = new SqlCommand();
+    //    sconn.Open();
+    //    cmd.Connection = sconn;
+    //    if (!(user.Birthday > new DateTime())) { user.Birthday = DateTime.Now; }
+    //    cmd.CommandText = "update userinformation set username = '"  + user.Username + "' , password = '" + user.Password + "' , trueName = '" + user.TrueName + "' , college = '"
+    //        + user.College + "' , address = '" + user.Address + "' , birthday = '" + user.Birthday + "' , sex = '" + user.Sex + "' , email = '" + user.Email + 
+    //        "' , telnumber = '" + user.Telnumber + "' , description = '" + user.Description + "' , mark = '" + user.Mark + "' where idUser = "+user.IdUser;
+    //    //l.Text = cmd.CommandText;
+    //    int result = cmd.ExecuteNonQuery();
+    //    return result != 0;
+    //}
 
     //public bool delete(int idUser)
     //{
@@ -78,32 +79,32 @@ public class UserDaoImpl : BaseDao, IUserDao{
     //    return result != 0;
     //}
 
-    public User getById(int idUser) {
-        SqlConnection sconn = new SqlConnection(connsql);
-        SqlCommand cmd = new SqlCommand();
-        sconn.Open();
-        cmd.Connection = sconn;
-        string sqlquery = "select * from userinformation where idUser = " + idUser;
-        cmd.CommandText = sqlquery;
-        SqlDataReader reader = cmd.ExecuteReader();
-        if (reader.Read())
-        {
-            User u = new User();
-            u.IdUser = (int)reader["idUser"];
-            u.Username = (string)reader["userName"];
-            u.Password = (string)reader["password"];
-            u.TrueName = (string)reader["trueName"];
-            u.College = (string)reader["college"];
-            u.Birthday = (DateTime)reader["birthday"];
-            u.Address = (string)reader["address"];
-            u.Sex = (string)reader["sex"];
-            u.Email = (string)reader["email"];
-            u.Description = (string)reader["description"];
-            u.Mark = (int)reader["mark"];
-            return u;
-        }
-        return null;
-    }
+    //public User getById(int idUser) {
+    //    SqlConnection sconn = new SqlConnection(connsql);
+    //    SqlCommand cmd = new SqlCommand();
+    //    sconn.Open();
+    //    cmd.Connection = sconn;
+    //    string sqlquery = "select * from userinformation where idUser = " + idUser;
+    //    cmd.CommandText = sqlquery;
+    //    SqlDataReader reader = cmd.ExecuteReader();
+    //    if (reader.Read())
+    //    {
+    //        User u = new User();
+    //        u.IdUser = (int)reader["idUser"];
+    //        u.Username = (string)reader["userName"];
+    //        u.Password = (string)reader["password"];
+    //        u.TrueName = (string)reader["trueName"];
+    //        u.College = (string)reader["college"];
+    //        u.Birthday = (DateTime)reader["birthday"];
+    //        u.Address = (string)reader["address"];
+    //        u.Sex = (string)reader["sex"];
+    //        u.Email = (string)reader["email"];
+    //        u.Description = (string)reader["description"];
+    //        u.Mark = (int)reader["mark"];
+    //        return u;
+    //    }
+    //    return null;
+    //}
 
     public IList<User> find(User info)
     {
