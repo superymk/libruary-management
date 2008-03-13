@@ -1,77 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Font Name="微软雅黑" Size="9" />
-  <Class Name="User" Collapsed="true">
-    <Position X="0.75" Y="1.5" Width="1.5" />
+  <Class Name="User">
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>Model\User.cs</FileName>
       <HashCode>AAAABAAACCQgBAggIQQACAkAAAoIAAACAACIAgAAiAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Book" Collapsed="true">
-    <Position X="2.5" Y="1.5" Width="1.5" />
+  <Class Name="Book">
+    <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>Model\Book.cs</FileName>
       <HashCode>AASCAgAFAAQAAAAkgAAAAIAAAAABAEAGAQCABAAAgiA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="BaseObject" Collapsed="true">
-    <Position X="1.5" Y="0.5" Width="1.5" />
+  <Class Name="BaseObject">
+    <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>Model\BaseObject.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="BaseDao" Collapsed="true">
-    <Position X="5" Y="2.5" Width="1.5" />
+  <Class Name="BaseDao">
+    <Position X="6.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>DAO\BaseDao.cs</FileName>
       <HashCode>AAAAAAAAAEACAAAAAAAEAQAAAAAAAAAACQCAoAAEAAA=</HashCode>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
+    <Lollipop Orientation="Right" Position="0.186" />
   </Class>
-  <Class Name="UserDaoImpl" Collapsed="true">
-    <Position X="4.25" Y="3.5" Width="1.5" />
+  <Class Name="UserDaoImpl">
+    <Position X="5.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <FileName>DAO\UserDaoImpl.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAACAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <Lollipop Position="0.221" />
+    <Lollipop Orientation="Right" Position="0.239" />
   </Class>
-  <Class Name="DaoFactory" Collapsed="true">
-    <Position X="0.5" Y="2.75" Width="1.5" />
+  <Class Name="DaoFactory">
+    <Position X="2.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>DAO\DaoFactory.cs</FileName>
       <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="BookDaoImpl" Collapsed="true">
-    <Position X="6" Y="3.5" Width="1.5" />
+  <Class Name="BookDaoImpl">
+    <Position X="9.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <FileName>DAO\BookDaoImpl.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
+    <Lollipop Orientation="Right" Position="0.186" />
   </Class>
-  <Interface Name="IBaseDao" Collapsed="true">
-    <Position X="5" Y="0.5" Width="1.5" />
+  <Interface Name="IBaseDao">
+    <Position X="9" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>DAO\IBaseDao.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAACQAAgAAEAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="IUserDao" Collapsed="true">
-    <Position X="4.25" Y="1.5" Width="1.5" />
+  <Interface Name="IUserDao">
+    <Position X="8" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <FileName>DAO\IUserDao.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
-  <Enum Name="libruary.BookStateEnum" Collapsed="true">
-    <Position X="2.25" Y="2.75" Width="1.5" />
+  <Interface Name="IBookDao">
+    <Position X="12" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <FileName>Model\BookStateEnum.cs</FileName>
-      <HashCode>AAggAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DAO\IBookDao.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
     </TypeIdentifier>
-  </Enum>
+  </Interface>
 </ClassDiagram>

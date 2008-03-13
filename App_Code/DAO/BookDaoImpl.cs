@@ -12,5 +12,8 @@ public class BookDaoImpl : BaseDao, IBookDao
         key = "IdBook";
         objectName = "Book";
     }
+
+    
+
 }
 

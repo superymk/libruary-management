@@ -6,5 +6,5 @@ using System.ComponentModel;
 
 public interface IBookDao : global::IBaseDao
 {
-    int confirmBook(string bookname);
+    
 }
