@@ -38,13 +38,13 @@ namespace libruary {
         protected global::System.Web.UI.WebControls.TextBox txtBookName;
         
         /// <summary>
-        /// lblIdBook 控件。
+        /// txtIdBook 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblIdBook;
+        protected global::System.Web.UI.WebControls.TextBox txtIdBook;
         
         /// <summary>
         /// txtType 控件。
@@ -117,5 +117,50 @@ namespace libruary {
         /// 要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtComment;
+        
+        /// <summary>
+        /// btnAdd 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdd;
+        
+        /// <summary>
+        /// btnUpdate 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
+        
+        /// <summary>
+        /// btnSearch 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSearch;
+        
+        /// <summary>
+        /// btnDelete 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDelete;
+        
+        /// <summary>
+        /// books 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table books;
     }
 }

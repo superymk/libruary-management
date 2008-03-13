@@ -13,11 +13,11 @@
                 <td style="width: 100px">
                     bookname</td>
                 <td style="width: 100px">
-                    <asp:TextBox ID="txtBookName" runat="server"></asp:TextBox></td>
+                    <asp:TextBox ID="txtBookName" runat="server" OnTextChanged="txtBookName_TextChanged"></asp:TextBox></td>
                 <td style="width: 100px">
                     idBook</td>
                 <td style="width: 102px">
-                    <asp:Label ID="lblIdBook" runat="server" Text="Label"></asp:Label></td>
+                    <asp:TextBox ID="txtIdBook" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
                 <td style="width: 100px">
@@ -68,6 +68,12 @@
                     <asp:TextBox ID="txtComment" runat="server" Height="109px" TextMode="MultiLine" Width="412px"></asp:TextBox></td>
             </tr>
         </table>
+        <asp:Button ID="btnAdd" runat="server" Text="Add" />
+        <asp:Button ID="btnUpdate" runat="server" Text="Update" />
+        <asp:Button ID="btnSearch" runat="server" Text="Search" />
+        <asp:Button ID="btnDelete" runat="server" Text="Delete" /><br />
+        <asp:Table ID="books" runat="server">
+        </asp:Table>
     </form>
 </body>
 </html>

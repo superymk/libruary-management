@@ -20,4 +20,9 @@ public class DaoFactory
     {
         return new UserDaoImpl();
     }
+
+    public static IUserDao getBookDao()
+    {
+        return new BookDaoImpl();
+    }
 }

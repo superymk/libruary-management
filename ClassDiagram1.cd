@@ -9,69 +9,69 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Book">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="2.25" Y="1" Width="1.5" />
     <TypeIdentifier>
       <FileName>Model\Book.cs</FileName>
       <HashCode>AASCAgAFAAQAAAAkgAAAAIAAAAABAEAGAQCABAAAgiA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseObject">
-    <Position X="2.25" Y="0.5" Width="1.5" />
+    <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>Model\BaseObject.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseDao">
-    <Position X="6.75" Y="0.5" Width="1.5" />
+    <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>DAO\BaseDao.cs</FileName>
       <HashCode>AAAAAAAAAEACAAAAAAAEAQAAAAAAAAAACQCAoAAEAAA=</HashCode>
     </TypeIdentifier>
-    <Lollipop Orientation="Right" Position="0.186" />
+    <Lollipop Orientation="Left" Position="1.514" />
   </Class>
   <Class Name="UserDaoImpl">
-    <Position X="5.75" Y="4.25" Width="1.5" />
+    <Position X="5.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>DAO\UserDaoImpl.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAACAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <Lollipop Orientation="Right" Position="0.239" />
+    <Lollipop Orientation="Left" Position="0.229" />
   </Class>
   <Class Name="DaoFactory">
-    <Position X="2.25" Y="1.75" Width="1.5" />
+    <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>DAO\DaoFactory.cs</FileName>
-      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="BookDaoImpl">
-    <Position X="9.75" Y="4.25" Width="1.5" />
+    <Position X="9.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>DAO\BookDaoImpl.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <Lollipop Orientation="Right" Position="0.186" />
+    <Lollipop Orientation="Left" Position="0.238" />
   </Class>
   <Interface Name="IBaseDao">
-    <Position X="9" Y="0.5" Width="1.5" />
+    <Position X="4" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>DAO\IBaseDao.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAACQAAgAAEAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="IUserDao">
-    <Position X="8" Y="4.25" Width="1.5" />
+    <Position X="4" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>DAO\IUserDao.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="IBookDao">
-    <Position X="12" Y="4.25" Width="1.5" />
+    <Position X="7.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>DAO\IBookDao.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
 </ClassDiagram>
