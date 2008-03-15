@@ -17,7 +17,7 @@ namespace libruary
         {
             if (IsPostBack)
             {
-                description.Text = "postBack";
+                txtComment.Text = "postBack";
                 return;
             }
             string mode = Request.QueryString["mode"];
@@ -43,26 +43,26 @@ namespace libruary
             IBookDao dao = DaoFactory.getBookDao();
             Book b = (Book)dao.getById(id);
             txtIdBook.Text = b.IdBook.ToString();
-            txtBookName.Text = b.Username;
+            txtBookName.Text = b.BookName;
             txtComment.Text = b.Comment;
             txtAbstract.Text = b.Abstract;
             txtAuthor.Text = b.Author;
             txtDonatePerson.Text = b.DonatePerson;
-            txtNumCopies.Text = b.NumCopies;
+            txtNumCopies.Text = b.NumCopies.ToString();
             txtPublishCompany.Text = b.PublishCompany;
             txtType.Text = b.Type;
 
             switch(b.State){
                 case BookStateEnum.BORROWED:
-                    ddlState.SelectedValue="BORROWED";
+                    ddlState.SelectedValue = "BORROWED"; break;
                 case BookStateEnum.FREE:
-                    ddlState.SelectedValue = "FREE";
+                    ddlState.SelectedValue = "FREE"; break;
                 case BookStateEnum.MISSING:
-                    ddlState.SelectedValue = "MISSING";
+                    ddlState.SelectedValue = "MISSING"; break;
             }
 
-            registerConfirm.Visible = false;
-            searchConfirm.Visible = false;
+            btnAdd.Visible = false;
+            btnSearch.Visible = false;
         }
 
         private void searchMode()
@@ -102,16 +102,24 @@ namespace libruary
             }
             catch (FormatException ee)
             {
-                txtComment.Text = ee.Message + idBook.Text;
+                txtComment.Text = ee.Message + txtIdBook.Text;
                 return;
             }
 
-            b.Username = txtBookName.Text;
+            b.BookName = txtBookName.Text;
             b.Comment = txtComment.Text;
             b.Abstract = txtAbstract.Text;
             b.Author = txtAuthor.Text;
             b.DonatePerson = txtDonatePerson.Text;
-            b.NumCopies = txtNumCopies.Text;
+            try
+            {
+                b.NumCopies = byte.Parse(txtNumCopies.Text);
+            }
+            catch (FormatException ee)
+            {
+                txtComment.Text = ee.Message + txtIdBook.Text;
+                return;
+            }
             b.PublishCompany = txtPublishCompany.Text;
             b.Type = txtType.Text;
             switch (ddlState.SelectedValue)

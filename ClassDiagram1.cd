@@ -28,7 +28,7 @@
       <FileName>DAO\BaseDao.cs</FileName>
       <HashCode>AAAAAAAAAEACAAAAAAAEAQAAAAAAAAAACQCAoAAEAAA=</HashCode>
     </TypeIdentifier>
-    <Lollipop Orientation="Left" Position="1.514" />
+    <Lollipop Orientation="Left" Position="1.533" />
   </Class>
   <Class Name="UserDaoImpl">
     <Position X="5.75" Y="4.75" Width="1.5" />

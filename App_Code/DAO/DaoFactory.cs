@@ -21,7 +21,7 @@ public class DaoFactory
         return new UserDaoImpl();
     }
 
-    public static IUserDao getBookDao()
+    public static IBookDao getBookDao()
     {
         return new BookDaoImpl();
     }
