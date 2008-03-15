@@ -13,23 +13,22 @@ public partial class _Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         
-        lblMessage.Text += "Hello World again!";
+        lblMessage.Text = "Hello World";
     }
     protected void Log_In(object sender, EventArgs e)
     {
         string name = username.Text;
         string psw = password.Text;
         IUserDao dao = new UserDaoImpl();
-        if (dao.confirmUser(name, psw)!=-1)
+        int id = dao.confirmUser(name, psw);
+        if (id!=-1)
         {
-            //do something 
+            Response.Redirect("user.aspx?id=" + id);
         }
         else
         {
-            //dosomething
+            lblMessage.Text = "username or password wrong";
         }
-        nameserver.Text = lblMessage.Text;
-        //nameserver.Text = name;
-        pswserver.Text = psw;
+        
     }
 }

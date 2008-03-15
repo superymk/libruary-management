@@ -97,6 +97,7 @@ public abstract class BaseDao:IBaseDao
         }
         command = command.Remove(command.Length - 1);
         command += "where " + key + " = " + t.GetProperty(key).GetValue(obj,null);
+        cmd.CommandText = command;
         int result = cmd.ExecuteNonQuery();
         return result != 0;
     }
@@ -151,8 +152,10 @@ public abstract class BaseDao:IBaseDao
             if (!name.Equals(key) && value!=null && !value.Equals(""))
             {
                 if (!pt.Equals(typeof(DateTime)) && !pt.Equals(typeof(Int32))) {
-                    sqlquery += " and " + name + " like '" + value + "'";
-                } else if (((DateTime)value > new DateTime())) {
+                    sqlquery += " and " + name + " like '%" + value + "%'";
+                }
+                else if (pt.Equals(typeof(DateTime)) && ((DateTime)value > new DateTime()))
+                {
                     sqlquery += " and " + name + " like '" + value + "'";
                 }
             }

@@ -17,7 +17,6 @@ public partial class UserManager : System.Web.UI.Page
     {
         if (IsPostBack)
         {
-            description.Text = "postBack";
             return;
         }
         string mode = Request.QueryString["mode"];
@@ -116,10 +115,22 @@ public partial class UserManager : System.Web.UI.Page
 
     protected void search(object sender, EventArgs e) {
         User u = new User();
-        //u.Username = "as";
+        u.Username = username.Text;
+        u.Password = password.Text;
+        u.TrueName = trueName.Text;
+        u.College = college.Text;
+        u.Address = address.Text;
+        u.Sex = sex.Text;
+        u.Email = email.Text;
+        u.Description = description.Text;
+        try
+        {
+            u.Birthday = DateTime.Parse(birthday.Text);
+        }
+        catch (FormatException ee){}
         IUserDao dao = DaoFactory.getUserDao();
         IList<BaseObject> list = dao.find(u);
-        username.Text = list.Count+"";
+        //username.Text = list.Count+"";
         for(int i=0; i<list.Count; i++){
             User user = (User)list[i];
             TableRow row = new TableRow();
