@@ -25,8 +25,7 @@ public class Book : global::BaseObject
     private int idBook;
     private int numCopies;
     private string publishCompany;
-    private BookStateEnum state;
-    private int field;
+    private string state;
     private string type;
 
 	public Book()
@@ -132,7 +131,7 @@ public class Book : global::BaseObject
         }
     }
 
-    public BookStateEnum State
+    public string State
     {
         get
         {

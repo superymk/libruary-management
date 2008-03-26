@@ -113,7 +113,8 @@ public class UserDaoImpl : BaseDao, IUserDao{
         sconn.Open();
         cmd.Connection = sconn;
         string sqlquery = "select * from userinformation where 1=1";
-        if (info.Username != null&&!info.Username.Equals("")){
+        if (info.Username != null && !info.Username.Equals(""))
+        {
             sqlquery = sqlquery + " and username like '" + info.Username + "'";
         }
         if (info.TrueName != null && !info.TrueName.Equals(""))
@@ -147,7 +148,8 @@ public class UserDaoImpl : BaseDao, IUserDao{
         cmd.CommandText = sqlquery;
         SqlDataReader reader = cmd.ExecuteReader();
         IList<User> result = new List<User>();
-        while (reader.Read()) {
+        while (reader.Read())
+        {
             User u = new User();
             u.IdUser = (int)reader["idUser"];
             u.Username = (string)reader["userName"];
@@ -162,7 +164,7 @@ public class UserDaoImpl : BaseDao, IUserDao{
             u.Mark = (int)reader["mark"];
             result.Add(u);
         }
-        return result ;
+        return result;
     }
     #endregion
 

@@ -108,7 +108,7 @@ public abstract class BaseDao:IBaseDao
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
         cmd.Connection = sconn;
-        string sqlquery = "select * from userinformation where " + key + " = " + id;
+        string sqlquery = "select * from "+relateTable+" where " + key + " = " + id;
         cmd.CommandText = sqlquery;
         SqlDataReader reader = cmd.ExecuteReader();
         if (reader.Read())
@@ -171,6 +171,7 @@ public abstract class BaseDao:IBaseDao
             foreach (PropertyInfo p in t.GetProperties())
             {
                 Type pType = p.PropertyType;
+                Console.Write(lowerFirstChar(p.Name));
                 p.SetValue(o, reader[lowerFirstChar(p.Name)], null);
                 //casting may be not needed
                 //switch (pType.Name)

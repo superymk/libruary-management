@@ -53,14 +53,7 @@ using System.Collections.Generic;
             txtPublishCompany.Text = b.PublishCompany;
             txtType.Text = b.Type;
 
-            switch(b.State){
-                case BookStateEnum.BORROWED:
-                    ddlState.SelectedValue = "BORROWED"; break;
-                case BookStateEnum.FREE:
-                    ddlState.SelectedValue = "FREE"; break;
-                case BookStateEnum.MISSING:
-                    ddlState.SelectedValue = "MISSING"; break;
-            }
+            ddlState.SelectedValue = b.State.Trim();
 
             btnAdd.Visible = false;
             btnSearch.Visible = false;
@@ -114,7 +107,7 @@ using System.Collections.Generic;
             b.DonatePerson = txtDonatePerson.Text;
             try
             {
-                b.NumCopies = byte.Parse(txtNumCopies.Text);
+                b.NumCopies = int.Parse(txtNumCopies.Text);
             }
             catch (FormatException ee)
             {
@@ -123,14 +116,7 @@ using System.Collections.Generic;
             }
             b.PublishCompany = txtPublishCompany.Text;
             b.Type = txtType.Text;
-            switch (ddlState.SelectedValue)
-            {
-                case"BORROWED": b.State = BookStateEnum.BORROWED; break;
-                case "FREE": b.State = BookStateEnum.FREE; break;
-                case "MISSING": b.State = BookStateEnum.MISSING; break;
-                default: break;
-
-            }
+            b.State = ddlState.SelectedValue;
             DaoFactory.getBookDao().update(b);
             reload(b.IdBook);
             
@@ -146,7 +132,7 @@ using System.Collections.Generic;
             b.DonatePerson = txtDonatePerson.Text;
             try
             {
-                b.NumCopies = byte.Parse(txtNumCopies.Text);
+                b.NumCopies = int.Parse(txtNumCopies.Text);
             }
             catch (FormatException ee)
             {
@@ -156,20 +142,8 @@ using System.Collections.Generic;
             b.PublishCompany = txtPublishCompany.Text;
             b.Type = txtType.Text;
 
-            string state= ddlState.SelectedValue;
-            if (state.Equals("BORROWED"))
-            {
-                b.State = BookStateEnum.BORROWED;
-            }
-            else if (state.Equals("FREE"))
-            {
-                b.State = BookStateEnum.FREE;
-            }
-            else if (state.Equals("MISSING"))
-            {
-                b.State = BookStateEnum.MISSING;
-            }
-
+            b.State= ddlState.SelectedValue;
+            
             DaoFactory.getBookDao().register(b);
             Response.Redirect("book.aspx?mode=search" );
         }
