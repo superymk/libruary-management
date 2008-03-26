@@ -10,8 +10,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Collections.Generic;
 
-namespace libruary
-{
+
     public partial class book : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -36,6 +35,7 @@ namespace libruary
             {
                 btnSearch.Visible = false;
                 btnUpdate.Visible = false;
+                Response.Write(ee.Message);
             }
         }
 
@@ -69,7 +69,7 @@ namespace libruary
         private void searchMode()
         {
             btnAdd.Visible = false;
-            btnDelete.Visible = false;
+            
             btnUpdate.Visible = false;
         }
 
@@ -135,5 +135,43 @@ namespace libruary
             reload(b.IdBook);
             
         }
+
+        protected void register(object sender, EventArgs e)
+        {
+            Book b = new Book();
+            b.BookName = txtBookName.Text;
+            b.Abstract = txtAbstract.Text;
+            b.Author = txtAuthor.Text;
+            b.Comment = txtComment.Text;
+            b.DonatePerson = txtDonatePerson.Text;
+            try
+            {
+                b.NumCopies = byte.Parse(txtNumCopies.Text);
+            }
+            catch (FormatException ee)
+            {
+                txtComment.Text = ee.Message + txtIdBook.Text;
+                return;
+            } 
+            b.PublishCompany = txtPublishCompany.Text;
+            b.Type = txtType.Text;
+
+            string state= ddlState.SelectedValue;
+            if (state.Equals("BORROWED"))
+            {
+                b.State = BookStateEnum.BORROWED;
+            }
+            else if (state.Equals("FREE"))
+            {
+                b.State = BookStateEnum.FREE;
+            }
+            else if (state.Equals("MISSING"))
+            {
+                b.State = BookStateEnum.MISSING;
+            }
+
+            DaoFactory.getBookDao().register(b);
+            Response.Redirect("book.aspx?mode=search" );
+        }
+
     }
-}

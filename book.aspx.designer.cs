@@ -145,15 +145,6 @@ public partial class book {
     protected global::System.Web.UI.WebControls.Button btnSearch;
     
     /// <summary>
-    /// btnDelete 控件。
-    /// </summary>
-    /// <remarks>
-    /// 自动生成的字段。
-    /// 要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-    /// </remarks>
-    protected global::System.Web.UI.WebControls.Button btnDelete;
-    
-    /// <summary>
     /// books 控件。
     /// </summary>
     /// <remarks>

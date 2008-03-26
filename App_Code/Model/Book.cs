@@ -23,7 +23,7 @@ public class Book : global::BaseObject
     private string comment;
     private string donatePerson;
     private int idBook;
-    private byte numCopies;
+    private int numCopies;
     private string publishCompany;
     private BookStateEnum state;
     private int field;
@@ -60,7 +60,7 @@ public class Book : global::BaseObject
         }
     }
 
-    public byte NumCopies
+    public int NumCopies
     {
         get
         {

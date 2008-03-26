@@ -9,7 +9,7 @@ public class BookDaoImpl : BaseDao, IBookDao
 {
     public BookDaoImpl(){
         relateTable = "bookstable";
-        key = "idBook";
+        key = "IdBook";
         objectName = "Book";
     }
 
