@@ -143,7 +143,7 @@ public abstract class BaseDao:IBaseDao
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
         cmd.Connection = sconn;
-        string sqlquery = "select * from userinformation where 1=1";
+        string sqlquery = "select * from "+relateTable+" where 1=1";
         Type t = information.GetType();
         foreach (PropertyInfo p in t.GetProperties()) {
             Type pt = p.PropertyType;

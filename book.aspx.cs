@@ -17,13 +17,15 @@ using System.Collections.Generic;
         {
             if (IsPostBack)
             {
-                txtComment.Text = "postBack";
+//                txtComment.Text = "postBack";
                 return;
             }
             string mode = Request.QueryString["mode"];
             if (mode != null && mode.Equals("search"))
             {
-                searchMode();
+                btnAdd.Visible = false;
+
+                btnUpdate.Visible = false;
                 return;
             }
             try
@@ -35,7 +37,7 @@ using System.Collections.Generic;
             {
                 btnSearch.Visible = false;
                 btnUpdate.Visible = false;
-                Response.Write(ee.Message);
+                
             }
         }
 
@@ -59,31 +61,26 @@ using System.Collections.Generic;
             btnSearch.Visible = false;
         }
 
-        private void searchMode()
-        {
-            btnAdd.Visible = false;
-            
-            btnUpdate.Visible = false;
-        }
 
         protected void search(object sender, EventArgs e)
         {
             Book b = new Book();
             IBookDao dao = DaoFactory.getBookDao();
             IList<BaseObject> list = dao.find(b);
-            txtBookName.Text = list.Count + "";
+            
             for (int i = 0; i < list.Count; i++)
             {
                 Book book = (Book)list[i];
                 TableRow row = new TableRow();
                 TableCell cell1 = new TableCell();
                 Label box = new Label();
-                box.Text = "<a href=book.aspx?id=" + b.IdBook + " >" + b.BookName + "</a>";
+                box.Text = "<a href=book.aspx?id=" + book.IdBook + " >" + book.BookName + "</a>";
                 cell1.Controls.Add(box);
                 row.Controls.Add(cell1);
                 books.Controls.Add(row);
                 
             }
+
 
         }
 
