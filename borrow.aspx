@@ -14,7 +14,11 @@
         BookName：<br />
         <asp:TextBox ID="txtBookName" runat="server"></asp:TextBox><br />
         <asp:Button ID="btnRegister" runat="server" OnClick="register" Text="Register" />
-        <asp:Button ID="btnSearch" runat="server" Text="Search" /></div>
+        <asp:Button ID="btnUpdate" runat="server" Text="Update" />
+        <asp:Button ID="btnSearch" runat="server" Text="Search" /><br />
+        <asp:Table ID="tblBorrow" runat="server">
+        </asp:Table>
+    </div>
     </form>
 </body>
 </html>

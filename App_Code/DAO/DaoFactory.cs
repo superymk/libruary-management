@@ -25,4 +25,9 @@ public class DaoFactory
     {
         return new BookDaoImpl();
     }
+
+    public static IBorrowDao getBorrowDao()
+    {
+        return new BorrowDaoImpl();
+    }
 }
