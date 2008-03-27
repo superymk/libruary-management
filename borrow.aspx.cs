@@ -67,6 +67,8 @@ public partial class borrow : System.Web.UI.Page
 
         Borrow b = new Borrow();
         IBorrowDao dao = DaoFactory.getBorrowDao();
+        IBookDao bookDao = DaoFactory.getBookDao();
+        IUserDao userDao = DaoFactory.getUserDao();
         IList<BaseObject> list = dao.find(b);
 
         for (int i = 0; i < list.Count; i++)
@@ -75,10 +77,16 @@ public partial class borrow : System.Web.UI.Page
             TableRow row = new TableRow();
             TableCell cell1 = new TableCell();
             Label box = new Label();
+
+            Book book =(Book) bookDao.getById(borrow.IdBook);
+            User user =(User) userDao.getById(borrow.IdUser);
+
             box.Text = "<a href=book.aspx?id=" + book.IdBook + " >" + book.BookName + "</a>";
+            box.Text += " - <a href=user.aspx?id=" + user.IdUser + " >" + user.Username + "</a>";
+
             cell1.Controls.Add(box);
             row.Controls.Add(cell1);
-            books.Controls.Add(row);
+            tblBorrow.Controls.Add(row);
 
         }
 
