@@ -42,7 +42,7 @@
     <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\DAO\DaoFactory.cs</FileName>
-      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAg=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="BookDaoImpl">
@@ -57,7 +57,7 @@
     <Position X="12.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\DAO\BorrowDaoImpl.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <Lollipop Orientation="Left" Position="0.301" />
   </Class>
@@ -65,7 +65,14 @@
     <Position X="4" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\Model\Borrow.cs</FileName>
-      <HashCode>AAAAAAABCAAAAQgAAAAAAAAAAAAAAAAAAACAAAAAgAA=</HashCode>
+      <HashCode>AAAAAAABCAAAAQgAAAAAAAAAAAAAAAAAAACAEAAAgAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DaoException">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>App_Code\DAO\DaoException.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Interface Name="IBaseDao">

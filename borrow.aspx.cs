@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 public partial class borrow : System.Web.UI.Page
 {
-    protected double deadLinePeriod = 10;
+
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -49,29 +49,17 @@ public partial class borrow : System.Web.UI.Page
     }
     protected void register(object sender, EventArgs e)
     {
-        
-        Borrow borrow = new Borrow();
 
-        Book book = new Book();
-        book.BookName = txtBookName.Text;
-        IList<BaseObject> list = DaoFactory.getBookDao().find(book);
-        if (list.Count != 1) Response.Redirect("borrow.aspx?err=\"Can't find Book!");
-        book = (Book)list[0];
-        if (book.BookName==null||book.BookName.Equals("")) Response.Redirect("borrow.aspx?err=\"Can't find Book!");
-
-        User user = new User();
-        user.Username = txtUserName.Text;
-        list = DaoFactory.getUserDao().find(user);
-        if (list.Count != 1) Response.Redirect("borrow.aspx?err=\"Can't find User!");
-        user= (User)list[0];
-        if (user.Username == null || user.Username.Equals("")) Response.Redirect("borrow.aspx?err=\"Can't find User!");
-
-        borrow.IdBook = book.IdBook;
-        borrow.IdUser = user.IdUser;
-
-        borrow.DeadLine =DateTime.Today.AddDays(deadLinePeriod);
-
-        DaoFactory.getBorrowDao().register(borrow);
+        BorrowDaoImpl bDao = (BorrowDaoImpl)DaoFactory.getBorrowDao();
+        try
+        {
+            bDao.RegisteByName(txtUserName.Text, txtBookName.Text);
+        }
+        catch (DaoException de)
+        {
+            Response.Redirect("borrow.aspx?err="+de.Message);
+        }
+       
         
         
         Response.Redirect("borrow.aspx?mode=search");
