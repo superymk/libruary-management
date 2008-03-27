@@ -10,14 +10,6 @@ public class Borrow : global::BaseObject
     private int idUser;
     private DateTime deadLine;
 
-    public double DeadLinePeriod
-    {
-        get
-        {
-            return 10;
-        }
-    }
-
     public int IdBook
     {
         get

@@ -43,8 +43,8 @@ public partial class borrow : System.Web.UI.Page
         }
         catch (Exception ee)
         {
-            //updateConfirm.Visible = false;
-            //searchConfirm.Visible = false;
+            btnSearch.Visible = false;
+            btnUpdate.Visible = false;
         }
     }
     protected void register(object sender, EventArgs e)
@@ -60,8 +60,27 @@ public partial class borrow : System.Web.UI.Page
             Response.Redirect("borrow.aspx?err="+de.Message);
         }
        
-        
-        
         Response.Redirect("borrow.aspx?mode=search");
+    }
+    protected void Search(object sender, EventArgs e)
+    {
+
+        Borrow b = new Borrow();
+        IBorrowDao dao = DaoFactory.getBorrowDao();
+        IList<BaseObject> list = dao.find(b);
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            Borrow borrow = (Borrow)list[i];
+            TableRow row = new TableRow();
+            TableCell cell1 = new TableCell();
+            Label box = new Label();
+            box.Text = "<a href=book.aspx?id=" + book.IdBook + " >" + book.BookName + "</a>";
+            cell1.Controls.Add(box);
+            row.Controls.Add(cell1);
+            books.Controls.Add(row);
+
+        }
+
     }
 }
