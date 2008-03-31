@@ -24,6 +24,12 @@ public partial class UserManager : System.Web.UI.Page
         {
             searchMode();
             return;
+        } if (mode != null && mode.ToLower().Equals("searchall"))
+        {
+            searchMode();
+            search(sender, e);
+            return;
+
         }
         try{
             Int32 id = Int32.Parse(Request.QueryString["id"]);

@@ -14,6 +14,7 @@ public partial class _Default : System.Web.UI.Page
     {
         
         lblMessage.Text = "Hello World";
+        
     }
     protected void Log_In(object sender, EventArgs e)
     {
@@ -23,6 +24,7 @@ public partial class _Default : System.Web.UI.Page
         int id = dao.confirmUser(name, psw);
         if (id!=-1)
         {
+            
             Response.Redirect("user.aspx?id=" + id);
         }
         else

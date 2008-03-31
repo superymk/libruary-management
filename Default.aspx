@@ -11,6 +11,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        上海交通大学 微软俱乐部 图书管理系统<br />
 
     <asp:Label id="lblMessage"  runat="server" /> 
     

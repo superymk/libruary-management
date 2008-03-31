@@ -27,6 +27,13 @@ using System.Collections.Generic;
 
                 btnUpdate.Visible = false;
                 return;
+            } if (mode != null && mode.ToLower().Equals("searchall"))
+            {
+                btnUpdate.Visible = false;
+                btnAdd.Visible = false;
+                search(sender, e);
+                return;
+
             }
             try
             {

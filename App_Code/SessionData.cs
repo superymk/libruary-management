@@ -28,5 +28,7 @@ public class SessionData
     {
         get { return currentUser; }
         set { currentUser = value; }
-    } 
+    }
+
+    
 }

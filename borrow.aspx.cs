@@ -22,11 +22,18 @@ public partial class borrow : System.Web.UI.Page
             return;
         }
         string mode = Request.QueryString["mode"];
-        if (mode != null && mode.Equals("search"))
+        if (mode != null && mode.ToLower().Equals("search"))
         {
             btnUpdate.Visible = false;
             btnRegister.Visible = false;
             return;
+        } if (mode != null && mode.ToLower().Equals("searchall"))
+        {
+            btnUpdate.Visible = false;
+            btnRegister.Visible = false;
+            Search(sender,e);
+            return;
+
         }
         string err = Request.QueryString["err"];
         if (err != null )

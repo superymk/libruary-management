@@ -2,28 +2,44 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Font Name="微软雅黑" Size="9" />
   <Class Name="User">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="2.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\Model\User.cs</FileName>
       <HashCode>AAAABAAACCQgBAggIQQACAkAAAoIAAACAACIAgAAiAA=</HashCode>
     </TypeIdentifier>
+    <InheritanceLine Type="BaseObject" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="6.5" />
+        <Point X="1.25" Y="6.125" />
+        <Point X="3" Y="6.125" />
+        <Point X="3" Y="6.5" />
+      </Path>
+    </InheritanceLine>
   </Class>
   <Class Name="Book">
-    <Position X="2.25" Y="1" Width="1.5" />
+    <Position X="4" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\Model\Book.cs</FileName>
       <HashCode>AAQCAgAFAAQAAAAkgAAAAIAAAAABAEAGAQCABAAAgiA=</HashCode>
     </TypeIdentifier>
+    <InheritanceLine Type="BaseObject" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="6.5" />
+        <Point X="1.25" Y="6.103" />
+        <Point X="4.75" Y="6.103" />
+        <Point X="4.75" Y="6.5" />
+      </Path>
+    </InheritanceLine>
   </Class>
   <Class Name="BaseObject">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\Model\BaseObject.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseDao">
-    <Position X="7.75" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\DAO\BaseDao.cs</FileName>
       <HashCode>AAAAAAAAAEACAAAAAAAEAQAAAAAAAAAACQCAoAAEAAA=</HashCode>
@@ -31,76 +47,132 @@
     <Lollipop Orientation="Bottom" Position="0.1" />
   </Class>
   <Class Name="UserDaoImpl">
-    <Position X="5.75" Y="4.75" Width="1.5" />
+    <Position X="2.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\DAO\UserDaoImpl.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAACAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <Lollipop Orientation="Left" Position="0.229" />
+    <InheritanceLine Type="BaseDao" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="2.75" />
+        <Point X="1.25" Y="2.558" />
+        <Point X="3" Y="2.558" />
+        <Point X="3" Y="2.75" />
+      </Path>
+    </InheritanceLine>
+    <Lollipop Position="1.028" />
   </Class>
   <Class Name="DaoFactory">
-    <Position X="6" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="8" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\DAO\DaoFactory.cs</FileName>
       <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAg=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="BookDaoImpl">
-    <Position X="9.25" Y="4.75" Width="1.5" />
+    <Position X="4" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\DAO\BookDaoImpl.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <Lollipop Orientation="Left" Position="0.238" />
+    <InheritanceLine Type="BaseDao" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="2.75" />
+        <Point X="1.25" Y="2.558" />
+        <Point X="4.75" Y="2.558" />
+        <Point X="4.75" Y="2.75" />
+      </Path>
+    </InheritanceLine>
+    <Lollipop Position="0.926" />
   </Class>
   <Class Name="BorrowDaoImpl">
-    <Position X="12.75" Y="4.75" Width="1.5" />
+    <Position X="5.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\DAO\BorrowDaoImpl.cs</FileName>
-      <HashCode>AQAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAEAAAAAA=</HashCode>
     </TypeIdentifier>
-    <Lollipop Orientation="Left" Position="0.301" />
+    <InheritanceLine Type="BaseDao" FixedToPoint="true">
+      <Path>
+        <Point X="1.656" Y="2.75" />
+        <Point X="1.656" Y="2.558" />
+        <Point X="6.5" Y="2.558" />
+        <Point X="6.5" Y="2.75" />
+      </Path>
+    </InheritanceLine>
+    <Lollipop Position="1.157" />
   </Class>
   <Class Name="Borrow">
-    <Position X="4" Y="1.75" Width="1.5" />
+    <Position X="5.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\Model\Borrow.cs</FileName>
-      <HashCode>AAAAAAABCAAAAQgAAAAAAAAAAAAAAAAAAACAEAAAgAA=</HashCode>
+      <HashCode>AAAAAAABCAAAAQgAAAAAAAAAAAAAAAAAAACAAAAAgAA=</HashCode>
     </TypeIdentifier>
+    <InheritanceLine Type="BaseObject" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="6.5" />
+        <Point X="1.25" Y="6.125" />
+        <Point X="6.438" Y="6.125" />
+        <Point X="6.438" Y="6.5" />
+      </Path>
+    </InheritanceLine>
   </Class>
   <Class Name="DaoException">
-    <Position X="10" Y="1.5" Width="1.5" />
+    <Position X="0.5" Y="10" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\DAO\DaoException.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Interface Name="IBaseDao">
-    <Position X="6" Y="2.25" Width="1.5" />
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\DAO\IBaseDao.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAACQAAgAAEAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="IUserDao">
-    <Position X="4" Y="4.75" Width="1.5" />
+    <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\DAO\IUserDao.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
+    <InheritanceLine Type="IBaseDao" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="0.5" />
+        <Point X="1.25" Y="0.34" />
+        <Point X="3.062" Y="0.34" />
+        <Point X="3.062" Y="0.5" />
+      </Path>
+    </InheritanceLine>
   </Interface>
   <Interface Name="IBookDao">
-    <Position X="7.5" Y="4.75" Width="1.5" />
+    <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\DAO\IBookDao.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
+    <InheritanceLine Type="IBaseDao" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="0.5" />
+        <Point X="1.25" Y="0.34" />
+        <Point X="4.75" Y="0.34" />
+        <Point X="4.75" Y="0.5" />
+      </Path>
+    </InheritanceLine>
   </Interface>
   <Interface Name="IBorrowDao">
-    <Position X="11" Y="4.75" Width="1.5" />
+    <Position X="5.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>App_Code\DAO\IBorrowDao.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
+    <InheritanceLine Type="IBaseDao" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="0.5" />
+        <Point X="1.25" Y="0.34" />
+        <Point X="6.438" Y="0.34" />
+        <Point X="6.438" Y="0.5" />
+      </Path>
+    </InheritanceLine>
   </Interface>
 </ClassDiagram>
