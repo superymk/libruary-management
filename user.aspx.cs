@@ -30,6 +30,22 @@ public partial class UserManager : System.Web.UI.Page
             search(sender, e);
             return;
 
+        } if (Session["user"] != null)
+        {
+            User u =(User) Session["user"];
+            Response.Write(u.Username+"<br/>");
+            Response.Write(u.Password);
+            if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
+            {
+                IUserDao dao = DaoFactory.getUserDao();
+                int id = dao.confirmUser(u.Username, u.Password);
+                if (id != -1)
+                {
+                    reload(id);
+                }
+                return;
+            }
+
         }
         try{
             Int32 id = Int32.Parse(Request.QueryString["id"]);

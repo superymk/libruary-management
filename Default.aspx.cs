@@ -20,8 +20,16 @@ public partial class _Default : System.Web.UI.Page
     {
         string name = username.Text;
         string psw = password.Text;
+        
         IUserDao dao = new UserDaoImpl();
         int id = dao.confirmUser(name, psw);
+
+
+        User u = new User();
+        u.Username = name;
+        u.Password = psw;
+        Session["user"] = u;
+
         if (id!=-1)
         {
             
@@ -32,5 +40,9 @@ public partial class _Default : System.Web.UI.Page
             lblMessage.Text = "username or password wrong";
         }
         
+    }
+    protected void offline(object sender, EventArgs e)
+    {
+        Session["user"] = null;
     }
 }

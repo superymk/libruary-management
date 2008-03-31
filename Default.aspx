@@ -27,7 +27,7 @@
     
 <asp:Label id="nameserver"  runat="server" /> 
 <asp:Label id="pswserver"  runat="server" /> 
-    </div>
+        <asp:Button ID="btnOffline" runat="server" OnClick="offline" Text="Offline" /></div>
     </form>
 </body>
 </html>
