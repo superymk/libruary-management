@@ -28,12 +28,15 @@ public partial class _Default : System.Web.UI.Page
         User u = new User();
         u.Username = name;
         u.Password = psw;
-        Session["user"] = u;
+        SessionData sd = SessionData.getInstance();
+        sd.CurrentUser = u;
+        Session[SessionData.SessionName] = sd;
 
         if (id!=-1)
         {
             
-            Response.Redirect("user.aspx?id=" + id);
+            //Response.Redirect("user.aspx?id=" + id);
+            Response.Redirect("user.aspx");
         }
         else
         {
@@ -43,6 +46,6 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void offline(object sender, EventArgs e)
     {
-        Session["user"] = null;
+        Session["SectionData"] = null;
     }
 }

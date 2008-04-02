@@ -23,12 +23,14 @@ public class SessionData
         return instance;
     }
 
+    public static String SessionName
+    {
+        get { return "SessionData"; }
+    }
 
     public User CurrentUser
     {
         get { return currentUser; }
         set { currentUser = value; }
-    }
-
-    
+    } 
 }

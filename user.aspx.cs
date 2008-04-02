@@ -30,11 +30,14 @@ public partial class UserManager : System.Web.UI.Page
             search(sender, e);
             return;
 
-        } if (Session["user"] != null)
+        } if (Session[SessionData.SessionName] != null)
         {
-            User u =(User) Session["user"];
-            Response.Write(u.Username+"<br/>");
-            Response.Write(u.Password);
+            //User u =(User) Session["user"];
+            //Response.Write(u.Username+"<br/>");
+            //Response.Write(u.Password);
+            SessionData sd = (SessionData)Session[SessionData.SessionName];
+            SessionData.getInstance().CurrentUser = sd.CurrentUser;
+            User u = SessionData.getInstance().CurrentUser;
             if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
             {
                 IUserDao dao = DaoFactory.getUserDao();
