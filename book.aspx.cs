@@ -72,6 +72,33 @@ using System.Collections.Generic;
         protected void search(object sender, EventArgs e)
         {
             Book b = new Book();
+
+            try
+            {
+                b.IdBook = Int32.Parse(txtIdBook.Text);
+            }
+            catch (FormatException ee)
+            {
+                b.IdBook = 0;
+            }
+
+            b.BookName = txtBookName.Text;
+            b.Comment = txtComment.Text;
+            b.Abstract = txtAbstract.Text;
+            b.Author = txtAuthor.Text;
+            b.DonatePerson = txtDonatePerson.Text;
+            try
+            {
+                b.NumCopies = int.Parse(txtNumCopies.Text);
+            }
+            catch (FormatException ee)
+            {
+                b.NumCopies = 0;
+            }
+            b.PublishCompany = txtPublishCompany.Text;
+            b.Type = txtType.Text;
+            b.State = ddlState.SelectedValue;
+
             IBookDao dao = DaoFactory.getBookDao();
             IList<BaseObject> list = dao.find(b);
             
@@ -87,7 +114,6 @@ using System.Collections.Generic;
                 books.Controls.Add(row);
                 
             }
-
 
         }
 
@@ -152,4 +178,19 @@ using System.Collections.Generic;
             Response.Redirect("book.aspx?mode=search" );
         }
 
-    }
+        protected void borrow(object sender, EventArgs e)
+        {
+            SessionData sd = Session[SessionData.SessionName] as SessionData;
+            if (sd == null)
+            {
+                Response.Write("ÇëµÇÂ½");
+                return;
+            }
+            SessionData.getInstance().CurrentUser = sd.CurrentUser;
+
+            IBorrowDao dao = DaoFactory.getBorrowDao();
+            dao.RegisteByName(sd.CurrentUser.Username, txtBookName.Text);
+            Response.Redirect("borrow.aspx?mode=searchall");
+
+        }
+}

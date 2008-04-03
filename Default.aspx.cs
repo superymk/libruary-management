@@ -14,6 +14,14 @@ public partial class _Default : System.Web.UI.Page
     {
         
         lblMessage.Text = "Hello World";
+        SessionData sd = Session[SessionData.SessionName]as SessionData;
+        if (sd != null)
+        {
+            User u= sd.CurrentUser;
+            username.Text = u.Username;
+            password.Text = u.Password;
+            lblMessage.Text = "Hello " + u.Username;
+        }
         
     }
     protected void Log_In(object sender, EventArgs e)

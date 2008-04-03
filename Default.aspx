@@ -15,7 +15,7 @@
 
     <asp:Label id="lblMessage"  runat="server" /> 
     
-    <asp:textbox id="username" textmode="Password" runat="server" cssclass="textbox" /> 
+    <asp:textbox id="username" runat="server" cssclass="textbox" /> 
     
     <asp:requiredfieldvalidator ID="Requiredfieldvalidator1" controltovalidate="username" display="dynamic" forecolor ="#ff0000" font-names="宋体" font-size="9pt" text="请填写" runat="server" />
     <asp:textbox id="password" textmode="Password" runat="server" cssclass="textbox" />
@@ -27,7 +27,7 @@
     
 <asp:Label id="nameserver"  runat="server" /> 
 <asp:Label id="pswserver"  runat="server" /> 
-        <asp:Button ID="btnOffline" runat="server" OnClick="offline" Text="Offline" /></div>
+        <asp:Button ID="btnOffline" runat="server" OnClick="offline" Text="Offline" UseSubmitBehavior="False" /></div>
     </form>
 </body>
 </html>

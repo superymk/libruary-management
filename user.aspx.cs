@@ -30,12 +30,14 @@ public partial class UserManager : System.Web.UI.Page
             search(sender, e);
             return;
 
-        } if (Session[SessionData.SessionName] != null)
+        }
+        SessionData sd = Session[SessionData.SessionName] as SessionData;
+        if (sd!= null)
         {
             //User u =(User) Session["user"];
             //Response.Write(u.Username+"<br/>");
             //Response.Write(u.Password);
-            SessionData sd = (SessionData)Session[SessionData.SessionName];
+            
             SessionData.getInstance().CurrentUser = sd.CurrentUser;
             User u = SessionData.getInstance().CurrentUser;
             if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
@@ -76,7 +78,10 @@ public partial class UserManager : System.Web.UI.Page
         u.Email = email.Text;
         u.Description = description.Text;
         DaoFactory.getUserDao().register(u);
-        Response.Redirect("default.aspx?name="+u.Username);
+
+        SessionData.getInstance().CurrentUser = u;
+        Session[SessionData.SessionName] = SessionData.getInstance();
+        Response.Redirect("default.aspx");
     }
 
     protected void update(object sender, EventArgs e)
