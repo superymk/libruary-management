@@ -1,0 +1,5 @@
+ftp://202.120.61.8:8021
+username:msclub
+pwd:campus_2008
+
+email:goodcjw2@gmail.com
