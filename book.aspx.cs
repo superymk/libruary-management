@@ -24,7 +24,6 @@ using System.Collections.Generic;
             if (mode != null && mode.Equals("search"))
             {
                 btnAdd.Visible = false;
-
                 btnUpdate.Visible = false;
                 return;
             } if (mode != null && mode.ToLower().Equals("searchall"))
@@ -40,7 +39,7 @@ using System.Collections.Generic;
                 Int32 id = Int32.Parse(Request.QueryString["id"]);
                 reload(id);
             }
-            catch (Exception ee)
+            catch (Exception )
             {
                 btnSearch.Visible = false;
                 btnUpdate.Visible = false;
@@ -77,7 +76,7 @@ using System.Collections.Generic;
             {
                 b.IdBook = Int32.Parse(txtIdBook.Text);
             }
-            catch (FormatException ee)
+            catch (FormatException )
             {
                 b.IdBook = 0;
             }
@@ -91,7 +90,7 @@ using System.Collections.Generic;
             {
                 b.NumCopies = int.Parse(txtNumCopies.Text);
             }
-            catch (FormatException ee)
+            catch (FormatException )
             {
                 b.NumCopies = 0;
             }
@@ -126,7 +125,7 @@ using System.Collections.Generic;
             }
             catch (FormatException ee)
             {
-                txtComment.Text = ee.Message + txtIdBook.Text;
+                Response.Write("<script>alert('idBook格式错误')</script>");
                 return;
             }
 
@@ -141,7 +140,7 @@ using System.Collections.Generic;
             }
             catch (FormatException ee)
             {
-                txtComment.Text = ee.Message + txtIdBook.Text;
+                Response.Write("<script>alert('NumCopies格式错误')</script>");
                 return;
             }
             b.PublishCompany = txtPublishCompany.Text;
@@ -162,11 +161,12 @@ using System.Collections.Generic;
             b.DonatePerson = txtDonatePerson.Text;
             try
             {
+                Response.Write("<script>alert('NumCopies格式错误')</script>");
                 b.NumCopies = int.Parse(txtNumCopies.Text);
             }
             catch (FormatException ee)
             {
-                txtComment.Text = ee.Message + txtIdBook.Text;
+                
                 return;
             } 
             b.PublishCompany = txtPublishCompany.Text;
@@ -183,13 +183,21 @@ using System.Collections.Generic;
             SessionData sd = Session[SessionData.SessionName] as SessionData;
             if (sd == null)
             {
-                Response.Write("请登陆");
+                Response.Write("<script>alert('请登陆')</script>");
                 return;
             }
             SessionData.getInstance().CurrentUser = sd.CurrentUser;
 
             IBorrowDao dao = DaoFactory.getBorrowDao();
-            dao.RegisteByName(sd.CurrentUser.Username, txtBookName.Text);
+            try
+            {
+                dao.RegisteByName(sd.CurrentUser.Username, txtBookName.Text);
+            }
+            catch (DaoException)
+            {
+                Response.Write("<script>alert('图书不存在')</script>");
+                return;
+            }
             Response.Redirect("borrow.aspx?mode=searchall");
 
         }

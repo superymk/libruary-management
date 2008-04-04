@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.Services.Protocols;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Collections.Generic;
 
 public class BorrowDaoImpl : BaseDao, IBorrowDao
@@ -27,6 +28,14 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
         borrow.IdBook = idBook;
         borrow.IdUser = idUser;
         borrow.DeadLine = DateTime.Today.AddDays(this.DeadLinePeriod);
+
+        IBaseDao bookdao = DaoFactory.getBookDao();
+        Book book = bookdao.getById(idBook)as Book;
+        if (book!=null&&!book.State.Trim().ToUpper().Equals(Book.Free))
+            throw new DaoException("Book " + book.BookName + "is not free");
+        book.State = Book.Borrowed;
+        bookdao.update(book);
+
         DaoFactory.getBorrowDao().register(borrow);
     }
 
@@ -47,5 +56,18 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
         if (user.Username == null || user.Username.Equals("")) throw new DaoException("Can't find User:" + userName);
 
         RegisteById(user.IdUser,book.IdBook);
+    }
+
+    public void ReturnBookById(int userId, int bookId)
+    {
+        SqlConnection sconn = new SqlConnection(connsql);
+        SqlCommand cmd = new SqlCommand();
+        sconn.Open();
+        cmd.Connection = sconn;
+        cmd.CommandText = "delete from borrowtable where idBook='" + bookId + "' and idUser='" + userId + "'";
+         cmd.ExecuteNonQuery();
+        
+        sconn.Close();
+        return ;
     }
 }

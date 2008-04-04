@@ -35,8 +35,10 @@ public class UserDaoImpl : BaseDao, IUserDao{
         while (reader.Read()) {
             int userid = (int)reader["idUser"];
             //save the userid in somewhere
+            sconn.Close();
             return userid;
         }
+        sconn.Close();
         return -1;
     }
 

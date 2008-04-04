@@ -14,9 +14,9 @@ using System.Web.UI.HtmlControls;
 public class Book : global::BaseObject
 {
     /// <summary>
-    /// abstract is the key string in csharp so the field of the Abstract is bookAbstract
+    /// abstract is the reserved string in csharp so the field of the Abstract is bookAbstract
     /// </summary>
-    /// <remarks>abstract is the key string in csharp so the field of the Abstract is bookAbstract</remarks>
+    /// <remarks>abstract is the reserved string in csharp so the field of the Abstract is bookAbstract</remarks>
     private string bookAbstract;
     private string author;
     private string bookName;
@@ -28,12 +28,22 @@ public class Book : global::BaseObject
     private string state;
     private string type;
 
-	public Book()
-	{
-		//
-		// TODO: 在此处添加构造函数逻辑
-		//
-	}
+    public static string Free
+    {
+        get { return "FREE"; }
+    }
+
+    public static string Borrowed
+    {
+        get { return "BORROWED"; }
+    }
+
+    public static string Missing
+    {
+        get { return "MISSING"; }
+    }
+
+
 
     public int IdBook
     {

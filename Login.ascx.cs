@@ -27,6 +27,8 @@ public partial class Login : System.Web.UI.UserControl
             btnLogout.Enabled = true;
             return;
         }
+        txtUsername.Enabled = true;
+        txtPassword.Enabled = true;
         btnLogout.Enabled = false;
         btnLogin.Enabled = true;
      
@@ -39,6 +41,16 @@ public partial class Login : System.Web.UI.UserControl
         User u = new User();
         u.Username = name;
         u.Password = psw;
+
+        IUserDao dao=DaoFactory.getUserDao();
+        int id = dao.confirmUser(name, psw);
+        if (id == -1)
+        {
+            Response.Write("<script>alert('用户名或密码错误')</script>");
+            return;
+        }
+        u = dao.getById(id)as User;
+
         SessionData sd = SessionData.getInstance();
         sd.CurrentUser = u;
         Session[SessionData.SessionName] = sd;
