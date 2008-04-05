@@ -30,4 +30,9 @@ public class DaoFactory
     {
         return new BorrowDaoImpl();
     }
+
+    public static IACommentDao getIACommentDao()
+    {
+        return new ACommentDaoImpl();
+    }
 }

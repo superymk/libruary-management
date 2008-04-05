@@ -17,7 +17,7 @@ public class UserDaoImpl : BaseDao, IUserDao{
     //private string connsql = "server=.\\sqlexpress;uid=sa;pwd=admin1;database=libruary";
 	public UserDaoImpl(){
         relateTable = "userinformation";
-        key = "IdUser";
+        key = new string[]{"IdUser"};
         objectName = "User";
     }
 

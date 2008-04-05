@@ -14,9 +14,11 @@ using System.Collections.Generic;
 /// </summary>
 public interface IBaseDao
 {
-    bool register(BaseObject user);
+    bool add(BaseObject user);
     bool delete(int id);
+    bool delete(int[] ids);
     bool update(BaseObject user);
     BaseObject getById(int id);
+    BaseObject getById(int[] ids);
     IList<BaseObject> find(BaseObject information);
 }

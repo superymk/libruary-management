@@ -18,13 +18,14 @@ public abstract class BaseDao:IBaseDao
 {
     protected string connsql = "server=.\\sqlexpress;uid=sa;pwd=admin1;database=libruary";
     protected string relateTable;
-    protected string key;
+    protected string[] key;
     protected string objectName;
+    protected bool autoKey = true;
 
     #region IBaseDao 成员
 
 
-    public bool register(BaseObject obj)
+    public bool add(BaseObject obj)
     {
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
@@ -36,7 +37,7 @@ public abstract class BaseDao:IBaseDao
             Type pt = p.PropertyType;
             string name = p.Name;
             object value = p.GetValue(obj,null);
-            if ( !name.Equals(key)) {
+            if ( !autoKey || !inArray(name, key)) {
                 if (pt.Equals(typeof(DateTime)))
                 {
                     Console.WriteLine("a");
@@ -58,15 +59,23 @@ public abstract class BaseDao:IBaseDao
 
 
 
-    public bool delete(int id)
+    public bool delete(int[] ids)
     {
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
         cmd.Connection = sconn;
-        cmd.CommandText = "delete from " + relateTable + " where " + key + " = " + id;
+        cmd.CommandText = "delete from " + relateTable + " where ";
+        for (int i = 0; i < key.Length; i++) {
+            cmd.CommandText += key[i] + "=" + ids[i];
+        }
         int result = cmd.ExecuteNonQuery();
         return result != 0;
+    }
+
+    public bool delete(int id)
+    {
+        return delete(new int[] { id });
     }
 
     public bool update(BaseObject obj)
@@ -82,7 +91,7 @@ public abstract class BaseDao:IBaseDao
             Type pt = p.PropertyType;
             string name = p.Name;
             object value = p.GetValue(obj, null);
-            if (!name.Equals(key))
+            if (!inArray(name, key))
             {
                 if (pt.Equals(typeof(DateTime)))
                 {
@@ -96,19 +105,27 @@ public abstract class BaseDao:IBaseDao
             }
         }
         command = command.Remove(command.Length - 1);
-        command += "where " + key + " = " + t.GetProperty(key).GetValue(obj,null);
+        command += "where ";
+        for (int i = 0; i < key.Length; i++)
+        {
+            command += key[i] + "=" + t.GetProperty(key[i]).GetValue(obj, null);
+        }
         cmd.CommandText = command;
         int result = cmd.ExecuteNonQuery();
         return result != 0;
     }
 
-    public BaseObject getById(int id)
+    public BaseObject getById(int[] ids)
     {
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
         cmd.Connection = sconn;
-        string sqlquery = "select * from "+relateTable+" where " + key + " = " + id;
+        string sqlquery = "select * from " + relateTable + " where ";
+        for (int i = 0; i < key.Length; i++)
+        {
+            sqlquery += key[i] + "=" + ids[i];
+        }
         cmd.CommandText = sqlquery;
         SqlDataReader reader = cmd.ExecuteReader();
         if (reader.Read())
@@ -137,6 +154,10 @@ public abstract class BaseDao:IBaseDao
         return null;
     }
 
+    public BaseObject getById(int id) {
+        return getById(new int[]{ id });
+    }
+
     public IList<BaseObject> find(BaseObject information)
     {
         SqlConnection sconn = new SqlConnection(connsql);
@@ -149,7 +170,7 @@ public abstract class BaseDao:IBaseDao
             Type pt = p.PropertyType;
             string name = p.Name;
             object value = p.GetValue(information, null);
-            if (!name.Equals(key) && value!=null && !value.Equals(""))
+            if (!inArray(name,key) && value!=null && !value.Equals(""))
             {
                 if (!pt.Equals(typeof(DateTime)) && !pt.Equals(typeof(Int32))) {
                     sqlquery += " and " + name + " like '%" + value + "%'";
@@ -199,4 +220,18 @@ public abstract class BaseDao:IBaseDao
     }
 
     #endregion
+
+
+    private bool inArray(object obj, object[] array)
+    {
+        foreach (object o in array)
+        {
+            if (obj.Equals(o))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

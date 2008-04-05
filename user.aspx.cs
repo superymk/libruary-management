@@ -31,35 +31,42 @@ public partial class UserManager : System.Web.UI.Page
             return;
 
         }
-        SessionData sd = Session[SessionData.SessionName] as SessionData;
-        if (sd!= null)
+        try
         {
-            //User u =(User) Session["user"];
-            //Response.Write(u.Username+"<br/>");
-            //Response.Write(u.Password);
-            
-            SessionData.getInstance().CurrentUser = sd.CurrentUser;
-            User u = SessionData.getInstance().CurrentUser;
-            if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
-            {
-                IUserDao dao = DaoFactory.getUserDao();
-                int id = dao.confirmUser(u.Username, u.Password);
-                if (id != -1)
-                {
-                    reload(id);
-                }
-                return;
-            }
-
-        }
-        try{
             Int32 id = Int32.Parse(Request.QueryString["id"]);
             reload(id);
-        }catch (Exception ee)
-        {
-            updateConfirm.Visible = false;
-            searchConfirm.Visible = false;
         }
+        catch (Exception ee)
+        {
+            SessionData sd = Session[SessionData.SessionName] as SessionData;
+            if (sd != null && sd.CurrentUser != null)
+            {
+                //User u =(User) Session["user"];
+                //Response.Write(u.Username+"<br/>");
+                //Response.Write(u.Password);
+
+                SessionData.getInstance().CurrentUser = sd.CurrentUser;
+                User u = SessionData.getInstance().CurrentUser;
+                if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
+                {
+                    IUserDao dao = DaoFactory.getUserDao();
+                    int id = dao.confirmUser(u.Username, u.Password);
+                    if (id != -1)
+                    {
+                        reload(id);
+                    }
+                    return;
+                }
+
+            }
+            else
+            {
+                updateConfirm.Visible = false;
+                searchConfirm.Visible = false;
+            }
+        }
+        
+        
     }
 
     protected void register(object sender, EventArgs e)
@@ -77,7 +84,7 @@ public partial class UserManager : System.Web.UI.Page
         u.Sex = sex.Text;
         u.Email = email.Text;
         u.Description = description.Text;
-        DaoFactory.getUserDao().register(u);
+        DaoFactory.getUserDao().add(u);
 
         SessionData.getInstance().CurrentUser = u;
         Session[SessionData.SessionName] = SessionData.getInstance();
@@ -131,6 +138,32 @@ public partial class UserManager : System.Web.UI.Page
         description.Text = idUser.Text;
         registerConfirm.Visible = false;
         searchConfirm.Visible = false;
+        int admin = dao.isAdmin(u.IdUser);
+        if (admin != 0)
+        {
+            comments.Visible = true;
+            ToAdminComment tac = new ToAdminComment();
+            tac.IdAdmin = id;
+            IACommentDao acd = DaoFactory.getIACommentDao();
+            IList<BaseObject> list = acd.find(tac);
+            for (int i = 0; i < list.Count; i++)
+            {
+                ToAdminComment comment = (ToAdminComment)list[i];
+                TableRow row = new TableRow();
+                TableCell cell1 = new TableCell();
+                Label box = new Label();
+                User cuser = (User)dao.getById(comment.IdUser);
+                box.Text = "<a href=user.aspx?id=" + comment.IdUser + " >" + cuser.Username + "</a> :" + comment.Comment;
+                cell1.Controls.Add(box);
+                row.Controls.Add(cell1);
+                comments.Controls.Add(row);
+                //description.Text += u.ToString();
+            }
+        }
+        else
+        {
+            comments.Visible = false;
+        }
     }
 
     private void searchMode()
@@ -174,4 +207,31 @@ public partial class UserManager : System.Web.UI.Page
         }
         
     }
+
+    protected void addComment(object sender, EventArgs e)
+    {
+        SessionData sd = Session[SessionData.SessionName] as SessionData;
+        User u = sd.CurrentUser;
+        IUserDao dao = DaoFactory.getUserDao();
+        int uid = dao.confirmUser(u.Username, u.Password);
+        int idAdmin = -1;
+        try
+        {
+            idAdmin = Int32.Parse(idUser.Text);
+        }
+        catch (FormatException ee)
+        {
+            description.Text = ee.Message + idUser.Text;
+            return;
+        }
+        DateTime now = DateTime.Now;
+        ToAdminComment comment = new ToAdminComment();
+        comment.IdUser = uid;
+        comment.IdAdmin = idAdmin;
+        comment.Comment = newCBox.Text;
+        comment.CommentDate = now;
+        DaoFactory.getIACommentDao().add(comment);
+        reload(idAdmin);
+    }
+
 }

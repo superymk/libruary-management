@@ -19,7 +19,7 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
     public BorrowDaoImpl()
     {
         relateTable = "borrowtable";
-        key = "";
+        key = new string[]{""};
         objectName = "Borrow";
     }
 
@@ -36,7 +36,7 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
         book.State = Book.Borrowed;
         bookdao.update(book);
 
-        DaoFactory.getBorrowDao().register(borrow);
+        DaoFactory.getBorrowDao().add(borrow);
     }
 
     public void RegisteByName(string userName, string bookName)

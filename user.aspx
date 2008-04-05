@@ -97,8 +97,17 @@
     <asp:Button ID="updateConfirm" Text="Update" runat="server" OnClick="update" />
     <asp:Button ID="searchConfirm" Text="Search" runat="server" OnClick="search" />
     
-    
-    
+    <asp:Label id="Admin"  runat="server" text="" /> 
+    <asp:Table ID="comments" runat="server">
+        <asp:TableRow ID="newComment" runat="server">
+            <asp:TableCell ID="newCCell" runat="server">
+                <asp:Label ID="newCLabel" runat="server" Text="new comment<BR>"></asp:Label>
+                <asp:textbox ID="newCBox" runat="server"></asp:textbox>
+                <asp:Label ID="newCLabel2" runat="server" Text="<BR>"></asp:Label>
+                <asp:Button ID="newCButton" Text="Add Comment" runat="server" OnClick="addComment"/>
+            </asp:TableCell>
+        </asp:TableRow>
+    </asp:Table>
     <asp:Table ID="users" runat="server"></asp:Table>
     </div>
     </form>

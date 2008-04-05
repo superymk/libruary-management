@@ -174,7 +174,7 @@ using System.Collections.Generic;
 
             b.State= ddlState.SelectedValue;
             
-            DaoFactory.getBookDao().register(b);
+            DaoFactory.getBookDao().add(b);
             Response.Redirect("book.aspx?mode=search" );
         }
 

@@ -14,7 +14,7 @@ using System.Web.UI.HtmlControls;
 public class SessionData
 {
     private static SessionData instance;
-    private User currentUser;
+    private User currentUser = null;
 
 	private SessionData(){}
     public static SessionData getInstance() {
