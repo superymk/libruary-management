@@ -15,4 +15,5 @@ using System.Collections.Generic;
 public interface IUserDao : IBaseDao
 {
     int confirmUser(string username, string password);
+    int isAdmin(int idUser);
 }
