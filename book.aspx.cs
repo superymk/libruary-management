@@ -195,7 +195,7 @@ using System.Collections.Generic;
             }
             catch (DaoException)
             {
-                Response.Write("<script>alert('图书不存在')</script>");
+                Response.Write("<script>alert('图书已被借阅,或者图书或用户不存在')</script>");
                 return;
             }
             Response.Redirect("borrow.aspx?mode=searchall");

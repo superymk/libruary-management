@@ -19,7 +19,7 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
     public BorrowDaoImpl()
     {
         relateTable = "borrowtable";
-        key = new string[]{""};
+        key = new string[]{"idBook","idUser"};
         objectName = "Borrow";
     }
 
@@ -35,6 +35,10 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
             throw new DaoException("Book " + book.BookName + "is not free");
         book.State = Book.Borrowed;
         bookdao.update(book);
+
+        IBaseDao userdao = DaoFactory.getUserDao();
+        User user = userdao.getById(idUser) as User;
+
 
         DaoFactory.getBorrowDao().add(borrow);
     }
@@ -60,14 +64,36 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
 
     public void ReturnBookById(int userId, int bookId)
     {
-        SqlConnection sconn = new SqlConnection(connsql);
-        SqlCommand cmd = new SqlCommand();
-        sconn.Open();
-        cmd.Connection = sconn;
-        cmd.CommandText = "delete from borrowtable where idBook='" + bookId + "' and idUser='" + userId + "'";
-         cmd.ExecuteNonQuery();
-        
-        sconn.Close();
-        return ;
+
+        Borrow borrow = getById(new int[] { bookId, userId })as Borrow;
+        if (borrow!=null)
+        {
+            IBaseDao bookdao = DaoFactory.getBookDao();
+            Book book = bookdao.getById(bookId)as Book;
+            if (book == null) throw new DaoException("Book with id:"+bookId+"didn't exist");
+
+            IBaseDao userdao = DaoFactory.getUserDao();
+            User user = userdao.getById(userId)as User;
+            if (user == null) throw new DaoException("User with id:" + userId + "didn't exist");
+
+            book.State = Book.Free;
+            bookdao.update(book);
+
+            DateTime deadLine = borrow.DeadLine;
+            if((deadLine>=DateTime.Now)){
+                user.Mark+=Borrow.MarkPerBorrow+Borrow.MarkPerBorrow;
+            }
+            else if ((DateTime.Now - deadLine) <= TimeSpan.FromDays(Borrow.TimeLimit))
+            {
+                user.Mark += Borrow.MarkPerBorrow;
+            }
+            userdao.update(user);
+
+            delete(new int[] { bookId, userId });
+            return;
+        }
+        throw new DaoException("Borrow with idUser:" + userId + " and idBook:" + bookId + "didn't exist");
     }
+    
+
 }

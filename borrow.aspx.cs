@@ -64,7 +64,7 @@ public partial class borrow : System.Web.UI.Page
         }
         catch (DaoException de)
         {
-            Response.Redirect("<script>alert('图书或用户不存在')</script>");
+            Response.Write("<script>alert('图书已被借阅,或者图书或用户不存在')</script>");
         }
        
         Response.Redirect("borrow.aspx?mode=search");

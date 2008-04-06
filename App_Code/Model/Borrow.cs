@@ -10,6 +10,22 @@ public class Borrow : global::BaseObject
     private int idUser;
     private DateTime deadLine;
 
+    public static int MarkPerBorrow
+    {
+        get
+        {
+            return 10;
+        }
+    }
+
+    public static int TimeLimit
+    {
+        get
+        {
+            return 7;
+        }
+    }
+
     public int IdBook
     {
         get
