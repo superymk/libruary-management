@@ -45,6 +45,15 @@ using System.Collections.Generic;
                 btnUpdate.Visible = false;
                 
             }
+            
+        }
+
+        private void gridViewBind(){
+            IBaseDao bookdao=DaoFactory.getBookDao();
+            DataSet ds = bookdao.getDataSet();
+            GridView1.DataSource = ds;
+            GridView1.DataBind();
+
         }
 
         private void reload(int id)
@@ -113,6 +122,8 @@ using System.Collections.Generic;
                 books.Controls.Add(row);
                 
             }
+
+            gridViewBind();
 
         }
 
@@ -200,5 +211,13 @@ using System.Collections.Generic;
             }
             Response.Redirect("borrow.aspx?mode=searchall");
 
+        }
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gridViewBind();
+        }
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gridViewBind();
         }
 }

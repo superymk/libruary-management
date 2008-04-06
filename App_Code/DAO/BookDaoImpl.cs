@@ -13,7 +13,21 @@ public class BookDaoImpl : BaseDao, IBookDao
         objectName = "Book";
     }
 
-    
+    public static string Free
+    {
+        get { return "FREE"; }
+    }
+
+    public static string Borrowed
+    {
+        get { return "BORROWED"; }
+    }
+
+    public static string Missing
+    {
+        get { return "MISSING"; }
+    }
+
 
 }
 

@@ -219,6 +219,19 @@ public abstract class BaseDao:IBaseDao
         return first.ToLower() + after;
     }
 
+    public DataSet getDataSet()
+    {
+        SqlConnection sconn = new SqlConnection(connsql);
+        SqlCommand cmd = new SqlCommand();
+        sconn.Open();
+        cmd.Connection = sconn;
+        string sqlquery = "select * from " + relateTable + " where 1=1";
+        SqlDataAdapter da = new SqlDataAdapter(sqlquery, sconn);
+        DataSet ds = new DataSet();
+        da.Fill(ds);
+        return ds;
+    }
+
     #endregion
 
 

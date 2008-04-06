@@ -16,6 +16,22 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
         }
     }
 
+    public static int MarkPerBorrow
+    {
+        get
+        {
+            return 10;
+        }
+    }
+
+    public static int TimeLimit
+    {
+        get
+        {
+            return 7;
+        }
+    }
+
     public BorrowDaoImpl()
     {
         relateTable = "borrowtable";
@@ -31,9 +47,9 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
 
         IBaseDao bookdao = DaoFactory.getBookDao();
         Book book = bookdao.getById(idBook)as Book;
-        if (book!=null&&!book.State.Trim().ToUpper().Equals(Book.Free))
+        if (book!=null&&!book.State.Trim().ToUpper().Equals(BookDaoImpl.Free))
             throw new DaoException("Book " + book.BookName + "is not free");
-        book.State = Book.Borrowed;
+        book.State = BookDaoImpl.Borrowed;
         bookdao.update(book);
 
         IBaseDao userdao = DaoFactory.getUserDao();
@@ -76,16 +92,16 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
             User user = userdao.getById(userId)as User;
             if (user == null) throw new DaoException("User with id:" + userId + "didn't exist");
 
-            book.State = Book.Free;
+            book.State = BookDaoImpl.Free;
             bookdao.update(book);
 
             DateTime deadLine = borrow.DeadLine;
             if((deadLine>=DateTime.Now)){
-                user.Mark+=Borrow.MarkPerBorrow+Borrow.MarkPerBorrow;
+                user.Mark+=MarkPerBorrow+MarkPerBorrow;
             }
-            else if ((DateTime.Now - deadLine) <= TimeSpan.FromDays(Borrow.TimeLimit))
+            else if ((DateTime.Now - deadLine) <= TimeSpan.FromDays(TimeLimit))
             {
-                user.Mark += Borrow.MarkPerBorrow;
+                user.Mark += MarkPerBorrow;
             }
             userdao.update(user);
 

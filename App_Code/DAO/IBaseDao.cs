@@ -21,4 +21,6 @@ public interface IBaseDao
     BaseObject getById(int id);
     BaseObject getById(int[] ids);
     IList<BaseObject> find(BaseObject information);
+    DataSet getDataSet();
+    
 }

@@ -15,7 +15,7 @@ public class DaoException:Exception
         error = err;
     }
 
-    public string Message
+    public override string Message
     {
         get
         {
