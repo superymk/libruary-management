@@ -37,6 +37,7 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
         relateTable = "borrowtable";
         key = new string[]{"idBook","idUser"};
         objectName = "Borrow";
+        autoKey = false;
     }
 
     public void RegisteById(int idUser,int idBook){
