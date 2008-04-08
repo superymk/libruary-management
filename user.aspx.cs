@@ -144,7 +144,7 @@ public partial class UserManager : System.Web.UI.Page
             comments.Visible = true;
             ToAdminComment tac = new ToAdminComment();
             tac.IdAdmin = id;
-            IACommentDao acd = DaoFactory.getIACommentDao();
+            IACommentDao acd = DaoFactory.getAdminCommentDao();
             IList<BaseObject> list = acd.find(tac);
             for (int i = 0; i < list.Count; i++)
             {
@@ -233,7 +233,7 @@ public partial class UserManager : System.Web.UI.Page
         comment.IdAdmin = idAdmin;
         comment.Comment = newCBox.Text;
         comment.CommentDate = now;
-        DaoFactory.getIACommentDao().add(comment);
+        DaoFactory.getAdminCommentDao().add(comment);
         reload(idAdmin);
     }
 

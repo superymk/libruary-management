@@ -31,8 +31,13 @@ public class DaoFactory
         return new BorrowDaoImpl();
     }
 
-    public static IACommentDao getIACommentDao()
+    public static IACommentDao getAdminCommentDao()
     {
         return new ACommentDaoImpl();
+    }
+
+    public static IBCommentDao getBookCommentDao()
+    {
+        return new BCommentDaoImpl();
     }
 }

@@ -77,6 +77,18 @@
         <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="update" />
         <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="search" />
         <br />
+        <asp:Table ID="comments" runat="server">
+        <asp:TableRow ID="newComment" runat="server">
+            <asp:TableCell ID="newCCell" runat="server">
+                <asp:Label ID="newCLabel" runat="server" Text="new comment<BR>"></asp:Label>
+                <asp:textbox ID="newCBox" runat="server"></asp:textbox>
+                <asp:Label ID="newCLabel2" runat="server" Text="<BR>"></asp:Label>
+                <asp:Button ID="newCButton" Text="Add Comment" runat="server" OnClick="addComment"/>
+            </asp:TableCell>
+        </asp:TableRow>
+    </asp:Table>
+        
+        
         <asp:Table ID="books" runat="server">
         </asp:Table>
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" PageSize="5" AutoGenerateColumns="False" OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">

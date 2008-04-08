@@ -75,6 +75,24 @@ using System.Collections.Generic;
 
             btnAdd.Visible = false;
             btnSearch.Visible = false;
+            comments.Visible = true;
+            BookComment tac = new BookComment();
+            tac.IdBook = id;
+            IBCommentDao acd = DaoFactory.getBookCommentDao();
+            IList<BaseObject> list = acd.find(tac);
+            for (int i = 0; i < list.Count; i++)
+            {
+                BookComment comment = (BookComment)list[i];
+                TableRow row = new TableRow();
+                TableCell cell1 = new TableCell();
+                Label box = new Label();
+                User cuser = (User)dao.getById(comment.IdUser);
+                box.Text = "<a href=user.aspx?id=" + comment.IdUser + " >" + cuser.Username + "</a> :" + comment.Comment;
+                cell1.Controls.Add(box);
+                row.Controls.Add(cell1);
+                comments.Controls.Add(row);
+                //description.Text += u.ToString();
+            }
         }
 
 
@@ -213,6 +231,30 @@ using System.Collections.Generic;
             Response.Redirect("borrow.aspx?mode=searchall");
 
         }
+
+        protected void addComment(object sender, EventArgs e)
+        {
+            SessionData sd = Session[SessionData.SessionName] as SessionData;
+            User u = sd.CurrentUser;
+            IUserDao dao = DaoFactory.getUserDao();
+            int uid = dao.confirmUser(u.Username, u.Password);
+            int idBook = -1;
+            try
+            {
+                idBook = Int32.Parse(txtIdBook.Text);
+            }
+            catch (FormatException ee)
+            { return; }
+            DateTime now = DateTime.Now;
+            BookComment comment = new BookComment();
+            comment.IdUser = uid;
+            comment.IdBook = idBook;
+            comment.Comment = newCBox.Text;
+            comment.CommentDate = now;
+            DaoFactory.getBookCommentDao().add(comment);
+            reload(idBook);
+        }
+
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             gridViewBind();
