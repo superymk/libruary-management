@@ -27,8 +27,10 @@ public partial class Login : System.Web.UI.UserControl
             btnLogout.Enabled = true;
             return;
         }
+
         txtUsername.Enabled = true;
         txtPassword.Enabled = true;
+        txtPassword.Attributes["value"] = " ";
         btnLogout.Enabled = false;
         btnLogin.Enabled = true;
      
@@ -52,6 +54,7 @@ public partial class Login : System.Web.UI.UserControl
         u = dao.getById(id)as User;
 
         SessionData sd = Session[SessionData.SessionName] as SessionData;
+        if (sd == null) sd = new SessionData();
         sd.CurrentUser = u;
         Session[SessionData.SessionName] = sd;
         Response.Redirect(Request.RawUrl);

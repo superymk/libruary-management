@@ -49,9 +49,9 @@ using System.Collections.Generic;
             
         }
 
-        private void gridViewBind(){
+        private void gridViewBind(Book b){
             IBaseDao bookdao=DaoFactory.getBookDao();
-            DataSet ds = bookdao.getDataSet();
+            DataSet ds = bookdao.findDataSet(b);
             GridView1.DataSource = ds;
             GridView1.DataBind();
 
@@ -142,7 +142,7 @@ using System.Collections.Generic;
                 
             }
 
-            gridViewBind();
+            gridViewBind(b);
 
         }
 
@@ -257,10 +257,10 @@ using System.Collections.Generic;
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            gridViewBind();
+            search(sender, e);
         }
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            gridViewBind();
+            search(sender, e);
         }
 }

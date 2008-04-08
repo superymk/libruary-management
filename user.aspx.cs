@@ -86,6 +86,7 @@ public partial class UserManager : System.Web.UI.Page
         DaoFactory.getUserDao().add(u);
 
         SessionData sd = Session[SessionData.SessionName] as SessionData;
+        if (sd == null) sd = new SessionData();
         sd.CurrentUser = u;
         Session[SessionData.SessionName] = sd;
         Response.Redirect("default.aspx");
@@ -214,6 +215,7 @@ public partial class UserManager : System.Web.UI.Page
     protected void addComment(object sender, EventArgs e)
     {
         SessionData sd = Session[SessionData.SessionName] as SessionData;
+        if (sd == null) sd = new SessionData();
         User u = sd.CurrentUser;
         IUserDao dao = DaoFactory.getUserDao();
         int uid = dao.confirmUser(u.Username, u.Password);

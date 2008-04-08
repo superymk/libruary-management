@@ -15,6 +15,7 @@ public class SessionData
 {
     //private static SessionData instance;
     private User currentUser = null;
+    private Book searchBook = null;
 
 	//private SessionData(){}
     //public static SessionData getInstance() {
@@ -32,5 +33,10 @@ public class SessionData
     {
         get { return currentUser; }
         set { currentUser = value; }
+    }
+    public Book SearchBook
+    {
+        get { return searchBook; }
+        set { searchBook = value; }
     } 
 }

@@ -59,8 +59,8 @@
                     state</td>
                 <td style="width: 100px">
                     <asp:DropDownList ID="ddlState" runat="server">
+                        <asp:ListItem Selected="True">FREE</asp:ListItem>
                         <asp:ListItem>BORROWED</asp:ListItem>
-                        <asp:ListItem>FREE</asp:ListItem>
                         <asp:ListItem>MISSING</asp:ListItem>
                     </asp:DropDownList></td>
                 <td colspan="2">
