@@ -20,6 +20,7 @@ using System.Collections.Generic;
 //                txtComment.Text = "postBack";
                 return;
             }
+            
             string mode = Request.QueryString["mode"];
             if (mode != null && mode.Equals("search"))
             {
@@ -197,7 +198,7 @@ using System.Collections.Generic;
                 Response.Write("<script>alert('ÇëµÇÂ½')</script>");
                 return;
             }
-            SessionData.getInstance().CurrentUser = sd.CurrentUser;
+            //SessionData.getInstance().CurrentUser = sd.CurrentUser;
 
             IBorrowDao dao = DaoFactory.getBorrowDao();
             try

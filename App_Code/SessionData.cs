@@ -13,15 +13,15 @@ using System.Web.UI.HtmlControls;
 /// </summary>
 public class SessionData
 {
-    private static SessionData instance;
+    //private static SessionData instance;
     private User currentUser = null;
 
-	private SessionData(){}
-    public static SessionData getInstance() {
-        if (instance == null)
-            instance = new SessionData();
-        return instance;
-    }
+	//private SessionData(){}
+    //public static SessionData getInstance() {
+    //    if (instance == null)
+    //        instance = new SessionData();
+    //    return instance;
+    //}
 
     public static String SessionName
     {

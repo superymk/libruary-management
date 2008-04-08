@@ -51,7 +51,7 @@ public partial class Login : System.Web.UI.UserControl
         }
         u = dao.getById(id)as User;
 
-        SessionData sd = SessionData.getInstance();
+        SessionData sd = Session[SessionData.SessionName] as SessionData;
         sd.CurrentUser = u;
         Session[SessionData.SessionName] = sd;
         Response.Redirect(Request.RawUrl);

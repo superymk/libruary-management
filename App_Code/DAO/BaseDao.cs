@@ -213,6 +213,37 @@ public abstract class BaseDao:IBaseDao
         return result;
     }
 
+
+    public DataSet findDataSet(BaseObject information)
+    {
+        SqlConnection sconn = new SqlConnection(connsql);
+        sconn.Open();
+        string sqlquery = "select * from " + relateTable + " where 1=1";
+        Type t = information.GetType();
+        foreach (PropertyInfo p in t.GetProperties())
+        {
+            Type pt = p.PropertyType;
+            string name = p.Name;
+            object value = p.GetValue(information, null);
+            if (!inArray(name, key) && value != null && !value.Equals(""))
+            {
+                if (!pt.Equals(typeof(DateTime)) && !pt.Equals(typeof(Int32)))
+                {
+                    sqlquery += " and " + name + " like '%" + value + "%'";
+                }
+                else if (pt.Equals(typeof(DateTime)) && ((DateTime)value > new DateTime()))
+                {
+                    sqlquery += " and " + name + " like '" + value + "'";
+                }
+            }
+
+        }
+        SqlDataAdapter da = new SqlDataAdapter(sqlquery, sconn);
+        DataSet ds = new DataSet();
+        da.Fill(ds);
+        return ds;
+    }
+
     private string lowerFirstChar(string ori) {
         string first = ori.Substring(0, 1);
         string after = ori.Substring(1, ori.Length - 1);

@@ -109,6 +109,22 @@
         </asp:TableRow>
     </asp:Table>
     <asp:Table ID="users" runat="server"></asp:Table>
+    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" PageSize="5" AutoGenerateColumns="False" OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+            <Columns>
+                <asp:BoundField DataField="idBook" HeaderText="IdBook" />
+                <asp:BoundField DataField="type" HeaderText="Type" />
+                <asp:BoundField DataField="numCopies" HeaderText="NumCopies" />
+                <asp:BoundField DataField="bookName" HeaderText="BookName" />
+                <asp:BoundField DataField="abstract" HeaderText="Abstract" />
+                <asp:BoundField DataField="author" HeaderText="Author" />
+                <asp:BoundField DataField="publishCompany" HeaderText="PublishCompany" />
+                <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
+                <asp:BoundField DataField="state" HeaderText="State" />
+                <asp:BoundField DataField="comment" HeaderText="Comment" />
+                <asp:ButtonField ButtonType="Button" Text="删除" />
+            </Columns>
+        </asp:GridView>
+    
     </div>
     </form>
 </body>

@@ -36,13 +36,12 @@ public partial class _Default : System.Web.UI.Page
         User u = new User();
         u.Username = name;
         u.Password = psw;
-        SessionData sd = SessionData.getInstance();
+        SessionData sd = Session[SessionData.SessionName] as SessionData;
         sd.CurrentUser = u;
         Session[SessionData.SessionName] = sd;
 
         if (id!=-1)
         {
-            
             //Response.Redirect("user.aspx?id=" + id);
             Response.Redirect("user.aspx");
         }

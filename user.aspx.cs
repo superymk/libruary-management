@@ -45,8 +45,7 @@ public partial class UserManager : System.Web.UI.Page
                 //Response.Write(u.Username+"<br/>");
                 //Response.Write(u.Password);
 
-                SessionData.getInstance().CurrentUser = sd.CurrentUser;
-                User u = SessionData.getInstance().CurrentUser;
+                User u = sd.CurrentUser;
                 if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
                 {
                     IUserDao dao = DaoFactory.getUserDao();
@@ -86,8 +85,9 @@ public partial class UserManager : System.Web.UI.Page
         u.Description = description.Text;
         DaoFactory.getUserDao().add(u);
 
-        SessionData.getInstance().CurrentUser = u;
-        Session[SessionData.SessionName] = SessionData.getInstance();
+        SessionData sd = Session[SessionData.SessionName] as SessionData;
+        sd.CurrentUser = u;
+        Session[SessionData.SessionName] = sd;
         Response.Redirect("default.aspx");
     }
 
@@ -193,7 +193,6 @@ public partial class UserManager : System.Web.UI.Page
         catch (FormatException ee){}
         IUserDao dao = DaoFactory.getUserDao();
         IList<BaseObject> list = dao.find(u);
-        //username.Text = list.Count+"";
         for(int i=0; i<list.Count; i++){
             User user = (User)list[i];
             TableRow row = new TableRow();
@@ -203,8 +202,12 @@ public partial class UserManager : System.Web.UI.Page
             cell1.Controls.Add(box);
             row.Controls.Add(cell1);
             users.Controls.Add(row);
-            //description.Text += u.ToString();
         }
+
+        IUserDao userdao=DaoFactory.getUserDao();
+        DataSet ds = userdao.findDataSet(u);
+        GridView1.DataSource = ds;
+        GridView1.DataBind();
         
     }
 
@@ -234,4 +237,13 @@ public partial class UserManager : System.Web.UI.Page
         reload(idAdmin);
     }
 
+
+    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        search(sender, e);
+    }
+    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        search(sender, e);
+    }
 }
