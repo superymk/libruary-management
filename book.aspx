@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="book.aspx.cs" Inherits="book" %>
 
+<%@ Register Src="navigator.ascx" TagName="navigator" TagPrefix="uc2" %>
+
 <%@ Register Src="Login.ascx" TagName="Login" TagPrefix="uc1" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -10,8 +12,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <uc1:Login ID="Login1" runat="server" />
-        <asp:Button ID="btnBorrow" runat="server" OnClick="borrow" Text="Borrow" /><br />
+        &nbsp;<uc2:navigator id="Navigator1" runat="server"></uc2:navigator><br />
         <br />
         <table border="0">
             <tr>
@@ -76,7 +77,7 @@
         <asp:Button ID="btnAdd" runat="server" Text="Register" OnClick="register" />
         <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="update" />
         <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="search" />
-        <br />
+        <asp:Button ID="btnBorrow" runat="server" OnClick="borrow" Text="Borrow" /><br />
         <asp:Table ID="comments" runat="server">
         <asp:TableRow ID="newComment" runat="server">
             <asp:TableCell ID="newCCell" runat="server">
@@ -91,19 +92,20 @@
         
         <asp:Table ID="books" runat="server">
         </asp:Table>
-        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" PageSize="5" AutoGenerateColumns="False" OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+        &nbsp;<asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False"
+            OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowDeleting="GridView1_RowDeleting"
+            PageSize="5">
             <Columns>
                 <asp:BoundField DataField="idBook" HeaderText="IdBook" />
-                <asp:BoundField DataField="type" HeaderText="Type" />
-                <asp:BoundField DataField="numCopies" HeaderText="NumCopies" />
                 <asp:BoundField DataField="bookName" HeaderText="BookName" />
-                <asp:BoundField DataField="abstract" HeaderText="Abstract" />
                 <asp:BoundField DataField="author" HeaderText="Author" />
                 <asp:BoundField DataField="publishCompany" HeaderText="PublishCompany" />
-                <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
+                <asp:BoundField DataField="type" HeaderText="Type" />
                 <asp:BoundField DataField="state" HeaderText="State" />
-                <asp:BoundField DataField="comment" HeaderText="Comment" />
-                <asp:ButtonField ButtonType="Button" Text="删除" />
+                <asp:BoundField DataField="numCopies" HeaderText="NumCopies" />
+                <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
+                <asp:BoundField DataField="abstract" HeaderText="Abstract" />
+                <asp:ButtonField ButtonType="Button" CommandName="delete" Text="删除" />
             </Columns>
         </asp:GridView>
     </form>

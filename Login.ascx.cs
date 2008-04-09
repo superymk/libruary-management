@@ -15,7 +15,7 @@ public partial class Login : System.Web.UI.UserControl
     protected void Page_Load(object sender, EventArgs e)
     {
         SessionData sd = Session[SessionData.SessionName] as SessionData;
-        if (sd != null)
+        if (sd != null&&sd.CurrentUser!=null)
         {
             User u = sd.CurrentUser;
             txtUsername.Text = u.Username;

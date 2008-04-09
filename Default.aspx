@@ -11,7 +11,8 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        上海交通大学 微软俱乐部 图书管理系统<br />
+        <span style="color: #ff0000"><strong>不应该看到这张页面，现在的主页是index.aspx,这张页面保留作跳转用</strong></span><br />
+        <br />
 
     <asp:Label id="lblMessage"  runat="server" /> 
     

@@ -205,7 +205,7 @@ using System.Collections.Generic;
             b.State= ddlState.SelectedValue;
             
             DaoFactory.getBookDao().add(b);
-            Response.Redirect("book.aspx?mode=search" );
+            Response.Redirect("book.aspx" );
         }
 
         protected void borrow(object sender, EventArgs e)
@@ -261,6 +261,15 @@ using System.Collections.Generic;
         }
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            GridView1.PageIndex = e.NewPageIndex;
             search(sender, e);
+        }
+
+        protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int index = e.RowIndex;
+            DataSet ds = GridView1.DataSource as DataSet;
+            ds.Tables["idBook"].Rows[index]
+
         }
 }

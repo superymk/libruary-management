@@ -12,16 +12,18 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
-        lblMessage.Text = "Hello World";
-        SessionData sd = Session[SessionData.SessionName]as SessionData;
-        if (sd != null)
-        {
-            User u= sd.CurrentUser;
-            username.Text = u.Username;
-            password.Text = u.Password;
-            lblMessage.Text = "Hello " + u.Username;
-        }
+        Response.Redirect("index.aspx");
+
+
+        //lblmessage.text = "hello world";
+        //sessiondata sd = session[sessiondata.sessionname] as sessiondata;
+        //if (sd != null)
+        //{
+        //    user u = sd.currentuser;
+        //    username.text = u.username;
+        //    password.text = u.password;
+        //    lblmessage.text = "hello " + u.username;
+        //}
         
     }
     protected void Log_In(object sender, EventArgs e)
@@ -37,6 +39,7 @@ public partial class _Default : System.Web.UI.Page
         u.Username = name;
         u.Password = psw;
         SessionData sd = Session[SessionData.SessionName] as SessionData;
+        if(sd==null)sd = new SessionData();
         sd.CurrentUser = u;
         Session[SessionData.SessionName] = sd;
 
