@@ -25,6 +25,7 @@ public partial class navigator : System.Web.UI.UserControl
         {
             btnUserList.Visible = true;
             btnReturnBook.Visible = true;
+            return;
         }
         btnUserList.Visible = false;
         btnReturnBook.Visible = false;

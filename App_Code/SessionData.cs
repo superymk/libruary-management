@@ -16,6 +16,7 @@ public class SessionData
     //private static SessionData instance;
     private User currentUser = null;
     private Book searchBook = null;
+    
 
 	//private SessionData(){}
     //public static SessionData getInstance() {
