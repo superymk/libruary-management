@@ -13,6 +13,22 @@
 <body>
     <form id="form1" runat="server">
         &nbsp;<uc2:navigator id="Navigator1" runat="server"></uc2:navigator><br />
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False"
+            OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowDeleting="GridView1_RowDeleting"
+            PageSize="5">
+            <Columns>
+                <asp:BoundField DataField="idBook" HeaderText="IdBook" />
+                <asp:BoundField DataField="bookName" HeaderText="BookName" />
+                <asp:BoundField DataField="author" HeaderText="Author" />
+                <asp:BoundField DataField="publishCompany" HeaderText="PublishCompany" />
+                <asp:BoundField DataField="type" HeaderText="Type" />
+                <asp:BoundField DataField="state" HeaderText="State" />
+                <asp:BoundField DataField="numCopies" HeaderText="NumCopies" />
+                <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
+                <asp:BoundField DataField="abstract" HeaderText="Abstract" />
+                <asp:ButtonField ButtonType="Button" CommandName="delete" Text="删除" />
+            </Columns>
+        </asp:GridView>
         <br />
         <table border="0">
             <tr>
@@ -88,26 +104,7 @@
             </asp:TableCell>
         </asp:TableRow>
     </asp:Table>
-        
-        
-        <asp:Table ID="books" runat="server">
-        </asp:Table>
-        &nbsp;<asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False"
-            OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowDeleting="GridView1_RowDeleting"
-            PageSize="5">
-            <Columns>
-                <asp:BoundField DataField="idBook" HeaderText="IdBook" />
-                <asp:BoundField DataField="bookName" HeaderText="BookName" />
-                <asp:BoundField DataField="author" HeaderText="Author" />
-                <asp:BoundField DataField="publishCompany" HeaderText="PublishCompany" />
-                <asp:BoundField DataField="type" HeaderText="Type" />
-                <asp:BoundField DataField="state" HeaderText="State" />
-                <asp:BoundField DataField="numCopies" HeaderText="NumCopies" />
-                <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
-                <asp:BoundField DataField="abstract" HeaderText="Abstract" />
-                <asp:ButtonField ButtonType="Button" CommandName="delete" Text="删除" />
-            </Columns>
-        </asp:GridView>
+        &nbsp; &nbsp;
     </form>
 </body>
 </html>

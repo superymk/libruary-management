@@ -63,27 +63,6 @@ public class UserDaoImpl : BaseDao, IUserDao{
         return 0;
 
     }
-
-    public int getAdminId(int idUser)
-    {
-        SqlConnection sconn = new SqlConnection(connsql);
-        SqlCommand cmd = new SqlCommand();
-        sconn.Open();
-        cmd.Connection = sconn;
-        cmd.CommandText = "select * from admininformation where idAdmin='" + idUser + "'";
-        //Console.WriteLine(cmd.CommandText);
-        SqlDataReader reader = cmd.ExecuteReader();
-        while (reader.Read())
-        {
-            int adminid = (int)reader["idAdmin"];
-            //save the userid in somewhere
-            sconn.Close();
-            return adminid;
-        }
-        sconn.Close();
-        return -1;
-
-    }
     
     //public bool register(User user) {
     //    SqlConnection sconn = new SqlConnection(connsql);

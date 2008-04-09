@@ -21,13 +21,13 @@ public partial class navigator : System.Web.UI.UserControl
         lblUsername.Text = sd.CurrentUser.Username;
 
         IUserDao userdao=DaoFactory.getUserDao();
-        if (userdao.isAdmin(sd.CurrentUser.IdUser)==1)//getAdminId(sd.CurrentUser.IdUser)!=-1)
+        if (userdao.isAdmin(sd.CurrentUser.IdUser)==1)
         {
             btnUserList.Visible = true;
             btnReturnBook.Visible = true;
         }
-        btnUserList.Visible = true;
-        btnReturnBook.Visible = true;
+        btnUserList.Visible = false;
+        btnReturnBook.Visible = false;
     }
     protected void btnNewUser_Click(object sender, EventArgs e)
     {

@@ -126,21 +126,21 @@ using System.Collections.Generic;
             b.Type = txtType.Text;
             b.State = ddlState.SelectedValue;
 
-            IBookDao dao = DaoFactory.getBookDao();
-            IList<BaseObject> list = dao.find(b);
+            //IBookDao dao = DaoFactory.getBookDao();
+            //IList<BaseObject> list = dao.find(b);
             
-            for (int i = 0; i < list.Count; i++)
-            {
-                Book book = (Book)list[i];
-                TableRow row = new TableRow();
-                TableCell cell1 = new TableCell();
-                Label box = new Label();
-                box.Text = "<a href=book.aspx?id=" + book.IdBook + " >" + book.BookName + "</a>";
-                cell1.Controls.Add(box);
-                row.Controls.Add(cell1);
-                books.Controls.Add(row);
+            //for (int i = 0; i < list.Count; i++)
+            //{
+            //    Book book = (Book)list[i];
+            //    TableRow row = new TableRow();
+            //    TableCell cell1 = new TableCell();
+            //    Label box = new Label();
+            //    box.Text = "<a href=book.aspx?id=" + book.IdBook + " >" + book.BookName + "</a>";
+            //    cell1.Controls.Add(box);
+            //    row.Controls.Add(cell1);
+            //    books.Controls.Add(row);
                 
-            }
+            //}
 
             gridViewBind(b);
 
@@ -267,9 +267,12 @@ using System.Collections.Generic;
 
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int index = e.RowIndex;
-            DataSet ds = GridView1.DataSource as DataSet;
-            ds.Tables["idBook"].Rows[index]
-
+            
+            string idstr = GridView1.Rows[e.RowIndex].Cells[0].Text;
+            int id = int.Parse(idstr);
+            IBaseDao bookdao = DaoFactory.getBookDao();
+            bookdao.delete(id);
+            GridView1.Rows[e.RowIndex].Visible = false;
+            gridViewBind(new Book());
         }
 }
