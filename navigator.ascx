@@ -1,8 +1,18 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="navigator.ascx.cs" Inherits="navigator" %>
+<style type="text/css">
+<!--
+.style1 {
+	font-size: 16pt;
+	font-weight: bold;
+}
+-->
+</style>
+
 <table>
     <tr>
         <td colspan="8">
-            上海交通大学 微软俱乐部 图书管理系统</td>
+            <p align="center"><img src="images/sjtulogo_2.png" width="181" height="57"> <img src="images/mstc_logo_1.jpg" width="190" height="65"></p>
+            <p align="center" class="style1">图书管理系统</p></td>
     </tr>
     <tr>
         <td style="width: 100px">
