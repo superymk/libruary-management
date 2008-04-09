@@ -8,11 +8,17 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
-    <title>无标题页</title>
+    <title>上海交通大学 微软俱乐部 图书管理系统</title>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <form id="form1" runat="server">
-        &nbsp;<uc2:navigator id="Navigator1" runat="server"></uc2:navigator><br />
+        <table style="width: 100%; height: 100%">
+            <tr>
+                <td style="width: 103px">
+                    <uc2:navigator id="Navigator1" runat="server"></uc2:navigator><br />
+                    <br />
+                    <br />
         
         <table border="0">
             <tr>
@@ -26,13 +32,13 @@
                     <asp:TextBox ID="txtIdBook" runat="server" Visible="False"></asp:TextBox></td>
             </tr>
             <tr>
-                <td style="width: 100px">
+                <td style="width: 100px; height: 26px;">
                     type</td>
-                <td style="width: 100px">
+                <td style="width: 100px; height: 26px;">
                     <asp:TextBox ID="txtType" runat="server"></asp:TextBox></td>
-                <td style="width: 100px">
+                <td style="width: 100px; height: 26px;">
                     numCopies</td>
-                <td style="width: 102px">
+                <td style="width: 102px; height: 26px;">
                     <asp:TextBox ID="txtNumCopies" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
@@ -93,7 +99,11 @@
             </asp:TableCell>
         </asp:TableRow>
     </asp:Table>
-        &nbsp; &nbsp;
+        &nbsp; &nbsp;&nbsp;&nbsp;
+                </td>
+            </tr>
+        </table>
+        &nbsp;
     </form>
 </body>
 </html>
