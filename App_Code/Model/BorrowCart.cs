@@ -25,14 +25,21 @@ public class BorrowCart
     {
         IBaseDao bookdao = DaoFactory.getBookDao();
         Book book = bookdao.getById(idBook)as Book;
-        BookList.AddLast(book);
+
+        for (LinkedListNode<Book> i = bookList.First; i != null; i = i.Next)
+        {
+            if (i.Value.IdBook == idBook)
+                return;
+        }
+
+        bookList.AddLast(book);
     }
 
     public void commit(User user)
     {
         IBorrowDao borrowdao = DaoFactory.getBorrowDao();
 
-        foreach (Book book in BookList)
+        foreach (Book book in bookList)
         {
             borrowdao.RegisteById(user.IdUser, book.IdBook);
         }
