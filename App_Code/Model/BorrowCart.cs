@@ -23,7 +23,7 @@ public class BorrowCart
 
     public void addById(int idBook)
     {
-        IBaseDao
+       // IBaseDao
     }
 
 	public BorrowCart()
