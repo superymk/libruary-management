@@ -43,7 +43,7 @@ public class UserDaoImpl : BaseDao, IUserDao{
     }
 
 
-    public int isAdmin(int idUser)
+    public bool isAdmin(int idUser)
     {
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
@@ -57,11 +57,19 @@ public class UserDaoImpl : BaseDao, IUserDao{
             int adminid = (int)reader["idAdmin"];
             //save the userid in somewhere
             sconn.Close();
-            return 1;
+            return true;
         }
         sconn.Close();
-        return 0;
+        return false;
 
+    }
+
+    public int borrowedBookCount(int idUser)
+    {
+        IBorrowDao borrowdao = DaoFactory.getBorrowDao();
+        Borrow borrow = new Borrow();
+        IList<BaseObject> list = borrowdao.find(borrow);
+        return list.Count;
     }
     
     //public bool register(User user) {

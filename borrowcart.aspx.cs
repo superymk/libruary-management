@@ -29,7 +29,15 @@ public partial class borrowcart : System.Web.UI.Page
     {
         SessionData sd = Session[SessionData.SessionName] as SessionData;
         BorrowCart cart = sd.Cart;
-        cart.commit(sd.CurrentUser);
+        try
+        {
+            cart.commit(sd.CurrentUser);
+        }
+        catch (DaoException de)
+        {
+            Response.Write("<script>alert('"+de.Message+"')</script>");
+            return;
+        }
         Response.Redirect("borrowlist.aspx?id="+sd.CurrentUser.IdUser);
     }
 

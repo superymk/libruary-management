@@ -32,6 +32,14 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
         }
     }
 
+    public static int BorrowCountLimit
+    {
+        get
+        {
+            return 5;
+        }
+    }
+
     public BorrowDaoImpl()
     {
         relateTable = "borrowtable";
@@ -53,9 +61,11 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
         book.State = BookDaoImpl.Borrowed;
         bookdao.update(book);
 
-        IBaseDao userdao = DaoFactory.getUserDao();
-        User user = userdao.getById(idUser) as User;
+        IUserDao userdao = DaoFactory.getUserDao();
+        int count = userdao.borrowedBookCount(idUser);
 
+        if (count + 1 >= BorrowCountLimit)
+            throw new DaoException("User with id:" + idUser + "has borrowed " + BorrowCountLimit + " books!");
 
         DaoFactory.getBorrowDao().add(borrow);
     }

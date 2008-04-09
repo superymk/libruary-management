@@ -24,7 +24,7 @@
         <table border="0">
             <tr>
                 <td style="width: 100px">
-                    bookname</td>
+                    Bookname</td>
                 <td style="width: 100px">
                     <asp:TextBox ID="txtBookName" runat="server" ></asp:TextBox></td>
                 <td style="width: 100px">
@@ -34,27 +34,27 @@
             </tr>
             <tr>
                 <td style="width: 100px; height: 26px;">
-                    type</td>
+                    Type</td>
                 <td style="width: 100px; height: 26px;">
                     <asp:TextBox ID="txtType" runat="server"></asp:TextBox></td>
                 <td style="width: 100px; height: 26px;">
-                    numCopies</td>
+                    NumCopies</td>
                 <td style="width: 102px; height: 26px;">
                     <asp:TextBox ID="txtNumCopies" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
                 <td style="width: 100px">
-                    abstract</td>
+                    Abstract</td>
                 <td style="width: 100px">
                     <asp:TextBox ID="txtAbstract" runat="server"></asp:TextBox></td>
                 <td style="width: 100px">
-                    author</td>
+                    Author</td>
                 <td style="width: 102px">
                     <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
                 <td style="width: 100px">
-                    publishCompany</td>
+                    PublishCompany</td>
                 <td style="width: 100px">
                     <asp:TextBox ID="txtPublishCompany" runat="server"></asp:TextBox></td>
                 <td style="width: 100px">
@@ -64,7 +64,7 @@
             </tr>
             <tr>
                 <td style="width: 100px">
-                    state</td>
+                    Atate</td>
                 <td style="width: 100px">
                     <asp:DropDownList ID="ddlState" runat="server">
                         <asp:ListItem Selected="True">FREE</asp:ListItem>
@@ -76,15 +76,15 @@
             </tr>
             <tr>
                 <td style="width: 100px; height: 105px">
-                    comment</td>
+                    Comment</td>
                 <td colspan="3" style="height: 105px">
                     <asp:TextBox ID="txtComment" runat="server" Height="109px" TextMode="MultiLine" Width="412px"></asp:TextBox></td>
             </tr>
         </table>
-        <asp:Button ID="btnAdd" runat="server" Text="Register" OnClick="register" />
-        <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="update" />
-        <asp:Button ID="btnBorrow" runat="server" OnClick="borrow" Text="Borrow" />
-                    <asp:Button ID="btnAddCart" runat="server" OnClick="btnAddCart_Click" Text="AddCart" /><br />
+        <asp:Button ID="btnAdd" runat="server" Text="添加" OnClick="register" />
+        <asp:Button ID="btnUpdate" runat="server" Text="修改" OnClick="update" />
+        <asp:Button ID="btnBorrow" runat="server" OnClick="borrow" Text="Borrow" Visible="False" />
+                    <asp:Button ID="btnAddCart" runat="server" OnClick="btnAddCart_Click" Text="加至借书车" /><br />
         
         
         

@@ -30,7 +30,8 @@ public partial class Login : System.Web.UI.UserControl
 
         txtUsername.Enabled = true;
         txtPassword.Enabled = true;
-        txtPassword.Attributes["value"] = " ";
+        
+        txtPassword.Attributes["value"] = "guest";
         btnLogout.Enabled = false;
         btnLogin.Enabled = true;
      
@@ -68,7 +69,7 @@ public partial class Login : System.Web.UI.UserControl
     }
     protected void btnRegister_Click(object sender, EventArgs e)
     {
-        Session[SessionData.SessionName] = null;
+        
         Response.Redirect("User.aspx");
     }
 }

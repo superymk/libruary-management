@@ -10,7 +10,7 @@
 
 <table>
     <tr>
-        <td colspan="8">
+        <td colspan="9">
             <p align="center"><img src="images/sjtulogo_2.png" width="181" height="57"> <img src="images/mstc_logo_1.jpg" width="190" height="65"></p>
             <p align="center" class="style1">图书管理系统</p></td>
     </tr>
@@ -28,8 +28,10 @@
         <td style="width: 100px">
             <asp:LinkButton ID="btnReturnBook" runat="server" OnClick="btnReturnBook_Click">用户还书</asp:LinkButton></td>
         <td style="width: 100px">
+            <asp:LinkButton ID="btnAddBook" runat="server" OnClick="addBook">添加图书</asp:LinkButton></td>
+        <td style="width: 157px">
             <asp:Label ID="lblUsername" runat="server"></asp:Label></td>
-        <td style="width: 100px">
-            欢迎您<asp:LinkButton ID="btnLogout" runat="server" OnClick="btnLogout_Click">注销</asp:LinkButton></td>
+        <td style="width: 124px">
+            <asp:LinkButton ID="btnLogout" runat="server" OnClick="btnLogout_Click">注销</asp:LinkButton></td>
     </tr>
 </table>

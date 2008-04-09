@@ -37,7 +37,7 @@ public partial class userlist : System.Web.UI.Page
         {
             u.Birthday = DateTime.Parse(birthday.Text);
         }
-        catch (FormatException ee) { }
+        catch (FormatException) { }
         IUserDao dao = DaoFactory.getUserDao();
         //IList<BaseObject> list = dao.find(u);
         //for (int i = 0; i < list.Count; i++)
@@ -68,5 +68,18 @@ public partial class userlist : System.Web.UI.Page
     {
         GridView1.PageIndex = e.NewPageIndex;
         search(sender, e);
+    }
+
+    protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+
+        string idstr = GridView1.Rows[e.RowIndex].Cells[0].Text;
+        int id = int.Parse(idstr);
+        IBaseDao userdao = DaoFactory.getUserDao();
+        userdao.delete(id);
+        GridView1.Rows[e.RowIndex].Visible = false;
+        
+
+        Page_Load(sender, new EventArgs());
     }
 }

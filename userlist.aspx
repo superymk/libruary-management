@@ -12,6 +12,25 @@
     <uc2:navigator id="Navigator1" runat="server"></uc2:navigator>
     <div>
     
+    
+     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" PageSize="5" AutoGenerateColumns="False" 
+     OnPageIndexChanging="GridView1_PageIndexChanging" OnRowDeleting="GridView1_RowDeleting">
+            <Columns>
+                <asp:BoundField DataField="idUser" HeaderText="IdUser" />
+                <asp:BoundField DataField="userName" HeaderText="UserName" />
+                <asp:BoundField DataField="trueName" HeaderText="TrueName" />
+                <asp:BoundField DataField="college" HeaderText="college" />
+                <asp:BoundField DataField="address" HeaderText="address" />
+                <asp:BoundField DataField="birthday" HeaderText="birthday" />
+                <asp:BoundField DataField="sex" HeaderText="sex" />
+                <asp:BoundField DataField="email" HeaderText="email" />
+                <asp:BoundField DataField="mark" HeaderText="mark" />
+                <asp:BoundField DataField="telnumber" HeaderText="telnumber" />
+                <asp:ButtonField ButtonType="Button" CommandName="delete" Text="删除" />
+            </Columns>
+        </asp:GridView>
+        <br />
+    
     <asp:Table ID="Table1" runat="server" Height="284px" Width="564px">
             <asp:TableRow ID="TableRow1" runat="server">
                 <asp:TableCell ID="TextCell0" runat="server">
@@ -82,24 +101,7 @@
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>
-    <asp:Button ID="searchConfirm" Text="Search" runat="server" OnClick="search" />
-    
-    
-     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" PageSize="5" AutoGenerateColumns="False" OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-            <Columns>
-                <asp:BoundField DataField="idUser" HeaderText="IdUser" />
-                <asp:BoundField DataField="userName" HeaderText="UserName" />
-                <asp:BoundField DataField="trueName" HeaderText="TrueName" />
-                <asp:BoundField DataField="college" HeaderText="college" />
-                <asp:BoundField DataField="address" HeaderText="address" />
-                <asp:BoundField DataField="birthday" HeaderText="birthday" />
-                <asp:BoundField DataField="sex" HeaderText="sex" />
-                <asp:BoundField DataField="email" HeaderText="email" />
-                <asp:BoundField DataField="mark" HeaderText="mark" />
-                <asp:BoundField DataField="telnumber" HeaderText="telnumber" />
-                <asp:ButtonField ButtonType="Button" Text="删除" />
-            </Columns>
-        </asp:GridView>
+    <asp:Button ID="searchConfirm" Text="查找" runat="server" OnClick="search" />&nbsp;
     </div>
     </form>
 </body>

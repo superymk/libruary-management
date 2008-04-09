@@ -17,13 +17,15 @@ public class SessionData
     private User currentUser = null;
     private Book searchBook = null;
     private BorrowCart borrowCart = null;
-
+    
 	//private SessionData(){}
     //public static SessionData getInstance() {
     //    if (instance == null)
     //        instance = new SessionData();
     //    return instance;
     //}
+
+    
 
     public static String SessionName
     {
@@ -35,6 +37,7 @@ public class SessionData
         get { return borrowCart; }
         set { borrowCart = value; }
     }
+
 
     public User CurrentUser
     {

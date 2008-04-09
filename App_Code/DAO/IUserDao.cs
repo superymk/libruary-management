@@ -15,6 +15,6 @@ using System.Collections.Generic;
 public interface IUserDao : IBaseDao
 {
     int confirmUser(string username, string password);
-    int isAdmin(int idUser);
-    
+    bool isAdmin(int idUser);
+    int borrowedBookCount(int idUser);
 }

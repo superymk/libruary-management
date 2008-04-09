@@ -8,13 +8,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
-
+using System.Collections.Generic;
 public partial class booklist : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        search(sender, e);
+        SessionData sd = Session[SessionData.SessionName] as SessionData;
+        if (sd == null || sd.CurrentUser == null)
+            Response.Redirect("Default.aspx");
+        gridViewBind(new Book());
     }
 
 
@@ -23,7 +25,22 @@ public partial class booklist : System.Web.UI.Page
         IBaseDao bookdao = DaoFactory.getBookDao();
         DataSet ds = bookdao.findDataSet(b);
         GridView1.DataSource = ds;
+        //IList<Book> list = bookdao.find(b);
+        //GridView1.DataSource = list.to;
+        IUserDao userdao = DaoFactory.getUserDao();
+        SessionData sd = Session[SessionData.SessionName] as SessionData;
+        User user = sd.CurrentUser;
+        if (userdao.isAdmin(user.IdUser))
+        {
+            GridView1.Columns[GridView1.Columns.Count - 1].Visible = true;
+        }
+        else
+        {
+            GridView1.Columns[GridView1.Columns.Count - 1].Visible = false;
+        }
+
         GridView1.DataBind();
+
 
     }
 

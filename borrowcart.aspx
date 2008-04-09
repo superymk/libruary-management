@@ -28,11 +28,11 @@
                 <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
                 <asp:BoundField DataField="abstract" HeaderText="Abstract" />
                 <asp:ButtonField CommandName="select" Text="选择" />
-                <asp:ButtonField ButtonType="Button" CommandName="delete" Text="Cancel" />
+                <asp:ButtonField ButtonType="Button" CommandName="delete" Text="取消" />
             </Columns>
         </asp:GridView>
         <br />
-        <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" /></div>
+        <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="确认借书" /></div>
     </form>
 </body>
 </html>

@@ -21,24 +21,25 @@ public partial class navigator : System.Web.UI.UserControl
         lblUsername.Text = sd.CurrentUser.Username;
 
         IUserDao userdao=DaoFactory.getUserDao();
-        if (userdao.isAdmin(sd.CurrentUser.IdUser) == 1)
+        if (userdao.isAdmin(sd.CurrentUser.IdUser) )
         {
             btnUserList.Visible = true;
             btnReturnBook.Visible = true;
+            btnAddBook.Visible = true;
+            lblUsername.Text += " 管理员";
             return;
         }
         else
         {
             btnUserList.Visible = false;
             btnReturnBook.Visible = false;
+            btnAddBook.Visible = false;
+            lblUsername.Text += " 用户";
         }
     }
     protected void btnNewUser_Click(object sender, EventArgs e)
     {
-        SessionData sd = Session[SessionData.SessionName] as SessionData;
-        if (sd == null) sd = new SessionData();
-        sd.CurrentUser = null;
-        Session[SessionData.SessionName] = sd;
+        
         Response.Redirect("User.aspx");
     }
     protected void btnBookSearch_Click(object sender, EventArgs e)
@@ -67,5 +68,9 @@ public partial class navigator : System.Web.UI.UserControl
     {
         Session[SessionData.SessionName] = null;
         Response.Redirect("index.aspx");
+    }
+    protected void addBook(object sender, EventArgs e)
+    {
+        Response.Redirect("book.aspx");
     }
 }

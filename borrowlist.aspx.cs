@@ -24,7 +24,7 @@ public partial class borrowlist : System.Web.UI.Page
         User user = sd.CurrentUser;
         IUserDao userdao=DaoFactory.getUserDao();
 
-        if (userdao.isAdmin(user.IdUser)==1)
+        if (userdao.isAdmin(user.IdUser))
         {
             try
             {
@@ -37,7 +37,7 @@ public partial class borrowlist : System.Web.UI.Page
 
             }
         }
-        reload(user.IdUser, userdao.isAdmin(user.IdUser) == 1);
+        reload(user.IdUser, userdao.isAdmin(user.IdUser));
     }
     protected void reload(int idUser,bool isAdmin)
     {

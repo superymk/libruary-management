@@ -66,7 +66,7 @@ public partial class UserManager : System.Web.UI.Page
         try {
             u.Birthday = DateTime.Parse(birthday.Text);
         }
-        catch (FormatException ee) { }
+        catch (FormatException) { }
         u.Address = address.Text;
         u.Sex = sex.Text;
         u.Email = email.Text;
@@ -125,9 +125,9 @@ public partial class UserManager : System.Web.UI.Page
         sex.Text = u.Sex;
         email.Text = u.Email;
         description.Text = idUser.Text;
-        registerConfirm.Visible = false;
-        int admin = dao.isAdmin(u.IdUser);
-        if (admin != 0)
+        registerConfirm.Visible = true;
+        bool admin = dao.isAdmin(u.IdUser);
+        if (admin)
         {
             comments.Visible = true;
             ToAdminComment tac = new ToAdminComment();

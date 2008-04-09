@@ -95,8 +95,8 @@
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>
-    <asp:Button ID="registerConfirm" Text="Register" runat="server" OnClick="register" />
-    <asp:Button ID="updateConfirm" Text="Update" runat="server" OnClick="update" />
+    <asp:Button ID="registerConfirm" Text="注册" runat="server" OnClick="register" />
+    <asp:Button ID="updateConfirm" Text="修改" runat="server" OnClick="update" />
     
     <asp:Label id="Admin"  runat="server" text="" /> 
     <asp:Table ID="comments" runat="server">

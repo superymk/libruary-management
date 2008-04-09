@@ -20,10 +20,10 @@
     </tr>
     <tr>
         <td style="width: 100px; height: 26px">
-            <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Login" /></td>
+            <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="登陆" /></td>
         <td style="width: 100px; height: 26px">
-            <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="logout" CausesValidation="False" /></td>
+            <asp:Button ID="btnLogout" runat="server" Text="注销" OnClick="logout" CausesValidation="False" /></td>
         <td style="width: 100px; height: 26px">
-            <asp:Button ID="btnRegister" runat="server" OnClick="btnRegister_Click" Text="Register" CausesValidation="False" /></td>
+            <asp:Button ID="btnRegister" runat="server" OnClick="btnRegister_Click" Text="注册新用户" CausesValidation="False" /></td>
     </tr>
 </table>

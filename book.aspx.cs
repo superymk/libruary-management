@@ -31,6 +31,20 @@ using System.Collections.Generic;
                 btnUpdate.Visible = false;
                 
             }
+
+            SessionData sd = Session[SessionData.SessionName] as SessionData;
+            User user = sd.CurrentUser;
+            IUserDao userdao=DaoFactory.getUserDao();
+            if (userdao.isAdmin(user.IdUser))
+            {
+                btnAdd.Visible = true;
+                btnUpdate.Visible = true;
+            }
+            else
+            {
+                btnAdd.Visible = false;
+                btnUpdate.Visible = false;
+            }
             
         }
 
@@ -53,6 +67,7 @@ using System.Collections.Generic;
 
             btnAdd.Visible = false;
             comments.Visible = true;
+
             BookComment tac = new BookComment();
             tac.IdBook = id;
             IBCommentDao acd = DaoFactory.getBookCommentDao();
@@ -81,7 +96,7 @@ using System.Collections.Generic;
             {
                 b.IdBook = Int32.Parse(txtIdBook.Text);
             }
-            catch (FormatException ee)
+            catch (FormatException)
             {
                 Response.Write("<script>alert('idBook格式错误')</script>");
                 return;
@@ -96,7 +111,7 @@ using System.Collections.Generic;
             {
                 b.NumCopies = int.Parse(txtNumCopies.Text);
             }
-            catch (FormatException ee)
+            catch (FormatException)
             {
                 Response.Write("<script>alert('NumCopies格式错误')</script>");
                 return;
@@ -122,7 +137,7 @@ using System.Collections.Generic;
                 Response.Write("<script>alert('NumCopies格式错误')</script>");
                 b.NumCopies = int.Parse(txtNumCopies.Text);
             }
-            catch (FormatException ee)
+            catch (FormatException)
             {
                 
                 return;
@@ -173,7 +188,7 @@ using System.Collections.Generic;
             {
                 idBook = Int32.Parse(txtIdBook.Text);
             }
-            catch (FormatException ee)
+            catch (FormatException)
             { return; }
             DateTime now = DateTime.Now;
             BookComment comment = new BookComment();

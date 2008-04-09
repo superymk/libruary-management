@@ -11,6 +11,27 @@
     <form id="form1" runat="server">
     <uc2:navigator id="Navigator1" runat="server"></uc2:navigator>
     <div>
+        
+        
+        
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanging="GridView1_SelectedIndexChanging"
+            OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowDeleting="GridView1_RowDeleting"
+            PageSize="5">
+            <Columns>
+                <asp:BoundField DataField="idBook" HeaderText="IdBook" />
+                <asp:BoundField DataField="bookName" HeaderText="BookName" />
+                <asp:BoundField DataField="author" HeaderText="Author" />
+                <asp:BoundField DataField="publishCompany" HeaderText="PublishCompany" />
+                <asp:BoundField DataField="type" HeaderText="Type" />
+                <asp:BoundField DataField="state" HeaderText="State" />
+                <asp:BoundField DataField="numCopies" HeaderText="NumCopies" />
+                <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
+                <asp:BoundField DataField="abstract" HeaderText="Abstract" />
+                <asp:ButtonField CommandName="select" Text="选择" />
+                <asp:ButtonField ButtonType="Button" CommandName="delete" Text="删除" />
+            </Columns>
+        </asp:GridView>
+        <br />
     <table border="0">
             <tr>
                 <td style="width: 100px">
@@ -71,27 +92,7 @@
                     <asp:TextBox ID="txtComment" runat="server" Height="109px" TextMode="MultiLine" Width="412px"></asp:TextBox></td>
             </tr>
         </table>
-        <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="search" />
-        
-        
-        
-        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanging="GridView1_SelectedIndexChanging"
-            OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowDeleting="GridView1_RowDeleting"
-            PageSize="5">
-            <Columns>
-                <asp:BoundField DataField="idBook" HeaderText="IdBook" />
-                <asp:BoundField DataField="bookName" HeaderText="BookName" />
-                <asp:BoundField DataField="author" HeaderText="Author" />
-                <asp:BoundField DataField="publishCompany" HeaderText="PublishCompany" />
-                <asp:BoundField DataField="type" HeaderText="Type" />
-                <asp:BoundField DataField="state" HeaderText="State" />
-                <asp:BoundField DataField="numCopies" HeaderText="NumCopies" />
-                <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
-                <asp:BoundField DataField="abstract" HeaderText="Abstract" />
-                <asp:ButtonField CommandName="select" Text="选择" />
-                <asp:ButtonField ButtonType="Button" CommandName="delete" Text="删除" />
-            </Columns>
-        </asp:GridView>
+        <asp:Button ID="btnSearch" runat="server" Text="查找" OnClick="search" />&nbsp;
     </div>
     </form>
 </body>
