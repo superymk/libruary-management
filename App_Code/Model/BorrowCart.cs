@@ -23,7 +23,28 @@ public class BorrowCart
 
     public void addById(int idBook)
     {
-       // IBaseDao
+        IBaseDao bookdao = DaoFactory.getBookDao();
+        Book book = bookdao.getById(idBook)as Book;
+        BookList.AddLast(book);
+    }
+
+    public void commit(User user)
+    {
+        IBorrowDao borrowdao = DaoFactory.getBorrowDao();
+
+        foreach (Book book in BookList)
+        {
+            borrowdao.RegisteById(user.IdUser, book.IdBook);
+        }
+        bookList = new LinkedList<Book>();
+    }
+    public void cancel(int idBook)
+    {
+        for (LinkedListNode<Book> i = bookList.First; i != null; i = i.Next)
+        {
+            if (i.Value.IdBook == idBook)
+                bookList.Remove(i);
+        }
     }
 
 	public BorrowCart()

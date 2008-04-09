@@ -16,7 +16,7 @@ public class SessionData
     //private static SessionData instance;
     private User currentUser = null;
     private Book searchBook = null;
-    
+    private BorrowCart borrowCart = null;
 
 	//private SessionData(){}
     //public static SessionData getInstance() {
@@ -28,6 +28,12 @@ public class SessionData
     public static String SessionName
     {
         get { return "SessionData"; }
+    }
+
+    public BorrowCart Cart
+    {
+        get { return borrowCart; }
+        set { borrowCart = value; }
     }
 
     public User CurrentUser

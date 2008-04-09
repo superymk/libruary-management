@@ -189,4 +189,17 @@ using System.Collections.Generic;
         {
             Response.Redirect("borrowlist.aspx");
         }
+        protected void btnAddCart_Click(object sender, EventArgs e)
+        {
+            int idBook = int.Parse(txtIdBook.Text);
+            SessionData sd = Session[SessionData.SessionName] as SessionData;
+            
+            BorrowCart cart = sd.Cart;
+            if (cart == null) cart = new BorrowCart();
+            cart.addById(idBook);
+            sd.Cart = cart;
+            Session[SessionData.SessionName] = sd;
+
+            Response.Redirect("borrowcart.aspx");
+        }
 }

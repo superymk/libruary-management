@@ -16,7 +16,7 @@
     <form id="form1" runat="server">
         <table style="width: 100%; height: 100%">
             <tr>
-                <td style="width: 103px">
+                <td >
                     <uc2:navigator id="Navigator1" runat="server"></uc2:navigator><br />
                     <br />
                     <br />
@@ -83,7 +83,8 @@
         </table>
         <asp:Button ID="btnAdd" runat="server" Text="Register" OnClick="register" />
         <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="update" />
-        <asp:Button ID="btnBorrow" runat="server" OnClick="borrow" Text="Borrow" /><br />
+        <asp:Button ID="btnBorrow" runat="server" OnClick="borrow" Text="Borrow" />
+                    <asp:Button ID="btnAddCart" runat="server" OnClick="btnAddCart_Click" Text="AddCart" /><br />
         
         
         

@@ -47,11 +47,13 @@ public partial class navigator : System.Web.UI.UserControl
     }
     protected void btnShopingList_Click(object sender, EventArgs e)
     {
-        Response.Write("<script>alert('功能未实现')</script>");
+        Response.Redirect("borrowcart.aspx");
     }
     protected void btnBorrowList_Click(object sender, EventArgs e)
     {
-        Response.Redirect("borrowlist.aspx");
+        SessionData sd = Session[SessionData.SessionName] as SessionData;
+        User user = sd.CurrentUser;
+        Response.Redirect("borrowlist.aspx?id="+user.IdUser);
     }
     protected void btnUserList_Click(object sender, EventArgs e)
     {
@@ -59,7 +61,7 @@ public partial class navigator : System.Web.UI.UserControl
     }
     protected void btnReturnBook_Click(object sender, EventArgs e)
     {
-        Response.Write("<script>alert('功能未实现')</script>");
+        Response.Redirect("borrowlist.aspx");
     }
     protected void btnLogout_Click(object sender, EventArgs e)
     {

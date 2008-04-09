@@ -13,8 +13,26 @@
     <form id="form1" runat="server">
     <div>
         <uc1:navigator ID="Navigator1" runat="server" />
-    
-    </div>
+        <br />
+        <asp:Label ID="lblMessage" runat="server"></asp:Label><br />
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowDeleting="GridView1_RowDeleting"
+            PageSize="5">
+            <Columns>
+                <asp:BoundField DataField="idBook" HeaderText="IdBook" />
+                <asp:BoundField DataField="bookName" HeaderText="BookName" />
+                <asp:BoundField DataField="author" HeaderText="Author" />
+                <asp:BoundField DataField="publishCompany" HeaderText="PublishCompany" />
+                <asp:BoundField DataField="type" HeaderText="Type" />
+                <asp:BoundField DataField="state" HeaderText="State" />
+                <asp:BoundField DataField="numCopies" HeaderText="NumCopies" />
+                <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
+                <asp:BoundField DataField="abstract" HeaderText="Abstract" />
+                <asp:ButtonField CommandName="select" Text="选择" />
+                <asp:ButtonField ButtonType="Button" CommandName="delete" Text="Cancel" />
+            </Columns>
+        </asp:GridView>
+        <br />
+        <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" /></div>
     </form>
 </body>
 </html>
