@@ -16,7 +16,7 @@ public partial class navigator : System.Web.UI.UserControl
         SessionData sd = Session[SessionData.SessionName] as SessionData;
         if (sd == null||sd.CurrentUser==null)
         {
-            Response.Redirect("Index.aspx");
+            Response.Redirect("Default.aspx");
         }
         lblUsername.Text = sd.CurrentUser.Username;
 
@@ -39,7 +39,7 @@ public partial class navigator : System.Web.UI.UserControl
     }
     protected void btnBookSearch_Click(object sender, EventArgs e)
     {
-        Response.Redirect("searchbook.aspx");
+        Response.Redirect("book.aspx?mode=searchall");
     }
     protected void btnShopingList_Click(object sender, EventArgs e)
     {
@@ -56,5 +56,10 @@ public partial class navigator : System.Web.UI.UserControl
     protected void btnReturnBook_Click(object sender, EventArgs e)
     {
         Response.Redirect("<script>alert('功能未实现')</script>");
+    }
+    protected void btnLogout_Click(object sender, EventArgs e)
+    {
+        Session[SessionData.SessionName] = null;
+        Response.Redirect("Default.aspx");
     }
 }

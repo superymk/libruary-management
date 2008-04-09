@@ -13,8 +13,8 @@
 <body>
     <form id="form1" runat="server">
         &nbsp;<uc2:navigator id="Navigator1" runat="server"></uc2:navigator><br />
-        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False"
-            OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowDeleting="GridView1_RowDeleting"
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanging="GridView1_SelectedIndexChanging"
+            OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowDeleting="GridView1_RowDeleting"
             PageSize="5">
             <Columns>
                 <asp:BoundField DataField="idBook" HeaderText="IdBook" />
@@ -26,6 +26,7 @@
                 <asp:BoundField DataField="numCopies" HeaderText="NumCopies" />
                 <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
                 <asp:BoundField DataField="abstract" HeaderText="Abstract" />
+                <asp:ButtonField CommandName="select" Text="选择" />
                 <asp:ButtonField ButtonType="Button" CommandName="delete" Text="删除" />
             </Columns>
         </asp:GridView>

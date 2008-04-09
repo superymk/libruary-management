@@ -255,9 +255,11 @@ using System.Collections.Generic;
             reload(idBook);
         }
 
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        protected void GridView1_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
         {
-            search(sender, e);
+            string idstr = GridView1.Rows[e.NewSelectedIndex].Cells[0].Text;
+            int id = int.Parse(idstr);
+            reload(id);
         }
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {

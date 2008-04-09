@@ -20,6 +20,6 @@
         <td style="width: 100px">
             <asp:Label ID="lblUsername" runat="server"></asp:Label></td>
         <td style="width: 100px">
-            欢迎您</td>
+            欢迎您<asp:LinkButton ID="btnLogout" runat="server" OnClick="btnLogout_Click">注销</asp:LinkButton></td>
     </tr>
 </table>
