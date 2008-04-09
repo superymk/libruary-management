@@ -1,0 +1,38 @@
+body,td,th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	text-align:justify;
+}
+body {
+	background-color: #ffffff; cursor: default;
+}
+
+<!--
+body{
+background-attachment:fixed;
+background-color:#ffffff;
+background-image:url(images/mstc_logo_2.jpg);
+background-position:bottom right;
+background-repeat:no-repeat;}
+-->
+
+a {
+	font-size: 12px;
+	color: #003300;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none; cursor: crosshair;
+	color: #999999;
+}
+a:hover {
+	text-decoration: none; cursor: crosshair;
+	color: #FFFFFF;
+}
+a:active {
+	text-decoration: none; cursor: crosshair
+	color: #999999;
+}
