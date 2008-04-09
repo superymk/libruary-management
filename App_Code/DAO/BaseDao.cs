@@ -65,9 +65,9 @@ public abstract class BaseDao:IBaseDao
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
         cmd.Connection = sconn;
-        cmd.CommandText = "delete from " + relateTable + " where ";
+        cmd.CommandText = "delete from " + relateTable + " where 1=1";
         for (int i = 0; i < key.Length; i++) {
-            cmd.CommandText += key[i] + "=" + ids[i];
+            cmd.CommandText +=" and "+ key[i] + "=" + ids[i];
         }
         int result = cmd.ExecuteNonQuery();
         return result != 0;
@@ -121,10 +121,10 @@ public abstract class BaseDao:IBaseDao
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
         cmd.Connection = sconn;
-        string sqlquery = "select * from " + relateTable + " where ";
+        string sqlquery = "select * from " + relateTable + " where 1=1";
         for (int i = 0; i < key.Length; i++)
         {
-            sqlquery += key[i] + "=" + ids[i];
+            sqlquery +=" and "+ key[i] + "=" + ids[i];
         }
         cmd.CommandText = sqlquery;
         SqlDataReader reader = cmd.ExecuteReader();

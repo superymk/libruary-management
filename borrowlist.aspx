@@ -12,19 +12,17 @@
     <form id="form1" runat="server">
     <div>
         <uc1:navigator ID="Navigator1" runat="server" />
-        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False"
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
+        OnSelectedIndexChanging="GridView1_SelectedIndexChanging" OnRowDeleting="GridView1_RowDeleting"
              PageSize="5">
             <Columns>
                 <asp:BoundField DataField="idBook" HeaderText="IdBook" />
-                <asp:BoundField DataField="bookName" HeaderText="BookName" />
-                <asp:BoundField DataField="author" HeaderText="Author" />
-                <asp:BoundField DataField="publishCompany" HeaderText="PublishCompany" />
-                <asp:BoundField DataField="type" HeaderText="Type" />
-                <asp:BoundField DataField="state" HeaderText="State" />
-                <asp:BoundField DataField="numCopies" HeaderText="NumCopies" />
-                <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
-                <asp:BoundField DataField="abstract" HeaderText="Abstract" />
-                <asp:ButtonField ButtonType="Button" CommandName="delete" Text="删除" />
+                <asp:BoundField HeaderText="BookName" />
+                <asp:BoundField DataField="idUser" HeaderText="IdUser" />
+                <asp:BoundField HeaderText="UserName" />
+                <asp:BoundField DataField="deadLine" HeaderText="DeadLine" />
+                <asp:ButtonField CommandName="select" Text="查看" />
+                <asp:ButtonField ButtonType="Button" CommandName="delete" Text="还书" />
             </Columns>
         </asp:GridView>
     

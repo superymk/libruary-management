@@ -31,7 +31,7 @@ using System.Collections.Generic;
             {
                 btnUpdate.Visible = false;
                 btnAdd.Visible = false;
-                search(sender, e);
+                gridViewBind(new Book());
                 return;
 
             }
@@ -211,7 +211,7 @@ using System.Collections.Generic;
         protected void borrow(object sender, EventArgs e)
         {
             SessionData sd = Session[SessionData.SessionName] as SessionData;
-            if (sd == null)
+            if (sd == null||sd.CurrentUser==null)
             {
                 Response.Write("<script>alert('请登陆')</script>");
                 return;
@@ -221,14 +221,16 @@ using System.Collections.Generic;
             IBorrowDao dao = DaoFactory.getBorrowDao();
             try
             {
-                dao.RegisteByName(sd.CurrentUser.Username, txtBookName.Text);
+                //dao.RegisteByName(sd.CurrentUser.Username, txtBookName.Text);
+
+                dao.RegisteById(sd.CurrentUser.IdUser,int.Parse(txtIdBook.Text));
             }
             catch (DaoException)
             {
                 Response.Write("<script>alert('图书已被借阅,或者图书或用户不存在')</script>");
                 return;
             }
-            Response.Redirect("borrow.aspx?mode=searchall");
+            Response.Redirect("borrowlist.aspx");
 
         }
 
@@ -258,8 +260,7 @@ using System.Collections.Generic;
         protected void GridView1_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
         {
             string idstr = GridView1.Rows[e.NewSelectedIndex].Cells[0].Text;
-            int id = int.Parse(idstr);
-            reload(id);
+            Response.Redirect("book.aspx?id=" + idstr);
         }
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -275,6 +276,10 @@ using System.Collections.Generic;
             IBaseDao bookdao = DaoFactory.getBookDao();
             bookdao.delete(id);
             GridView1.Rows[e.RowIndex].Visible = false;
+            gridViewBind(new Book());
+        }
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
             gridViewBind(new Book());
         }
 }

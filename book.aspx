@@ -15,7 +15,7 @@
         &nbsp;<uc2:navigator id="Navigator1" runat="server"></uc2:navigator><br />
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanging="GridView1_SelectedIndexChanging"
             OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowDeleting="GridView1_RowDeleting"
-            PageSize="5">
+            PageSize="5" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
             <Columns>
                 <asp:BoundField DataField="idBook" HeaderText="IdBook" />
                 <asp:BoundField DataField="bookName" HeaderText="BookName" />
