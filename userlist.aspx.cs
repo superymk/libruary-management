@@ -39,21 +39,21 @@ public partial class userlist : System.Web.UI.Page
         }
         catch (FormatException ee) { }
         IUserDao dao = DaoFactory.getUserDao();
-        IList<BaseObject> list = dao.find(u);
-        for (int i = 0; i < list.Count; i++)
-        {
-            User user = (User)list[i];
-            TableRow row = new TableRow();
-            TableCell cell1 = new TableCell();
-            Label box = new Label();
-            box.Text = "<a href=user.aspx?id=" + user.IdUser + " >" + user.Username + "</a>";
-            cell1.Controls.Add(box);
-            row.Controls.Add(cell1);
-            users.Controls.Add(row);
-        }
+        //IList<BaseObject> list = dao.find(u);
+        //for (int i = 0; i < list.Count; i++)
+        //{
+        //    User user = (User)list[i];
+        //    TableRow row = new TableRow();
+        //    TableCell cell1 = new TableCell();
+        //    Label box = new Label();
+        //    box.Text = "<a href=user.aspx?id=" + user.IdUser + " >" + user.Username + "</a>";
+        //    cell1.Controls.Add(box);
+        //    row.Controls.Add(cell1);
+        //    users.Controls.Add(row);
+        //}
 
-        IUserDao userdao = DaoFactory.getUserDao();
-        DataSet ds = userdao.findDataSet(u);
+        //IUserDao userdao = DaoFactory.getUserDao();
+        DataSet ds = dao.findDataSet(u);
         GridView1.DataSource = ds;
         GridView1.DataBind();
 

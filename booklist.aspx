@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="booklist.aspx.cs" Inherits="booklist" %>
-
+<%@ Register Src="navigator.ascx" TagName="navigator" TagPrefix="uc2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -8,6 +8,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+    <uc2:navigator id="Navigator1" runat="server"></uc2:navigator>
     <div>
     <table border="0">
             <tr>

@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="userlist.aspx.cs" Inherits="userlist" %>
-
+<%@ Register Src="navigator.ascx" TagName="navigator" TagPrefix="uc2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -8,6 +8,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+    <uc2:navigator id="Navigator1" runat="server"></uc2:navigator>
     <div>
     
     <asp:Table ID="Table1" runat="server" Height="284px" Width="564px">
@@ -85,16 +86,16 @@
     
      <asp:GridView ID="GridView1" runat="server" AllowPaging="True" PageSize="5" AutoGenerateColumns="False" OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
             <Columns>
-                <asp:BoundField DataField="idBook" HeaderText="IdBook" />
-                <asp:BoundField DataField="type" HeaderText="Type" />
-                <asp:BoundField DataField="numCopies" HeaderText="NumCopies" />
-                <asp:BoundField DataField="bookName" HeaderText="BookName" />
-                <asp:BoundField DataField="abstract" HeaderText="Abstract" />
-                <asp:BoundField DataField="author" HeaderText="Author" />
-                <asp:BoundField DataField="publishCompany" HeaderText="PublishCompany" />
-                <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
-                <asp:BoundField DataField="state" HeaderText="State" />
-                <asp:BoundField DataField="comment" HeaderText="Comment" />
+                <asp:BoundField DataField="idUser" HeaderText="IdUser" />
+                <asp:BoundField DataField="userName" HeaderText="UserName" />
+                <asp:BoundField DataField="trueName" HeaderText="TrueName" />
+                <asp:BoundField DataField="college" HeaderText="college" />
+                <asp:BoundField DataField="address" HeaderText="address" />
+                <asp:BoundField DataField="birthday" HeaderText="birthday" />
+                <asp:BoundField DataField="sex" HeaderText="sex" />
+                <asp:BoundField DataField="email" HeaderText="email" />
+                <asp:BoundField DataField="mark" HeaderText="mark" />
+                <asp:BoundField DataField="telnumber" HeaderText="telnumber" />
                 <asp:ButtonField ButtonType="Button" Text="删除" />
             </Columns>
         </asp:GridView>

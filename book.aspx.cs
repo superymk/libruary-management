@@ -185,8 +185,5 @@ using System.Collections.Generic;
             reload(idBook);
         }
 
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            gridViewBind(new Book());
-        }
+       
 }

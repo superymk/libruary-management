@@ -16,19 +16,22 @@ public partial class navigator : System.Web.UI.UserControl
         SessionData sd = Session[SessionData.SessionName] as SessionData;
         if (sd == null||sd.CurrentUser==null)
         {
-            Response.Redirect("Default.aspx");
+            Response.Redirect("index.aspx");
         }
         lblUsername.Text = sd.CurrentUser.Username;
 
         IUserDao userdao=DaoFactory.getUserDao();
-        if (userdao.isAdmin(sd.CurrentUser.IdUser)==1)
+        if (userdao.isAdmin(sd.CurrentUser.IdUser) == 1)
         {
             btnUserList.Visible = true;
             btnReturnBook.Visible = true;
             return;
         }
-        btnUserList.Visible = false;
-        btnReturnBook.Visible = false;
+        else
+        {
+            btnUserList.Visible = false;
+            btnReturnBook.Visible = false;
+        }
     }
     protected void btnNewUser_Click(object sender, EventArgs e)
     {
@@ -40,7 +43,7 @@ public partial class navigator : System.Web.UI.UserControl
     }
     protected void btnBookSearch_Click(object sender, EventArgs e)
     {
-        Response.Redirect("book.aspx?mode=searchall");
+        Response.Redirect("booklist.aspx");
     }
     protected void btnShopingList_Click(object sender, EventArgs e)
     {
@@ -52,7 +55,7 @@ public partial class navigator : System.Web.UI.UserControl
     }
     protected void btnUserList_Click(object sender, EventArgs e)
     {
-        Response.Redirect("User.aspx?mode=searchall");
+        Response.Redirect("Userlist.aspx");
     }
     protected void btnReturnBook_Click(object sender, EventArgs e)
     {
@@ -61,6 +64,6 @@ public partial class navigator : System.Web.UI.UserControl
     protected void btnLogout_Click(object sender, EventArgs e)
     {
         Session[SessionData.SessionName] = null;
-        Response.Redirect("Default.aspx");
+        Response.Redirect("index.aspx");
     }
 }

@@ -57,7 +57,7 @@ public partial class Login : System.Web.UI.UserControl
         if (sd == null) sd = new SessionData();
         sd.CurrentUser = u;
         Session[SessionData.SessionName] = sd;
-        Response.Redirect("book.aspx?mode=searchall");
+        Response.Redirect("booklist.aspx");
         
     }
     protected void logout(object sender, EventArgs e)
