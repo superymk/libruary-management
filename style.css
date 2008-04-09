@@ -23,16 +23,17 @@ a {
 }
 a:link {
 	text-decoration: none;
+	color: #339966;
 }
 a:visited {
-	text-decoration: none; cursor: crosshair;
-	color: #999999;
+	text-decoration: none;
+	color: #339966;
 }
 a:hover {
-	text-decoration: none; cursor: crosshair;
-	color: #FFFFFF;
+	text-decoration: none;
+	color: #00CC66;
 }
 a:active {
-	text-decoration: none; cursor: crosshair
-	color: #999999;
+	text-decoration: none;
+	color: #339966;
 }
