@@ -1,20 +1,15 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="book.aspx.cs" Inherits="book" %>
-
-<%@ Register Src="navigator.ascx" TagName="navigator" TagPrefix="uc2" %>
-
-<%@ Register Src="Login.ascx" TagName="Login" TagPrefix="uc1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="booklist.aspx.cs" Inherits="booklist" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
-    <title>无标题页</title>
+    <title>Untitled Page</title>
 </head>
 <body>
     <form id="form1" runat="server">
-        &nbsp;<uc2:navigator id="Navigator1" runat="server"></uc2:navigator><br />
-        
-        <table border="0">
+    <div>
+    <table border="0">
             <tr>
                 <td style="width: 100px">
                     bookname</td>
@@ -74,26 +69,28 @@
                     <asp:TextBox ID="txtComment" runat="server" Height="109px" TextMode="MultiLine" Width="412px"></asp:TextBox></td>
             </tr>
         </table>
-        <asp:Button ID="btnAdd" runat="server" Text="Register" OnClick="register" />
-        <asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="update" />
-        <asp:Button ID="btnBorrow" runat="server" OnClick="borrow" Text="Borrow" /><br />
+        <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="search" />
         
         
         
-        
-        <br />
-        
-        <asp:Table ID="comments" runat="server">
-        <asp:TableRow ID="newComment" runat="server">
-            <asp:TableCell ID="newCCell" runat="server">
-                <asp:Label ID="newCLabel" runat="server" Text="new comment<BR>"></asp:Label>
-                <asp:textbox ID="newCBox" runat="server"></asp:textbox>
-                <asp:Label ID="newCLabel2" runat="server" Text="<BR>"></asp:Label>
-                <asp:Button ID="newCButton" Text="Add Comment" runat="server" OnClick="addComment"/>
-            </asp:TableCell>
-        </asp:TableRow>
-    </asp:Table>
-        &nbsp; &nbsp;
+        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanging="GridView1_SelectedIndexChanging"
+            OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowDeleting="GridView1_RowDeleting"
+            PageSize="5">
+            <Columns>
+                <asp:BoundField DataField="idBook" HeaderText="IdBook" />
+                <asp:BoundField DataField="bookName" HeaderText="BookName" />
+                <asp:BoundField DataField="author" HeaderText="Author" />
+                <asp:BoundField DataField="publishCompany" HeaderText="PublishCompany" />
+                <asp:BoundField DataField="type" HeaderText="Type" />
+                <asp:BoundField DataField="state" HeaderText="State" />
+                <asp:BoundField DataField="numCopies" HeaderText="NumCopies" />
+                <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
+                <asp:BoundField DataField="abstract" HeaderText="Abstract" />
+                <asp:ButtonField CommandName="select" Text="选择" />
+                <asp:ButtonField ButtonType="Button" CommandName="delete" Text="删除" />
+            </Columns>
+        </asp:GridView>
+    </div>
     </form>
 </body>
 </html>

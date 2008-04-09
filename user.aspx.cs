@@ -19,18 +19,7 @@ public partial class UserManager : System.Web.UI.Page
         {
             return;
         }
-        string mode = Request.QueryString["mode"];
-        if (mode!=null && mode.Equals("search"))
-        {
-            searchMode();
-            return;
-        } if (mode != null && mode.ToLower().Equals("searchall"))
-        {
-            searchMode();
-            search(sender, e);
-            return;
-
-        }
+        
         try
         {
             Int32 id = Int32.Parse(Request.QueryString["id"]);
@@ -61,7 +50,6 @@ public partial class UserManager : System.Web.UI.Page
             else
             {
                 updateConfirm.Visible = false;
-                searchConfirm.Visible = false;
             }
         }
         
@@ -138,7 +126,6 @@ public partial class UserManager : System.Web.UI.Page
         email.Text = u.Email;
         description.Text = idUser.Text;
         registerConfirm.Visible = false;
-        searchConfirm.Visible = false;
         int admin = dao.isAdmin(u.IdUser);
         if (admin != 0)
         {
@@ -167,50 +154,7 @@ public partial class UserManager : System.Web.UI.Page
         }
     }
 
-    private void searchMode()
-    {
-        updateConfirm.Visible = false;
-        registerConfirm.Visible = false;
-        password.Visible = false;
-        password2.Visible = false;
-        Label1.Visible = false;
-        Label2.Visible = false;
-    }
 
-    protected void search(object sender, EventArgs e) {
-        User u = new User();
-        u.Username = username.Text;
-        u.Password = password.Text;
-        u.TrueName = trueName.Text;
-        u.College = college.Text;
-        u.Address = address.Text;
-        u.Sex = sex.Text;
-        u.Email = email.Text;
-        u.Description = description.Text;
-        try
-        {
-            u.Birthday = DateTime.Parse(birthday.Text);
-        }
-        catch (FormatException ee){}
-        IUserDao dao = DaoFactory.getUserDao();
-        IList<BaseObject> list = dao.find(u);
-        for(int i=0; i<list.Count; i++){
-            User user = (User)list[i];
-            TableRow row = new TableRow();
-            TableCell cell1 = new TableCell();
-            Label box = new Label();
-            box.Text = "<a href=user.aspx?id="+user.IdUser+" >"+user.Username+"</a>";
-            cell1.Controls.Add(box);
-            row.Controls.Add(cell1);
-            users.Controls.Add(row);
-        }
-
-        IUserDao userdao=DaoFactory.getUserDao();
-        DataSet ds = userdao.findDataSet(u);
-        GridView1.DataSource = ds;
-        GridView1.DataBind();
-        
-    }
 
     protected void addComment(object sender, EventArgs e)
     {
@@ -240,13 +184,4 @@ public partial class UserManager : System.Web.UI.Page
     }
 
 
-    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        search(sender, e);
-    }
-    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-    {
-        GridView1.PageIndex = e.NewPageIndex;
-        search(sender, e);
-    }
 }

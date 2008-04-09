@@ -21,20 +21,6 @@ using System.Collections.Generic;
                 return;
             }
             
-            string mode = Request.QueryString["mode"];
-            if (mode != null && mode.Equals("search"))
-            {
-                btnAdd.Visible = false;
-                btnUpdate.Visible = false;
-                return;
-            } if (mode != null && mode.ToLower().Equals("searchall"))
-            {
-                btnUpdate.Visible = false;
-                btnAdd.Visible = false;
-                gridViewBind(new Book());
-                return;
-
-            }
             try
             {
                 Int32 id = Int32.Parse(Request.QueryString["id"]);
@@ -42,20 +28,12 @@ using System.Collections.Generic;
             }
             catch (Exception )
             {
-                btnSearch.Visible = false;
                 btnUpdate.Visible = false;
                 
             }
             
         }
 
-        private void gridViewBind(Book b){
-            IBaseDao bookdao=DaoFactory.getBookDao();
-            DataSet ds = bookdao.findDataSet(b);
-            GridView1.DataSource = ds;
-            GridView1.DataBind();
-
-        }
 
         private void reload(int id)
         {
@@ -74,7 +52,6 @@ using System.Collections.Generic;
             ddlState.SelectedValue = b.State.Trim();
 
             btnAdd.Visible = false;
-            btnSearch.Visible = false;
             comments.Visible = true;
             BookComment tac = new BookComment();
             tac.IdBook = id;
@@ -96,55 +73,6 @@ using System.Collections.Generic;
         }
 
 
-        protected void search(object sender, EventArgs e)
-        {
-            Book b = new Book();
-
-            try
-            {
-                b.IdBook = Int32.Parse(txtIdBook.Text);
-            }
-            catch (FormatException )
-            {
-                b.IdBook = 0;
-            }
-
-            b.BookName = txtBookName.Text;
-            b.Comment = txtComment.Text;
-            b.Abstract = txtAbstract.Text;
-            b.Author = txtAuthor.Text;
-            b.DonatePerson = txtDonatePerson.Text;
-            try
-            {
-                b.NumCopies = int.Parse(txtNumCopies.Text);
-            }
-            catch (FormatException )
-            {
-                b.NumCopies = 0;
-            }
-            b.PublishCompany = txtPublishCompany.Text;
-            b.Type = txtType.Text;
-            b.State = ddlState.SelectedValue;
-
-            //IBookDao dao = DaoFactory.getBookDao();
-            //IList<BaseObject> list = dao.find(b);
-            
-            //for (int i = 0; i < list.Count; i++)
-            //{
-            //    Book book = (Book)list[i];
-            //    TableRow row = new TableRow();
-            //    TableCell cell1 = new TableCell();
-            //    Label box = new Label();
-            //    box.Text = "<a href=book.aspx?id=" + book.IdBook + " >" + book.BookName + "</a>";
-            //    cell1.Controls.Add(box);
-            //    row.Controls.Add(cell1);
-            //    books.Controls.Add(row);
-                
-            //}
-
-            gridViewBind(b);
-
-        }
 
         protected void update(object sender, EventArgs e)
         {
@@ -257,27 +185,6 @@ using System.Collections.Generic;
             reload(idBook);
         }
 
-        protected void GridView1_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
-        {
-            string idstr = GridView1.Rows[e.NewSelectedIndex].Cells[0].Text;
-            Response.Redirect("book.aspx?id=" + idstr);
-        }
-        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            GridView1.PageIndex = e.NewPageIndex;
-            search(sender, e);
-        }
-
-        protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            
-            string idstr = GridView1.Rows[e.RowIndex].Cells[0].Text;
-            int id = int.Parse(idstr);
-            IBaseDao bookdao = DaoFactory.getBookDao();
-            bookdao.delete(id);
-            GridView1.Rows[e.RowIndex].Visible = false;
-            gridViewBind(new Book());
-        }
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             gridViewBind(new Book());
