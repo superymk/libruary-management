@@ -82,4 +82,9 @@ public partial class userlist : System.Web.UI.Page
 
         Page_Load(sender, new EventArgs());
     }
+    protected void GridView1_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+    {
+        string idstr = GridView1.Rows[e.NewSelectedIndex].Cells[0].Text;
+        Response.Redirect("user.aspx?id=" + idstr);
+    }
 }

@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
-    <title>Untitled Page</title>
+    <title>上海交通大学 微软俱乐部 图书管理系统</title>
     <link href="style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -14,7 +14,7 @@
     
     
      <asp:GridView ID="GridView1" runat="server" AllowPaging="True" PageSize="5" AutoGenerateColumns="False" 
-     OnPageIndexChanging="GridView1_PageIndexChanging" OnRowDeleting="GridView1_RowDeleting">
+     OnPageIndexChanging="GridView1_PageIndexChanging" OnRowDeleting="GridView1_RowDeleting" OnSelectedIndexChanging="GridView1_SelectedIndexChanging">
             <Columns>
                 <asp:BoundField DataField="idUser" HeaderText="IdUser" />
                 <asp:BoundField DataField="userName" HeaderText="UserName" />
@@ -26,6 +26,7 @@
                 <asp:BoundField DataField="email" HeaderText="email" />
                 <asp:BoundField DataField="mark" HeaderText="mark" />
                 <asp:BoundField DataField="telnumber" HeaderText="telnumber" />
+                <asp:CommandField ShowSelectButton="True" />
                 <asp:ButtonField ButtonType="Button" CommandName="delete" Text="删除" />
             </Columns>
         </asp:GridView>

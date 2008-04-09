@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
-    <title>Untitled Page</title>
+    <title>上海交通大学 微软俱乐部 图书管理系统</title>
     <link href="style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>

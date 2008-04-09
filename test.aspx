@@ -2,7 +2,7 @@
 <%@ Page Language="C#" AutoEventWireup="true"  CodeFile="test.aspx.cs" Inherits="test" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
-<head><title>Label.aspx</title></head> 
+<head><title>上海交通大学 微软俱乐部 图书管理系统</title></head> 
 <body>
 <form id="form2" runat="server">
 <asp:Button Text="UnClicked" OnClick="btnCounter_OnClick" id="btnCounter" runat="server" />
