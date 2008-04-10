@@ -18,15 +18,15 @@
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowDeleting="GridView1_RowDeleting"
             PageSize="5">
             <Columns>
-                <asp:BoundField DataField="idBook" HeaderText="IdBook" />
-                <asp:BoundField DataField="bookName" HeaderText="BookName" />
-                <asp:BoundField DataField="author" HeaderText="Author" />
-                <asp:BoundField DataField="publishCompany" HeaderText="PublishCompany" />
-                <asp:BoundField DataField="type" HeaderText="Type" />
-                <asp:BoundField DataField="state" HeaderText="State" />
-                <asp:BoundField DataField="numCopies" HeaderText="NumCopies" />
-                <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
-                <asp:BoundField DataField="abstract" HeaderText="Abstract" />
+                <asp:BoundField DataField="idBook" HeaderText="书籍编号" />
+                <asp:BoundField DataField="bookName" HeaderText="书名" />
+                <asp:BoundField DataField="author" HeaderText="作者" />
+                <asp:BoundField DataField="publishCompany" HeaderText="出版社" />
+                <asp:BoundField DataField="type" HeaderText="类型" />
+                <asp:BoundField DataField="state" HeaderText="状态" />
+                <asp:BoundField DataField="numCopies" HeaderText="数量" />
+                <asp:BoundField DataField="donatePerson" HeaderText="捐献人" />
+                <asp:BoundField DataField="abstract" HeaderText="描述" />
                 <asp:ButtonField CommandName="select" Text="选择" />
                 <asp:ButtonField ButtonType="Button" CommandName="delete" Text="取消" />
             </Columns>

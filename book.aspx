@@ -24,7 +24,7 @@
         <table border="0">
             <tr>
                 <td style="width: 100px">
-                    Bookname</td>
+                    书名</td>
                 <td style="width: 100px">
                     <asp:TextBox ID="txtBookName" runat="server" ></asp:TextBox></td>
                 <td style="width: 100px">
@@ -34,37 +34,37 @@
             </tr>
             <tr>
                 <td style="width: 100px; height: 26px;">
-                    Type</td>
+                    类别</td>
                 <td style="width: 100px; height: 26px;">
                     <asp:TextBox ID="txtType" runat="server"></asp:TextBox></td>
                 <td style="width: 100px; height: 26px;">
-                    NumCopies</td>
+                    数量</td>
                 <td style="width: 102px; height: 26px;">
                     <asp:TextBox ID="txtNumCopies" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
                 <td style="width: 100px">
-                    Abstract</td>
+                    描述</td>
                 <td style="width: 100px">
                     <asp:TextBox ID="txtAbstract" runat="server"></asp:TextBox></td>
                 <td style="width: 100px">
-                    Author</td>
+                    作者</td>
                 <td style="width: 102px">
                     <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
                 <td style="width: 100px">
-                    PublishCompany</td>
+                    出版社</td>
                 <td style="width: 100px">
                     <asp:TextBox ID="txtPublishCompany" runat="server"></asp:TextBox></td>
                 <td style="width: 100px">
-                    DonatePerson</td>
+                    捐献人</td>
                 <td style="width: 102px">
                     <asp:TextBox ID="txtDonatePerson" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
                 <td style="width: 100px">
-                    Atate</td>
+                    状态</td>
                 <td style="width: 100px">
                     <asp:DropDownList ID="ddlState" runat="server">
                         <asp:ListItem Selected="True">FREE</asp:ListItem>
@@ -76,7 +76,7 @@
             </tr>
             <tr>
                 <td style="width: 100px; height: 105px">
-                    Comment</td>
+                    评论</td>
                 <td colspan="3" style="height: 105px">
                     <asp:TextBox ID="txtComment" runat="server" Height="109px" TextMode="MultiLine" Width="412px"></asp:TextBox></td>
             </tr>
@@ -94,10 +94,10 @@
         <asp:Table ID="comments" runat="server">
         <asp:TableRow ID="newComment" runat="server">
             <asp:TableCell ID="newCCell" runat="server">
-                <asp:Label ID="newCLabel" runat="server" Text="new comment<BR>"></asp:Label>
+                <asp:Label ID="newCLabel" runat="server" Text="添加新评论<BR>"></asp:Label>
                 <asp:textbox ID="newCBox" runat="server"></asp:textbox>
                 <asp:Label ID="newCLabel2" runat="server" Text="<BR>"></asp:Label>
-                <asp:Button ID="newCButton" Text="Add Comment" runat="server" OnClick="addComment"/>
+                <asp:Button ID="newCButton" Text="添加评论" runat="server" OnClick="addComment"/>
             </asp:TableCell>
         </asp:TableRow>
     </asp:Table>

@@ -17,11 +17,11 @@
         OnSelectedIndexChanging="GridView1_SelectedIndexChanging" OnRowDeleting="GridView1_RowDeleting"
              PageSize="5">
             <Columns>
-                <asp:BoundField DataField="idBook" HeaderText="IdBook" />
-                <asp:BoundField HeaderText="BookName" />
-                <asp:BoundField DataField="idUser" HeaderText="IdUser" />
-                <asp:BoundField HeaderText="UserName" />
-                <asp:BoundField DataField="deadLine" HeaderText="DeadLine" />
+                <asp:BoundField DataField="idBook" HeaderText="书号" />
+                <asp:BoundField HeaderText="书名" />
+                <asp:BoundField DataField="idUser" HeaderText="用户号" />
+                <asp:BoundField HeaderText="用户名" />
+                <asp:BoundField DataField="deadLine" HeaderText="截止日期" />
                 <asp:ButtonField CommandName="select" Text="查看" />
                 <asp:ButtonField ButtonType="Button" CommandName="delete" Text="还书" />
             </Columns>

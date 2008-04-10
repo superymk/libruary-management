@@ -18,15 +18,15 @@
             OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowDeleting="GridView1_RowDeleting"
             PageSize="5">
             <Columns>
-                <asp:BoundField DataField="idBook" HeaderText="IdBook" />
-                <asp:BoundField DataField="bookName" HeaderText="BookName" />
-                <asp:BoundField DataField="author" HeaderText="Author" />
-                <asp:BoundField DataField="publishCompany" HeaderText="PublishCompany" />
-                <asp:BoundField DataField="type" HeaderText="Type" />
-                <asp:BoundField DataField="state" HeaderText="State" />
-                <asp:BoundField DataField="numCopies" HeaderText="NumCopies" />
-                <asp:BoundField DataField="donatePerson" HeaderText="DonatePerson" />
-                <asp:BoundField DataField="abstract" HeaderText="Abstract" />
+                <asp:BoundField DataField="idBook" HeaderText="书籍编号" />
+                <asp:BoundField DataField="bookName" HeaderText="书名" />
+                <asp:BoundField DataField="author" HeaderText="作者" />
+                <asp:BoundField DataField="publishCompany" HeaderText="出版社" />
+                <asp:BoundField DataField="type" HeaderText="类型" />
+                <asp:BoundField DataField="state" HeaderText="状态" />
+                <asp:BoundField DataField="numCopies" HeaderText="数量" />
+                <asp:BoundField DataField="donatePerson" HeaderText="捐献人" />
+                <asp:BoundField DataField="abstract" HeaderText="描述" />
                 <asp:ButtonField CommandName="select" Text="选择" />
                 <asp:ButtonField ButtonType="Button" CommandName="delete" Text="删除" />
             </Columns>
@@ -35,7 +35,7 @@
     <table border="0">
             <tr>
                 <td style="width: 100px">
-                    bookname</td>
+                    书名</td>
                 <td style="width: 100px">
                     <asp:TextBox ID="txtBookName" runat="server" ></asp:TextBox></td>
                 <td style="width: 100px">
@@ -45,37 +45,37 @@
             </tr>
             <tr>
                 <td style="width: 100px">
-                    type</td>
+                    类型</td>
                 <td style="width: 100px">
                     <asp:TextBox ID="txtType" runat="server"></asp:TextBox></td>
                 <td style="width: 100px">
-                    numCopies</td>
+                    数量</td>
                 <td style="width: 102px">
                     <asp:TextBox ID="txtNumCopies" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
                 <td style="width: 100px">
-                    abstract</td>
+                    描述</td>
                 <td style="width: 100px">
                     <asp:TextBox ID="txtAbstract" runat="server"></asp:TextBox></td>
                 <td style="width: 100px">
-                    author</td>
+                    作者</td>
                 <td style="width: 102px">
                     <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
                 <td style="width: 100px">
-                    publishCompany</td>
+                    出版社</td>
                 <td style="width: 100px">
                     <asp:TextBox ID="txtPublishCompany" runat="server"></asp:TextBox></td>
                 <td style="width: 100px">
-                    DonatePerson</td>
+                    捐献人</td>
                 <td style="width: 102px">
                     <asp:TextBox ID="txtDonatePerson" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
                 <td style="width: 100px">
-                    state</td>
+                    状态</td>
                 <td style="width: 100px">
                     <asp:DropDownList ID="ddlState" runat="server">
                         <asp:ListItem Selected="True">FREE</asp:ListItem>
@@ -87,7 +87,7 @@
             </tr>
             <tr>
                 <td style="width: 100px; height: 105px">
-                    comment</td>
+                    评论</td>
                 <td colspan="3" style="height: 105px">
                     <asp:TextBox ID="txtComment" runat="server" Height="109px" TextMode="MultiLine" Width="412px"></asp:TextBox></td>
             </tr>
