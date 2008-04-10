@@ -29,31 +29,32 @@ public partial class borrowlist : System.Web.UI.Page
             try
             {
                 Int32 id = Int32.Parse(Request.QueryString["id"]);
-                reload(id,true);
+                Borrow b = new Borrow();
+                b.IdUser = id;
+                reload(b);
+                GridView1.Columns[GridView1.Columns.Count - 1].Visible = true;
                 return;
             }
             catch (Exception)
             {
-
+                reload(new Borrow());
+                GridView1.Columns[GridView1.Columns.Count - 1].Visible = true;
+                return;
             }
         }
-        reload(user.IdUser, userdao.isAdmin(user.IdUser));
+        GridView1.Columns[GridView1.Columns.Count - 1].Visible = false;
+        Borrow borrow = new Borrow();
+        borrow.IdUser = user.IdUser;
+        reload(borrow);
     }
-    protected void reload(int idUser,bool isAdmin)
+    protected void reload(Borrow borrow)
     {
         IBaseDao borrowdao = DaoFactory.getBorrowDao();
-        Borrow borrow = new Borrow();
-        borrow.IdUser = idUser;
+        //Borrow borrow = new Borrow();
+        
+        //    borrow.IdUser = idUser;
         DataSet ds = borrowdao.findDataSet(borrow);
 
-        if (isAdmin)
-        {
-            GridView1.Columns[GridView1.Columns.Count - 1].Visible = true;
-        }
-        else
-        {
-            GridView1.Columns[GridView1.Columns.Count - 1].Visible = false;
-        }
         
         GridView1.DataSource = ds;
         GridView1.DataBind();

@@ -90,7 +90,7 @@ public partial class booklist : System.Web.UI.Page
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
-        search(sender, e);
+        gridViewBind(new Book());
     }
 
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)

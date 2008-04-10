@@ -62,10 +62,11 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
         bookdao.update(book);
 
         IUserDao userdao = DaoFactory.getUserDao();
+        User user = userdao.getById(idUser)as User;
         int count = userdao.borrowedBookCount(idUser);
 
-        if (count + 1 >= BorrowCountLimit)
-            throw new DaoException("User with id:" + idUser + "has borrowed " + BorrowCountLimit + " books!");
+        if (count > BorrowCountLimit)
+            throw new DaoException("User :" + user.Username + " has borrowed " + count+" more than "+BorrowCountLimit+ " books!");
 
         DaoFactory.getBorrowDao().add(borrow);
     }

@@ -181,7 +181,7 @@ public abstract class BaseDao:IBaseDao
                 }
                 else
                 {
-                    if (!value.Equals(0))
+                    if (!pt.Equals(typeof(DateTime)) && !value.Equals(0))
                     {
                         sqlquery += " and " + name + " = '" + value + "'";
                     }

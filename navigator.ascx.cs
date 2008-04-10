@@ -41,6 +41,7 @@ public partial class navigator : System.Web.UI.UserControl
                 btnUserList.Visible = true;
                 btnReturnBook.Visible = true;
                 btnAddBook.Visible = true;
+                btnAddUser.Visible = true;
                 lblUsername.Text += " 管理员";
                 return;
             }
@@ -49,6 +50,7 @@ public partial class navigator : System.Web.UI.UserControl
                 btnUserList.Visible = false;
                 btnReturnBook.Visible = false;
                 btnAddBook.Visible = false;
+                btnAddUser.Visible = false;
                 lblUsername.Text += " 用户";
             }
         }
@@ -88,5 +90,9 @@ public partial class navigator : System.Web.UI.UserControl
     protected void addBook(object sender, EventArgs e)
     {
         Response.Redirect("book.aspx");
+    }
+    protected void addUser(object sender, EventArgs e)
+    {
+        Response.Redirect("user.aspx");
     }
 }

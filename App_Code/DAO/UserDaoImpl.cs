@@ -68,6 +68,7 @@ public class UserDaoImpl : BaseDao, IUserDao{
     {
         IBorrowDao borrowdao = DaoFactory.getBorrowDao();
         Borrow borrow = new Borrow();
+        borrow.IdUser = idUser;
         IList<BaseObject> list = borrowdao.find(borrow);
         return list.Count;
     }
