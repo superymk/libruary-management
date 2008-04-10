@@ -179,6 +179,13 @@ public abstract class BaseDao:IBaseDao
                 {
                     sqlquery += " and " + name + " like '" + value + "'";
                 }
+                else
+                {
+                    if (!value.Equals(0))
+                    {
+                        sqlquery += " and " + name + " = '" + value + "'";
+                    }
+                }
             }
             
         }
@@ -234,6 +241,10 @@ public abstract class BaseDao:IBaseDao
                 else if (pt.Equals(typeof(DateTime)) && ((DateTime)value > new DateTime()))
                 {
                     sqlquery += " and " + name + " like '" + value + "'";
+                }
+                else if(pt.Equals(typeof(Int32)) && !value.Equals(0))
+                {
+                        sqlquery += " and " + name + " = '" + value + "'";
                 }
             }
 

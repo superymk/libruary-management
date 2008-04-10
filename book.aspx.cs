@@ -20,31 +20,39 @@ using System.Collections.Generic;
 //                txtComment.Text = "postBack";
                 return;
             }
-            
+            SessionData sd = Session[SessionData.SessionName] as SessionData;
+            User user = sd.CurrentUser;
+            IUserDao userdao = DaoFactory.getUserDao();
             try
             {
                 Int32 id = Int32.Parse(Request.QueryString["id"]);
                 reload(id);
+                comments.Visible = true;
+                btnAddCart.Visible = true;
+                if (userdao.isAdmin(user.IdUser))
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = true;
+                }
+                else
+                {
+                    btnAdd.Visible = false;
+                    btnUpdate.Visible = false;
+                }
             }
             catch (Exception )
             {
-                btnUpdate.Visible = false;
-                
+                if (userdao.isAdmin(user.IdUser))
+                {
+                    btnUpdate.Visible = false;
+                    btnAdd.Visible = true;
+                    comments.Visible = false;
+                    btnAddCart.Visible = false;
+                }
+                else Response.Redirect("booklist.aspx");
             }
 
-            SessionData sd = Session[SessionData.SessionName] as SessionData;
-            User user = sd.CurrentUser;
-            IUserDao userdao=DaoFactory.getUserDao();
-            if (userdao.isAdmin(user.IdUser))
-            {
-                btnAdd.Visible = true;
-                btnUpdate.Visible = true;
-            }
-            else
-            {
-                btnAdd.Visible = false;
-                btnUpdate.Visible = false;
-            }
+            
             
         }
 
@@ -66,7 +74,6 @@ using System.Collections.Generic;
             ddlState.SelectedValue = b.State.Trim();
 
             btnAdd.Visible = false;
-            comments.Visible = true;
 
             BookComment tac = new BookComment();
             tac.IdBook = id;

@@ -14,32 +14,48 @@ public partial class navigator : System.Web.UI.UserControl
     protected void Page_Load(object sender, EventArgs e)
     {
         SessionData sd = Session[SessionData.SessionName] as SessionData;
-        if (sd == null||sd.CurrentUser==null)
+        if (sd == null || sd.CurrentUser == null)
         {
-            Response.Redirect("index.aspx");
-        }
-        lblUsername.Text = sd.CurrentUser.Username;
-
-        IUserDao userdao=DaoFactory.getUserDao();
-        if (userdao.isAdmin(sd.CurrentUser.IdUser) )
-        {
-            btnUserList.Visible = true;
-            btnReturnBook.Visible = true;
-            btnAddBook.Visible = true;
-            lblUsername.Text += " 管理员";
-            return;
+            string a = Request.Url.LocalPath;
+            if (!a.ToLower().Equals("/libsys/user.aspx"))
+            {
+                Response.Redirect("index.aspx");
+            }
+            btnNewUser.Visible = false;
+            btnReturnBook.Visible = false;
+            btnShopingList.Visible = false;
+            btnUserList.Visible = false;
+            btnBookSearch.Visible = false;
+            btnShopingList.Visible = false;
+            btnBorrowList.Visible = false;
+            btnAddBook.Visible = false;
+            btnLogout.Visible = false;
         }
         else
         {
-            btnUserList.Visible = false;
-            btnReturnBook.Visible = false;
-            btnAddBook.Visible = false;
-            lblUsername.Text += " 用户";
+            lblUsername.Text = "<a href=user.aspx?id=" + sd.CurrentUser.IdUser + ">"
+                + sd.CurrentUser.Username + "</a>";
+            IUserDao userdao = DaoFactory.getUserDao();
+            if (userdao.isAdmin(sd.CurrentUser.IdUser))
+            {
+                btnUserList.Visible = true;
+                btnReturnBook.Visible = true;
+                btnAddBook.Visible = true;
+                lblUsername.Text += " 管理员";
+                return;
+            }
+            else
+            {
+                btnUserList.Visible = false;
+                btnReturnBook.Visible = false;
+                btnAddBook.Visible = false;
+                lblUsername.Text += " 用户";
+            }
         }
     }
     protected void btnNewUser_Click(object sender, EventArgs e)
     {
-        
+        Session[SessionData.SessionName] = null;
         Response.Redirect("User.aspx");
     }
     protected void btnBookSearch_Click(object sender, EventArgs e)

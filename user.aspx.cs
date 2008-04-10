@@ -24,16 +24,37 @@ public partial class UserManager : System.Web.UI.Page
         {
             Int32 id = Int32.Parse(Request.QueryString["id"]);
             reload(id);
+            SessionData sd = Session[SessionData.SessionName] as SessionData;
+            if (sd != null && sd.CurrentUser != null)
+            {
+                User u = sd.CurrentUser;
+                if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
+                {
+                    IUserDao dao = DaoFactory.getUserDao();
+                    int lid = dao.confirmUser(u.Username, u.Password);
+                    if (lid != -1)
+                    {
+                        bool luser = dao.isAdmin(lid);
+                        if (luser || lid == id)
+                        {
+                            updateConfirm.Visible = true;
+                        }
+                        else
+                        {
+                            updateConfirm.Visible = false;
+                        }
+                        registerConfirm.Visible = false;
+                        return;
+                    }
+                }
+            }
+            Response.Redirect("index.aspx");
         }
         catch (Exception ee)
         {
             SessionData sd = Session[SessionData.SessionName] as SessionData;
             if (sd != null && sd.CurrentUser != null)
             {
-                //User u =(User) Session["user"];
-                //Response.Write(u.Username+"<br/>");
-                //Response.Write(u.Password);
-
                 User u = sd.CurrentUser;
                 if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
                 {
@@ -43,17 +64,15 @@ public partial class UserManager : System.Web.UI.Page
                     {
                         reload(id);
                     }
+                    updateConfirm.Visible = true;
+                    registerConfirm.Visible = false;
                     return;
                 }
-
             }
-            else
-            {
-                updateConfirm.Visible = false;
-            }
+            comments.Visible = false;
+            updateConfirm.Visible = false;
+            registerConfirm.Visible = true;
         }
-        
-        
     }
 
     protected void register(object sender, EventArgs e)
@@ -77,7 +96,7 @@ public partial class UserManager : System.Web.UI.Page
         if (sd == null) sd = new SessionData();
         sd.CurrentUser = u;
         Session[SessionData.SessionName] = sd;
-        Response.Redirect("default.aspx");
+        Response.Redirect("booklist.aspx");
     }
 
     protected void update(object sender, EventArgs e)
