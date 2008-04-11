@@ -170,7 +170,7 @@ public abstract class BaseDao:IBaseDao
             Type pt = p.PropertyType;
             string name = p.Name;
             object value = p.GetValue(information, null);
-            if (!inArray(name,key) && value!=null && !value.Equals(""))
+            if ((!autoKey || !inArray(name, key)) && value != null && !value.Equals(""))
             {
                 if (!pt.Equals(typeof(DateTime)) && !pt.Equals(typeof(Int32))) {
                     sqlquery += " and " + name + " like '%" + value + "%'";
@@ -232,7 +232,7 @@ public abstract class BaseDao:IBaseDao
             Type pt = p.PropertyType;
             string name = p.Name;
             object value = p.GetValue(information, null);
-            if (!inArray(name, key) && value != null && !value.Equals(""))
+            if ((!autoKey || !inArray(name, key)) && value != null && !value.Equals(""))
             {
                 if (!pt.Equals(typeof(DateTime)) && !pt.Equals(typeof(Int32)))
                 {
