@@ -21,15 +21,7 @@ public partial class navigator : System.Web.UI.UserControl
             {
                 Response.Redirect("index.aspx");
             }
-            btnNewUser.Visible = false;
-            btnReturnBook.Visible = false;
-            btnShopingList.Visible = false;
-            btnUserList.Visible = false;
-            btnBookSearch.Visible = false;
-            btnShopingList.Visible = false;
-            btnBorrowList.Visible = false;
-            btnAddBook.Visible = false;
-            btnLogout.Visible = false;
+            
         }
         else
         {

@@ -21,6 +21,8 @@ using System.Collections.Generic;
                 return;
             }
             SessionData sd = Session[SessionData.SessionName] as SessionData;
+            if (sd == null || sd.CurrentUser == null)
+                Response.Redirect("Default.aspx");
             User user = sd.CurrentUser;
             IUserDao userdao = DaoFactory.getUserDao();
             try
@@ -46,7 +48,7 @@ using System.Collections.Generic;
                 {
                     btnUpdate.Visible = false;
                     btnAdd.Visible = true;
-                    comments.Visible = false;
+                    //comments.Visible = false;
                     btnAddCart.Visible = false;
                 }
                 else Response.Redirect("booklist.aspx");
@@ -85,7 +87,8 @@ using System.Collections.Generic;
                 TableRow row = new TableRow();
                 TableCell cell1 = new TableCell();
                 Label box = new Label();
-                User cuser = (User)dao.getById(comment.IdUser);
+                IUserDao userdao = DaoFactory.getUserDao();
+                User cuser = (User)userdao.getById(comment.IdUser);
                 box.Text = "<a href=user.aspx?id=" + comment.IdUser + " >" + cuser.Username + "</a> :" + comment.Comment;
                 cell1.Controls.Add(box);
                 row.Controls.Add(cell1);

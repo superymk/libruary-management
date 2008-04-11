@@ -94,13 +94,13 @@
         <asp:Table ID="comments" runat="server">
         <asp:TableRow ID="newComment" runat="server">
             <asp:TableCell ID="newCCell" runat="server">
-                <asp:Label ID="newCLabel" runat="server" Text="添加新评论<BR>"></asp:Label>
+                <asp:Label ID="newCLabel" runat="server" Text="添加新评论<BR/>"></asp:Label>
                 <asp:textbox ID="newCBox" runat="server"></asp:textbox>
-                <asp:Label ID="newCLabel2" runat="server" Text="<BR>"></asp:Label>
+                <asp:Label ID="newCLabel2" runat="server" Text="<BR/>"></asp:Label>
                 <asp:Button ID="newCButton" Text="添加评论" runat="server" OnClick="addComment"/>
             </asp:TableCell>
         </asp:TableRow>
-    </asp:Table>
+        </asp:Table>
         &nbsp; &nbsp;&nbsp;&nbsp;
                 </td>
             </tr>
