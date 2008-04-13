@@ -19,7 +19,7 @@ public partial class UserManager : System.Web.UI.Page
         {
             return;
         }
-        
+        username.Enabled = true;
         try
         {
             Int32 id = Int32.Parse(Request.QueryString["id"]);
@@ -28,6 +28,16 @@ public partial class UserManager : System.Web.UI.Page
             if (sd != null && sd.CurrentUser != null)
             {
                 User u = sd.CurrentUser;
+
+                if (DaoFactory.getUserDao().isAdmin(u.IdUser))
+                {
+                    btnAddAdmin.Visible = true;
+                }
+                else
+                {
+                    btnAddAdmin.Visible = false;
+                }
+
                 if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
                 {
                     IUserDao dao = DaoFactory.getUserDao();
@@ -44,6 +54,7 @@ public partial class UserManager : System.Web.UI.Page
                             updateConfirm.Visible = false;
                         }
                         registerConfirm.Visible = false;
+                        
                         return;
                     }
                 }
@@ -60,13 +71,10 @@ public partial class UserManager : System.Web.UI.Page
                 {
                     IUserDao dao = DaoFactory.getUserDao();
                     int id = dao.confirmUser(u.Username, u.Password);
-                    if (id != -1)
+                    if (id != -1 && !dao.isAdmin(id))
                     {
                         reload(id);
-                    }
-                    updateConfirm.Visible = true;
-                    registerConfirm.Visible = false;
-                    return;
+                    }                    
                 }
             }
             comments.Visible = false;
@@ -90,13 +98,14 @@ public partial class UserManager : System.Web.UI.Page
         u.Sex = sex.Text;
         u.Email = email.Text;
         u.Description = description.Text;
-        DaoFactory.getUserDao().add(u);
+        if (!DaoFactory.getUserDao().add(u)) 
+        {
+            Response.Write("<script>alert('用户添加错误,可能同名用户已存在')</script>");
+            return;
+        }
 
-        SessionData sd = Session[SessionData.SessionName] as SessionData;
-        if (sd == null) sd = new SessionData();
-        sd.CurrentUser = u;
-        Session[SessionData.SessionName] = sd;
-        Response.Redirect("booklist.aspx");
+        
+        Response.Redirect("userlist.aspx");
     }
 
     protected void update(object sender, EventArgs e)
@@ -166,11 +175,18 @@ public partial class UserManager : System.Web.UI.Page
                 comments.Controls.Add(row);
                 //description.Text += u.ToString();
             }
+            btnAddAdmin.Text = "取消管理员";
         }
         else
         {
+            btnAddAdmin.Text = "设置管理员";
             comments.Visible = false;
+            
         }
+        username.Enabled = false;
+
+
+
     }
 
 
@@ -203,4 +219,10 @@ public partial class UserManager : System.Web.UI.Page
     }
 
 
+    protected void AddAdmin(object sender, EventArgs e)
+    {
+        int id =int.Parse( idUser.Text);
+        DaoFactory.getUserDao().setAdmin(id);
+        Response.Redirect("userlist.aspx");
+    }
 }

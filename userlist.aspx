@@ -27,6 +27,7 @@
                 <asp:BoundField DataField="email" HeaderText="Email" />
                 <asp:BoundField DataField="mark" HeaderText="积分" />
                 <asp:BoundField DataField="telnumber" HeaderText="电话" />
+                <asp:BoundField HeaderText="管理员" />
                 <asp:CommandField ShowSelectButton="True" />
                 <asp:ButtonField ButtonType="Button" CommandName="delete" Text="删除" />
             </Columns>

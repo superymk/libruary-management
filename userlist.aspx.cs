@@ -56,6 +56,12 @@ public partial class userlist : System.Web.UI.Page
         DataSet ds = dao.findDataSet(u);
         GridView1.DataSource = ds;
         GridView1.DataBind();
+        foreach (GridViewRow row in GridView1.Rows)
+        {
+            string iduserstr = row.Cells[0].Text;
+            int iduser = int.Parse(iduserstr);
+            row.Cells[row.Cells.Count - 3].Text = DaoFactory.getUserDao().isAdmin(iduser) ? "是" : "否";
+        }
 
     }
 

@@ -25,7 +25,7 @@ public abstract class BaseDao:IBaseDao
     #region IBaseDao 成员
 
 
-    public bool add(BaseObject obj)
+    public virtual bool add(BaseObject obj)
     {
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();

@@ -99,6 +99,7 @@
     <asp:Button ID="updateConfirm" Text="修改" runat="server" OnClick="update" />
     
     <asp:Label id="Admin"  runat="server" text="" /> 
+        <asp:Button ID="btnAddAdmin" runat="server" OnClick="AddAdmin" Text="注册为管理员" />
     <asp:Table ID="comments" runat="server">
         <asp:TableRow ID="newComment" runat="server">
             <asp:TableCell ID="newCCell" runat="server">

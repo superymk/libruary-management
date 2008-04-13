@@ -30,7 +30,7 @@ public partial class navigator : System.Web.UI.UserControl
             IUserDao userdao = DaoFactory.getUserDao();
             if (userdao.isAdmin(sd.CurrentUser.IdUser))
             {
-                btnUserList.Visible = true;
+                
                 btnReturnBook.Visible = true;
                 btnAddBook.Visible = true;
                 btnAddUser.Visible = true;
@@ -39,7 +39,7 @@ public partial class navigator : System.Web.UI.UserControl
             }
             else
             {
-                btnUserList.Visible = false;
+                
                 btnReturnBook.Visible = false;
                 btnAddBook.Visible = false;
                 btnAddUser.Visible = false;

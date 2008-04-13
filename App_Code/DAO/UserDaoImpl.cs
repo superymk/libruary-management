@@ -64,6 +64,30 @@ public class UserDaoImpl : BaseDao, IUserDao{
 
     }
 
+    public bool setAdmin(int idUser)
+    {
+        if (!isAdmin(idUser))
+        {
+            SqlConnection sconn = new SqlConnection(connsql);
+            SqlCommand cmd = new SqlCommand();
+            sconn.Open();
+            cmd.Connection = sconn;
+            cmd.CommandText = "insert into admininformation values(" + idUser + ")";
+            int result = cmd.ExecuteNonQuery();
+            return result != 0;
+        }
+        else
+        {
+            SqlConnection sconn = new SqlConnection(connsql);
+        SqlCommand cmd = new SqlCommand();
+        sconn.Open();
+        cmd.Connection = sconn;
+        cmd.CommandText = "delete from admininformation where idAdmin=" + idUser;
+        int result = cmd.ExecuteNonQuery();
+        return result != 0;
+        }
+    }
+
     public int borrowedBookCount(int idUser)
     {
         IBorrowDao borrowdao = DaoFactory.getBorrowDao();
@@ -71,6 +95,15 @@ public class UserDaoImpl : BaseDao, IUserDao{
         borrow.IdUser = idUser;
         IList<BaseObject> list = borrowdao.find(borrow);
         return list.Count;
+    }
+
+    public override bool add(BaseObject user)
+    {
+        User username = new User();
+        username.Username = (user as User).Username;
+        IList<BaseObject> list = base.find(username);
+        if (list.Count != 0) return false;
+        return base.add(user);
     }
     
     //public bool register(User user) {

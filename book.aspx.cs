@@ -156,8 +156,11 @@ using System.Collections.Generic;
             b.Type = txtType.Text;
 
             b.State= ddlState.SelectedValue;
-            
-            DaoFactory.getBookDao().add(b);
+
+            if (!DaoFactory.getBookDao().add(b))
+            {
+                Response.Write("<script>alert('加入图书失败,可能是此书已存在')</script>");
+            }else
             Response.Redirect("book.aspx" );
         }
 
