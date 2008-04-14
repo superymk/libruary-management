@@ -54,6 +54,12 @@ public partial class Login : System.Web.UI.UserControl
         }
         u = dao.getById(id)as User;
 
+        if (u.Mark < 0)
+        {
+            Response.Write("<script>alert('您的用户积分已低于0分，请与系统管理员联系！')</script>");
+            return;
+        }
+
         SessionData sd = Session[SessionData.SessionName] as SessionData;
         if (sd == null) sd = new SessionData();
         sd.CurrentUser = u;

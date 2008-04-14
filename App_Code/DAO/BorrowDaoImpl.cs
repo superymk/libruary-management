@@ -16,7 +16,13 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
         }
     }
 
-    public static int MarkPerBorrow
+    public int InitialMark{
+        get{
+            return 50;
+        }
+    }
+
+    public int MarkPerBorrow
     {
         get
         {
@@ -24,7 +30,7 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
         }
     }
 
-    public static int TimeLimit
+    public int TimeLimit
     {
         get
         {
@@ -32,7 +38,7 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
         }
     }
 
-    public static int BorrowCountLimit
+    public int BorrowCountLimit
     {
         get
         {

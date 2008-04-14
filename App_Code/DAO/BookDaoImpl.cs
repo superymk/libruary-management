@@ -14,7 +14,7 @@ public class BookDaoImpl : BaseDao, IBookDao
         key = new string[]{"IdBook"};
         objectName = "Book";
     }
-    public bool add(BaseObject book)
+    public override bool add(BaseObject book)
     {
         Book bookname=new Book();
         IList<BaseObject> list= base.find(book);

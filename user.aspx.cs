@@ -98,6 +98,7 @@ public partial class UserManager : System.Web.UI.Page
         u.Sex = sex.Text;
         u.Email = email.Text;
         u.Description = description.Text;
+        u.Mark = DaoFactory.getBorrowDao().InitialMark;
         if (!DaoFactory.getUserDao().add(u)) 
         {
             Response.Write("<script>alert('用户添加错误,可能同名用户已存在')</script>");
