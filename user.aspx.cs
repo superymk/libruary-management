@@ -61,7 +61,7 @@ public partial class UserManager : System.Web.UI.Page
             }
             Response.Redirect("index.aspx");
         }
-        catch (Exception ee)
+        catch (Exception)
         {
             SessionData sd = Session[SessionData.SessionName] as SessionData;
             if (sd != null && sd.CurrentUser != null)

@@ -74,6 +74,11 @@ public partial class borrowlist : System.Web.UI.Page
             row.Cells[1].Text = book.BookName;
             row.Cells[3].Text = user.Username;
         }
+
+        if (GridView1.Rows.Count == 0)
+        {
+            lblMessage.Text = "借书单为空！";
+        }
     }
 
     protected void GridView1_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
@@ -81,7 +86,11 @@ public partial class borrowlist : System.Web.UI.Page
         string idstr = GridView1.Rows[e.NewSelectedIndex].Cells[0].Text;
         Response.Redirect("book.aspx?id=" + idstr);
     }
-
+    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView1.PageIndex = e.NewPageIndex;
+        Page_Load(sender, e);
+    }
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
 

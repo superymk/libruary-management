@@ -13,9 +13,11 @@
     <form id="form1" runat="server">
     <div>
         <uc1:navigator ID="Navigator1" runat="server" />
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
-        OnSelectedIndexChanging="GridView1_SelectedIndexChanging" OnRowDeleting="GridView1_RowDeleting"
-             PageSize="5">
+        <br />
+        <asp:Label ID="lblMessage" runat="server"></asp:Label><br />
+        <br />
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False"  OnPageIndexChanging="GridView1_PageIndexChanging" 
+        OnSelectedIndexChanging="GridView1_SelectedIndexChanging" OnRowDeleting="GridView1_RowDeleting" AllowPaging="True" AllowSorting="True" EnableSortingAndPagingCallbacks="True">
             <Columns>
                 <asp:BoundField DataField="idBook" HeaderText="书号" />
                 <asp:BoundField HeaderText="书名" />

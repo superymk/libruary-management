@@ -10,13 +10,14 @@
 <body>
     <form id="form1" runat="server">
     <uc2:navigator id="Navigator1" runat="server"></uc2:navigator>
+        <br />
     <div>
+        <asp:Label ID="lblMessage" runat="server"></asp:Label><br />
         
         
         
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnSelectedIndexChanging="GridView1_SelectedIndexChanging"
-            OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowDeleting="GridView1_RowDeleting"
-            PageSize="5">
+            OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowDeleting="GridView1_RowDeleting" Width="800px">
             <Columns>
                 <asp:BoundField DataField="idBook" HeaderText="书籍编号" />
                 <asp:BoundField DataField="bookName" HeaderText="书名" />
@@ -31,8 +32,11 @@
                 <asp:ButtonField ButtonType="Button" CommandName="delete" Text="删除" />
             </Columns>
         </asp:GridView>
-        <br />
-    <table border="0">
+        &nbsp;<br />
+        &nbsp;
+        <asp:Button ID="showSearch" runat="server" Text="查找..." OnClick="showSearch_Click" />
+        <asp:Panel ID="panelSearch" runat="server" Height="50px" Width="125px" Visible="False">
+    <table border="0" width="800">
             <tr>
                 <td style="width: 100px">
                     书名</td>
@@ -92,7 +96,7 @@
                     <asp:TextBox ID="txtComment" runat="server" Height="109px" TextMode="MultiLine" Width="412px"></asp:TextBox></td>
             </tr>
         </table>
-        <asp:Button ID="btnSearch" runat="server" Text="查找" OnClick="search" />&nbsp;
+        <asp:Button ID="btnSearch" runat="server" Text="查找" OnClick="search" /></asp:Panel>
     </div>
     </form>
 </body>

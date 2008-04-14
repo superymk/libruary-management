@@ -63,6 +63,22 @@ public partial class userlist : System.Web.UI.Page
             row.Cells[row.Cells.Count - 3].Text = DaoFactory.getUserDao().isAdmin(iduser) ? "是" : "否";
         }
 
+        
+        SessionData sd = Session[SessionData.SessionName] as SessionData;
+        if (DaoFactory.getUserDao().isAdmin(sd.CurrentUser.IdUser))
+        {
+            GridView1.Columns[GridView1.Columns.Count - 1].Visible = true;
+        }
+        else
+        {
+            GridView1.Columns[GridView1.Columns.Count - 1].Visible = false;
+        }
+
+        if (GridView1.Rows.Count == 0)
+        {
+            lblMessage.Text = "用户列表为空！";
+        }
+
     }
 
 
@@ -92,5 +108,9 @@ public partial class userlist : System.Web.UI.Page
     {
         string idstr = GridView1.Rows[e.NewSelectedIndex].Cells[0].Text;
         Response.Redirect("user.aspx?id=" + idstr);
+    }
+    protected void btnShowSearch_Click(object sender, EventArgs e)
+    {
+        panelSearch.Visible = !panelSearch.Visible;
     }
 }

@@ -13,6 +13,7 @@ using System.Collections.Generic;
 
     public partial class book : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack)
@@ -29,7 +30,7 @@ using System.Collections.Generic;
             {
                 Int32 id = Int32.Parse(Request.QueryString["id"]);
                 reload(id);
-                comments.Visible = true;
+                panelComments.Visible = true;
                 btnAddCart.Visible = true;
                 if (userdao.isAdmin(user.IdUser))
                 {
@@ -48,7 +49,7 @@ using System.Collections.Generic;
                 {
                     btnUpdate.Visible = false;
                     btnAdd.Visible = true;
-                    //comments.Visible = false;
+                    //panelComments.Visible = false;
                     btnAddCart.Visible = false;
                 }
                 else Response.Redirect("booklist.aspx");

@@ -14,58 +14,61 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <table style="width: 100%; height: 100%">
-            <tr>
-                <td >
-                    <uc2:navigator id="Navigator1" runat="server"></uc2:navigator><br />
-                    <br />
-                    <br />
+        <table style="width: 800px">
+            
+                        <tr>
+                            <td colspan="2">
+                    <uc2:navigator id="Navigator1" runat="server"></uc2:navigator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
         
-        <table border="0">
+        <table border="0"  style="width: 100%; height: 100%">
             <tr>
-                <td style="width: 100px">
+                <td>
                     书名</td>
-                <td style="width: 100px">
+                <td>
                     <asp:TextBox ID="txtBookName" runat="server" ></asp:TextBox></td>
-                <td style="width: 100px">
+                <td>
                     </td>
-                <td style="width: 102px">
+                <td>
                     <asp:TextBox ID="txtIdBook" runat="server" Visible="False"></asp:TextBox></td>
             </tr>
             <tr>
-                <td style="width: 100px; height: 26px;">
+                <td>
                     类别</td>
-                <td style="width: 100px; height: 26px;">
+                <td>
                     <asp:TextBox ID="txtType" runat="server"></asp:TextBox></td>
-                <td style="width: 100px; height: 26px;">
+                <td>
                     数量</td>
-                <td style="width: 102px; height: 26px;">
+                <td>
                     <asp:TextBox ID="txtNumCopies" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
-                <td style="width: 100px">
+                <td>
                     描述</td>
-                <td style="width: 100px">
+                <td>
                     <asp:TextBox ID="txtAbstract" runat="server"></asp:TextBox></td>
-                <td style="width: 100px">
+                <td>
                     作者</td>
-                <td style="width: 102px">
+                <td>
                     <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
-                <td style="width: 100px">
+                <td>
                     出版社</td>
-                <td style="width: 100px">
+                <td>
                     <asp:TextBox ID="txtPublishCompany" runat="server"></asp:TextBox></td>
-                <td style="width: 100px">
+                <td>
                     捐献人</td>
-                <td style="width: 102px">
+                <td>
                     <asp:TextBox ID="txtDonatePerson" runat="server"></asp:TextBox></td>
             </tr>
             <tr>
-                <td style="width: 100px">
+                <td>
                     状态</td>
-                <td style="width: 100px">
+                <td>
                     <asp:DropDownList ID="ddlState" runat="server">
                         <asp:ListItem Selected="True">FREE</asp:ListItem>
                         <asp:ListItem>BORROWED</asp:ListItem>
@@ -75,37 +78,42 @@
                 </td>
             </tr>
             <tr>
-                <td style="width: 100px; height: 105px">
+                <td>
                     评论</td>
-                <td colspan="3" style="height: 105px">
-                    <asp:TextBox ID="txtComment" runat="server" Height="109px" TextMode="MultiLine" Width="412px"></asp:TextBox></td>
+                <td colspan="3">
+                    <asp:TextBox ID="txtComment" runat="server" Height="110px" TextMode="MultiLine" Width="400px"></asp:TextBox></td>
             </tr>
         </table>
         <asp:Button ID="btnAdd" runat="server" Text="添加" OnClick="register" />
         <asp:Button ID="btnUpdate" runat="server" Text="修改" OnClick="update" />
         <asp:Button ID="btnBorrow" runat="server" OnClick="borrow" Text="Borrow" Visible="False" />
-                    <asp:Button ID="btnAddCart" runat="server" OnClick="btnAddCart_Click" Text="加至借书车" /><br />
+        <asp:Button ID="btnAddCart" runat="server" OnClick="btnAddCart_Click" Text="加至借书车" />&nbsp;
+        </td>
+     
+          <td style="width: 100px" valign="top">
+            
+            <asp:Panel ID="panelComments" runat="server" Width="100%">
+            <asp:Label ID="newCLabel" runat="server" Text="新评论"></asp:Label><br/>
+            <asp:textbox ID="newCBox" runat="server" TextMode="MultiLine"></asp:textbox><br/>
+            <asp:Button ID="newCButton" Text="添加评论" runat="server" OnClick="addComment"/><br/>
+            <asp:Table ID="comments" runat="server">
+                <asp:TableRow ID="newComment" runat="server">
+                    <asp:TableCell ID="newCCell" runat="server">
+                
+                    </asp:TableCell>
+                    </asp:TableRow>
+            </asp:Table>            
+            </asp:Panel>
+            <br/>
         
-        
-        
-        
-        <br />
-        
-        <asp:Table ID="comments" runat="server">
-        <asp:TableRow ID="newComment" runat="server">
-            <asp:TableCell ID="newCCell" runat="server">
-                <asp:Label ID="newCLabel" runat="server" Text="添加新评论<BR/>"></asp:Label>
-                <asp:textbox ID="newCBox" runat="server"></asp:textbox>
-                <asp:Label ID="newCLabel2" runat="server" Text="<BR/>"></asp:Label>
-                <asp:Button ID="newCButton" Text="添加评论" runat="server" OnClick="addComment"/>
-            </asp:TableCell>
-        </asp:TableRow>
-        </asp:Table>
-        &nbsp; &nbsp;&nbsp;&nbsp;
-                </td>
-            </tr>
-        </table>
         &nbsp;
+        </td>
+                </tr>
+                </table>
     </form>
+                        
+                   
+        
+                
 </body>
 </html>

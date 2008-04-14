@@ -17,6 +17,7 @@ public partial class booklist : System.Web.UI.Page
         if (sd == null || sd.CurrentUser == null)
             Response.Redirect("Default.aspx");
         gridViewBind(new Book());
+        
     }
 
 
@@ -41,6 +42,10 @@ public partial class booklist : System.Web.UI.Page
 
         GridView1.DataBind();
 
+        if (ds.Tables.Count == 0)
+        {
+            lblMessage.Text = "书库为空！";
+        }
 
     }
 
@@ -106,5 +111,9 @@ public partial class booklist : System.Web.UI.Page
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
         gridViewBind(new Book());
+    }
+    protected void showSearch_Click(object sender, EventArgs e)
+    {
+        panelSearch.Visible = !panelSearch.Visible;
     }
 }

@@ -9,8 +9,16 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        &nbsp;<div>
+            &nbsp; &nbsp; &nbsp;
+            <table>
+                <tr>
+                    <td colspan="2">
     <uc2:navigator id="Navigator1" runat="server"></uc2:navigator>
-    <div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">
         <asp:Table ID="Table1" runat="server" Height="284px" Width="564px">
             <asp:TableRow runat="server">
                 <asp:TableCell ID="TextCell0" runat="server">
@@ -99,17 +107,25 @@
     <asp:Button ID="updateConfirm" Text="修改" runat="server" OnClick="update" />
     
     <asp:Label id="Admin"  runat="server" text="" /> 
-        <asp:Button ID="btnAddAdmin" runat="server" OnClick="AddAdmin" Text="注册为管理员" />
-    <asp:Table ID="comments" runat="server">
-        <asp:TableRow ID="newComment" runat="server">
-            <asp:TableCell ID="newCCell" runat="server">
-                <asp:Label ID="newCLabel" runat="server" Text="新评论<BR>"></asp:Label>
-                <asp:textbox ID="newCBox" runat="server"></asp:textbox>
-                <asp:Label ID="newCLabel2" runat="server" Text="<BR>"></asp:Label>
-                <asp:Button ID="newCButton" Text="添加评论" runat="server" OnClick="addComment"/>
-            </asp:TableCell>
-        </asp:TableRow>
-    </asp:Table>
+        <asp:Button ID="btnAddAdmin" runat="server" OnClick="AddAdmin" Text="注册为管理员" /></td>
+                    <td style="width: 100px" valign="top">
+                   
+            <asp:Panel ID="panelComments" runat="server" Width="100%">
+            <asp:Label ID="Label11" runat="server" Text="新评论"></asp:Label><br/>
+            <asp:textbox ID="newCBox" runat="server" TextMode="MultiLine"></asp:textbox><br/>
+            <asp:Button ID="Button1" Text="添加评论" runat="server" OnClick="addComment"/><br/>
+            <asp:Table ID="comments" runat="server">
+                <asp:TableRow ID="newComment" runat="server">
+                    <asp:TableCell ID="newCCell" runat="server">
+                
+                    </asp:TableCell>
+                    </asp:TableRow>
+            </asp:Table>            
+            </asp:Panel>
+                        &nbsp;<br/>
+                    </td>
+                </tr>
+            </table>
 
     
     </div>
