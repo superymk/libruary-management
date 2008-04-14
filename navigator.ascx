@@ -12,7 +12,7 @@
     <tr>
         <td colspan="9">
             <p align="center"><img src="images/sjtulogo_2.png" width="181" height="57"> <img src="images/mstc_logo_1.jpg" width="190" height="65"></p>
-            <p align="center" class="style1">图书管理系统</p></td>
+            <p align="center" class="style1">MSTC图书管理系统</p></td>
     </tr>
     <tr>
         <td style="width: 100px">

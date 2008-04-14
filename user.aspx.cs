@@ -48,12 +48,14 @@ public partial class UserManager : System.Web.UI.Page
                         if (luser || lid == id)
                         {
                             updateConfirm.Visible = true;
+       
                         }
                         else
                         {
                             updateConfirm.Visible = false;
+       
                         }
-                        registerConfirm.Visible = false;
+                        registerConfirm.Visible = false;                 
                         
                         return;
                     }
@@ -77,8 +79,9 @@ public partial class UserManager : System.Web.UI.Page
                     }                    
                 }
             }
-            comments.Visible = false;
+            panelComments.Visible = false;
             updateConfirm.Visible = false;
+            btnAddAdmin.Visible = false;
             registerConfirm.Visible = true;
         }
     }
@@ -141,6 +144,7 @@ public partial class UserManager : System.Web.UI.Page
 
     private void reload(int id)
     {
+        registerConfirm.Visible = false;
         IUserDao dao = DaoFactory.getUserDao();
         User u = (User)dao.getById(id);
         idUser.Text = u.IdUser.ToString();
@@ -154,11 +158,11 @@ public partial class UserManager : System.Web.UI.Page
         sex.Text = u.Sex;
         email.Text = u.Email;
         description.Text = idUser.Text;
-        registerConfirm.Visible = true;
+        
         bool admin = dao.isAdmin(u.IdUser);
         if (admin)
         {
-            comments.Visible = true;
+            panelComments.Visible = true;
             ToAdminComment tac = new ToAdminComment();
             tac.IdAdmin = id;
             IACommentDao acd = DaoFactory.getAdminCommentDao();
@@ -181,7 +185,7 @@ public partial class UserManager : System.Web.UI.Page
         else
         {
             btnAddAdmin.Text = "设置管理员";
-            comments.Visible = false;
+            panelComments.Visible = false;
             
         }
         username.Enabled = false;
