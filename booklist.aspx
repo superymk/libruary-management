@@ -35,7 +35,7 @@
         &nbsp;<br />
         &nbsp;
         <asp:Button ID="showSearch" runat="server" Text="查找..." OnClick="showSearch_Click" />
-        <asp:Panel ID="panelSearch" runat="server" Height="50px" Width="125px" Visible="False">
+        <asp:Panel ID="panelSearch" runat="server" Visible="False">
     <table border="0" width="800">
             <tr>
                 <td style="width: 100px">

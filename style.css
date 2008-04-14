@@ -6,6 +6,7 @@ body,td,th {
 }
 body {
 	background-color: #ffffff; cursor: default;
+	text-align: center;
 }
 
 <!--
@@ -43,7 +44,7 @@ table {
   font-family: arial; 
   font-size:14px; 
 } 
-th{background:#328aa4 url(tr_back.gif) repeat-x;color:#fff;} 
+th{background:#328aa4 url(images/tr_back.gif) repeat-x;color:#fff;} 
 td { 
   border-bottom:1 solid #000000; 
 } 

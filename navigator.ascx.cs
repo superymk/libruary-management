@@ -19,7 +19,7 @@ public partial class navigator : System.Web.UI.UserControl
             string a = Request.Url.LocalPath;
             if (!a.ToLower().Equals("/libsys/user.aspx"))
             {
-                Response.Redirect("index.aspx");
+                Response.Redirect("Default.aspx");
             }
             
         }
@@ -77,7 +77,7 @@ public partial class navigator : System.Web.UI.UserControl
     protected void btnLogout_Click(object sender, EventArgs e)
     {
         Session[SessionData.SessionName] = null;
-        Response.Redirect("index.aspx");
+        Response.Redirect("Default.aspx");
     }
     protected void addBook(object sender, EventArgs e)
     {

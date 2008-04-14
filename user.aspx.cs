@@ -59,7 +59,7 @@ public partial class UserManager : System.Web.UI.Page
                     }
                 }
             }
-            Response.Redirect("index.aspx");
+            Response.Redirect("default.aspx");
         }
         catch (Exception)
         {

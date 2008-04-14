@@ -1,34 +1,34 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  CodeFile="Default.aspx.cs" Inherits="_Default" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="Index" %>
+
+<%@ Register Src="Login.ascx" TagName="Login" TagPrefix="uc1" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
-
-
 <head runat="server">
-    <title>Hello World!</title>
+    <title>�Ϻ���ͨ��ѧ ΢�����ֲ� ͼ�����ϵͳ</title>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-        <span style="color: #ff0000"><strong>不应该看到这张页面，现在的主页是index.aspx,这张页面保留作跳转用</strong></span><br />
+    <div style="text-align: center">
         <br />
-
-    <asp:Label id="lblMessage"  runat="server" /> 
+        <br />
+        <br />
+    <img src="images/sjtulogo_1.png" width="80" height="85" alt="" title="Shanghai Jiao Tong University"/><br />
+        <img src="images/sjtulogo_2.png" width="181" height="57" alt="" title="Shanghai Jiao Tong University"/>&nbsp;<br />
+        <img src="images/mstc_logo_1.jpg" width="190" height="65" alt="" title="Shanghai Jiao Tong University"/><br />
+        <br />
+        <br />
+        <br />
+        <span style="font-size: 32pt; font-family: ����"><span style="font-size: 16pt">
+        ͼ�����ϵͳ<br />
+        </span>
+            <br />
+        </span>
+        <uc1:Login ID="Login1" runat="server" OnLoad="Login1_Load" />
     
-    <asp:textbox id="username" runat="server" cssclass="textbox" /> 
-    
-    <asp:requiredfieldvalidator ID="Requiredfieldvalidator1" controltovalidate="username" display="dynamic" forecolor ="#ff0000" font-names="宋体" font-size="9pt" text="请填写" runat="server" />
-    <asp:textbox id="password" textmode="Password" runat="server" cssclass="textbox" />
-    
-    <asp:requiredfieldvalidator ID="Requiredfieldvalidator2" controltovalidate="password" display="dynamic" forecolor ="#ff0000" font-names="宋体" font-size="9pt" text="请填写" runat="server" />  
-    
-    <asp:Button Text="Login" OnClick="Log_In" id="btnCounter" runat="server" />
-    
-    
-<asp:Label id="nameserver"  runat="server" /> 
-<asp:Label id="pswserver"  runat="server" /> 
-        <asp:Button ID="btnOffline" runat="server" OnClick="offline" Text="Offline" UseSubmitBehavior="False" /></div>
+    </div>
     </form>
 </body>
 </html>
