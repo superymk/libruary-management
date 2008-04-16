@@ -107,7 +107,7 @@
     <asp:Button ID="updateConfirm" Text="修改" runat="server" OnClick="update" />
     
     <asp:Label id="Admin"  runat="server" text="" /> 
-        <asp:Button ID="btnAddAdmin" runat="server" OnClick="AddAdmin" Text="注册为管理员" /></td>
+        <asp:Button ID="btnChangeAdmin" runat="server" OnClick="ChangeAdmin" Text="设置管理员" /></td>
                     <td style="width: 100px" valign="top">
                    
             <asp:Panel ID="panelComments" runat="server" Width="100%">

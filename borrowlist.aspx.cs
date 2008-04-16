@@ -13,18 +13,14 @@ public partial class borrowlist : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (IsPostBack)
-        {
-         
-            return;
-        }
+        if (IsPostBack) return;
+
         SessionData sd = Session[SessionData.SessionName] as SessionData;
         if (sd == null || sd.CurrentUser == null)
             Response.Redirect("default.aspx");
         User user = sd.CurrentUser;
-        IUserDao userdao=DaoFactory.getUserDao();
 
-        if (userdao.isAdmin(user.IdUser))
+        if (DaoFactory.getUserDao().isAdmin(user.IdUser))
         {
             try
             {
@@ -32,15 +28,13 @@ public partial class borrowlist : System.Web.UI.Page
                 Borrow b = new Borrow();
                 b.IdUser = id;
                 reload(b);
-                GridView1.Columns[GridView1.Columns.Count - 1].Visible = true;
-                return;
             }
             catch (Exception)
             {
                 reload(new Borrow());
-                GridView1.Columns[GridView1.Columns.Count - 1].Visible = true;
-                return;
             }
+            GridView1.Columns[GridView1.Columns.Count - 1].Visible = true;
+            return;
         }
         GridView1.Columns[GridView1.Columns.Count - 1].Visible = false;
         Borrow borrow = new Borrow();
@@ -50,12 +44,10 @@ public partial class borrowlist : System.Web.UI.Page
     protected void reload(Borrow borrow)
     {
         IBaseDao borrowdao = DaoFactory.getBorrowDao();
-        //Borrow borrow = new Borrow();
-        
-        //    borrow.IdUser = idUser;
+
         DataSet ds = borrowdao.findDataSet(borrow);
 
-        
+
         GridView1.DataSource = ds;
         GridView1.DataBind();
 
@@ -68,11 +60,10 @@ public partial class borrowlist : System.Web.UI.Page
 
             IBookDao bookdao = DaoFactory.getBookDao();
             IUserDao userdao = DaoFactory.getUserDao();
-            Book book = bookdao.getById(idbook)as Book;
-            User user = userdao.getById(iduser)as User;
-
-            row.Cells[1].Text = book.BookName;
-            row.Cells[3].Text = user.Username;
+            Book book = bookdao.getById(idbook) as Book;
+            User user = userdao.getById(iduser) as User;
+            row.Cells[1].Text = "<a href='book.aspx?id="+idbook+"'>"+book.BookName+"<a/>";
+            row.Cells[3].Text = "<a href='user.aspx?id=" + iduser + "'>" + user.Username + "<a/>";
         }
 
         if (GridView1.Rows.Count == 0)
@@ -86,11 +77,13 @@ public partial class borrowlist : System.Web.UI.Page
         string idstr = GridView1.Rows[e.NewSelectedIndex].Cells[0].Text;
         Response.Redirect("book.aspx?id=" + idstr);
     }
+
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
         Page_Load(sender, e);
     }
+
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
 

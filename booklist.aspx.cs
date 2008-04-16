@@ -26,26 +26,13 @@ public partial class booklist : System.Web.UI.Page
         IBaseDao bookdao = DaoFactory.getBookDao();
         DataSet ds = bookdao.findDataSet(b);
         GridView1.DataSource = ds;
-        //IList<Book> list = bookdao.find(b);
-        //GridView1.DataSource = list.to;
         IUserDao userdao = DaoFactory.getUserDao();
         SessionData sd = Session[SessionData.SessionName] as SessionData;
-        User user = sd.CurrentUser;
-        if (userdao.isAdmin(user.IdUser))
-        {
-            GridView1.Columns[GridView1.Columns.Count - 1].Visible = true;
-        }
-        else
-        {
-            GridView1.Columns[GridView1.Columns.Count - 1].Visible = false;
-        }
 
+        GridView1.Columns[GridView1.Columns.Count - 1].Visible = userdao.isAdmin(sd.CurrentUser.IdUser);
         GridView1.DataBind();
 
-        if (ds.Tables.Count == 0)
-        {
-            lblMessage.Text = "书库为空！";
-        }
+        if (ds.Tables.Count == 0) lblMessage.Text = "书库为空！";
 
     }
 
@@ -53,15 +40,6 @@ public partial class booklist : System.Web.UI.Page
     protected void search(object sender, EventArgs e)
     {
         Book b = new Book();
-
-        try
-        {
-            b.IdBook = Int32.Parse(txtIdBook.Text);
-        }
-        catch (FormatException)
-        {
-            b.IdBook = 0;
-        }
 
         b.BookName = txtBookName.Text;
         b.Comment = txtComment.Text;
@@ -79,12 +57,14 @@ public partial class booklist : System.Web.UI.Page
         b.PublishCompany = txtPublishCompany.Text;
         b.Type = txtType.Text;
         b.State = ddlState.SelectedValue;
-
+        if (b.State.Equals(""))
+        {
+            b.State = null;
+        }
 
         gridViewBind(b);
 
     }
-
 
 
     protected void GridView1_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
@@ -95,12 +75,11 @@ public partial class booklist : System.Web.UI.Page
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
-        gridViewBind(new Book());
+        search(sender, e);
     }
 
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-
         string idstr = GridView1.Rows[e.RowIndex].Cells[0].Text;
         int id = int.Parse(idstr);
         IBaseDao bookdao = DaoFactory.getBookDao();
@@ -108,12 +87,19 @@ public partial class booklist : System.Web.UI.Page
         GridView1.Rows[e.RowIndex].Visible = false;
         gridViewBind(new Book());
     }
-    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        gridViewBind(new Book());
-    }
+    
     protected void showSearch_Click(object sender, EventArgs e)
     {
         panelSearch.Visible = !panelSearch.Visible;
+
+        txtBookName.Text="";
+        txtComment.Text="";
+        txtAbstract.Text="";
+        txtAuthor.Text="";
+        txtDonatePerson.Text="";
+        txtNumCopies.Text = "";
+        txtPublishCompany.Text = "";
+        txtType.Text = "";
+        ddlState.SelectedValue = "";
     }
 }

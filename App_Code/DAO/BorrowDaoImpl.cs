@@ -62,10 +62,10 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
 
         IBaseDao bookdao = DaoFactory.getBookDao();
         Book book = bookdao.getById(idBook)as Book;
-        if (book!=null&&!book.State.Trim().ToUpper().Equals(BookDaoImpl.Free))
+        if (book == null) throw new DaoException("Can't find Book with Id" + idBook);
+        if (!book.State.Trim().ToUpper().Equals(BookDaoImpl.Free))
             throw new DaoException("Book " + book.BookName + "is not free");
         book.State = BookDaoImpl.Borrowed;
-        bookdao.update(book);
 
         IUserDao userdao = DaoFactory.getUserDao();
         User user = userdao.getById(idUser)as User;
@@ -74,6 +74,7 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
         if (count > BorrowCountLimit)
             throw new DaoException("User :" + user.Username + " has borrowed " + count+" more than "+BorrowCountLimit+ " books!");
 
+        bookdao.update(book);
         DaoFactory.getBorrowDao().add(borrow);
     }
 

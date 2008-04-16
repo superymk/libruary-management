@@ -16,49 +16,37 @@ using System.Collections.Generic;
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack)
-            {
-//                txtComment.Text = "postBack";
-                return;
-            }
+            if (IsPostBack) return;
+
             SessionData sd = Session[SessionData.SessionName] as SessionData;
             if (sd == null || sd.CurrentUser == null)
                 Response.Redirect("Default.aspx");
             User user = sd.CurrentUser;
-            IUserDao userdao = DaoFactory.getUserDao();
+            bool isAdmin = DaoFactory.getUserDao().isAdmin(user.IdUser);
+            
             try
             {
                 Int32 id = Int32.Parse(Request.QueryString["id"]);
                 reload(id);
                 panelComments.Visible = true;
                 btnAddCart.Visible = true;
-                if (userdao.isAdmin(user.IdUser))
-                {
-                    btnAdd.Visible = false;
-                    btnUpdate.Visible = true;
-                }
-                else
-                {
-                    btnAdd.Visible = false;
-                    btnUpdate.Visible = false;
-                }
-            }
-            catch (Exception )
+                btnAdd.Visible = false;
+                btnUpdate.Visible = isAdmin;                
+            }catch (Exception)
             {
-                if (userdao.isAdmin(user.IdUser))
+                if (isAdmin)
                 {
                     btnUpdate.Visible = false;
                     btnAdd.Visible = true;
-                    //panelComments.Visible = false;
+                    panelComments.Visible = false;
                     btnAddCart.Visible = false;
                 }
                 else Response.Redirect("booklist.aspx");
-            }
-
-            
+            }            
             
         }
 
+        
 
         private void reload(int id)
         {
@@ -73,10 +61,7 @@ using System.Collections.Generic;
             txtNumCopies.Text = b.NumCopies.ToString();
             txtPublishCompany.Text = b.PublishCompany;
             txtType.Text = b.Type;
-
             ddlState.SelectedValue = b.State.Trim();
-
-            btnAdd.Visible = false;
 
             BookComment tac = new BookComment();
             tac.IdBook = id;
@@ -94,11 +79,8 @@ using System.Collections.Generic;
                 cell1.Controls.Add(box);
                 row.Controls.Add(cell1);
                 comments.Controls.Add(row);
-                //description.Text += u.ToString();
             }
         }
-
-
 
         protected void update(object sender, EventArgs e)
         {
@@ -131,8 +113,7 @@ using System.Collections.Generic;
             b.Type = txtType.Text;
             b.State = ddlState.SelectedValue;
             DaoFactory.getBookDao().update(b);
-            reload(b.IdBook);
-            
+            Response.Redirect("book.aspx?id="+b.IdBook);            
         }
 
         protected void register(object sender, EventArgs e)
@@ -145,12 +126,11 @@ using System.Collections.Generic;
             b.DonatePerson = txtDonatePerson.Text;
             try
             {
-                Response.Write("<script>alert('NumCopies格式错误')</script>");
                 b.NumCopies = int.Parse(txtNumCopies.Text);
             }
             catch (FormatException)
             {
-                
+                Response.Write("<script>alert('NumCopies格式错误')</script>");
                 return;
             } 
             b.PublishCompany = txtPublishCompany.Text;
@@ -162,34 +142,9 @@ using System.Collections.Generic;
             {
                 Response.Write("<script>alert('加入图书失败,可能是此书已存在')</script>");
             }else
-            Response.Redirect("book.aspx" );
+            Response.Redirect("booklist.aspx" );
         }
 
-        protected void borrow(object sender, EventArgs e)
-        {
-            SessionData sd = Session[SessionData.SessionName] as SessionData;
-            if (sd == null||sd.CurrentUser==null)
-            {
-                Response.Write("<script>alert('请登陆')</script>");
-                return;
-            }
-            //SessionData.getInstance().CurrentUser = sd.CurrentUser;
-
-            IBorrowDao dao = DaoFactory.getBorrowDao();
-            try
-            {
-                //dao.RegisteByName(sd.CurrentUser.Username, txtBookName.Text);
-
-                dao.RegisteById(sd.CurrentUser.IdUser,int.Parse(txtIdBook.Text));
-            }
-            catch (DaoException)
-            {
-                Response.Write("<script>alert('图书已被借阅,或者图书或用户不存在')</script>");
-                return;
-            }
-            Response.Redirect("borrowlist.aspx");
-
-        }
 
         protected void addComment(object sender, EventArgs e)
         {
@@ -214,10 +169,7 @@ using System.Collections.Generic;
             reload(idBook);
         }
 
-        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Response.Redirect("borrowlist.aspx");
-        }
+        
         protected void btnAddCart_Click(object sender, EventArgs e)
         {
             int idBook = int.Parse(txtIdBook.Text);

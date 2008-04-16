@@ -17,14 +17,13 @@
         <asp:Label ID="lblMessage" runat="server"></asp:Label><br />
         <br />
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False"  OnPageIndexChanging="GridView1_PageIndexChanging" 
-        OnSelectedIndexChanging="GridView1_SelectedIndexChanging" OnRowDeleting="GridView1_RowDeleting" AllowPaging="True" AllowSorting="True" EnableSortingAndPagingCallbacks="True">
+        OnRowDeleting="GridView1_RowDeleting" AllowPaging="True" AllowSorting="True" EnableSortingAndPagingCallbacks="True" EnableTheming="True" Width="800px">
             <Columns>
                 <asp:BoundField DataField="idBook" HeaderText="书号" />
                 <asp:BoundField HeaderText="书名" />
                 <asp:BoundField DataField="idUser" HeaderText="用户号" />
                 <asp:BoundField HeaderText="用户名" />
                 <asp:BoundField DataField="deadLine" HeaderText="截止日期" />
-                <asp:ButtonField CommandName="select" Text="查看" />
                 <asp:ButtonField ButtonType="Button" CommandName="delete" Text="还书" />
             </Columns>
         </asp:GridView>

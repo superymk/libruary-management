@@ -25,63 +25,50 @@ public partial class UserManager : System.Web.UI.Page
             Int32 id = Int32.Parse(Request.QueryString["id"]);
             reload(id);
             SessionData sd = Session[SessionData.SessionName] as SessionData;
-            if (sd != null && sd.CurrentUser != null)
+            if (sd == null || sd.CurrentUser == null)
             {
-                User u = sd.CurrentUser;
+                Response.Redirect("default.aspx");
+                return;
+            }
+            
+            User u = sd.CurrentUser;
+            btnChangeAdmin.Visible = DaoFactory.getUserDao().isAdmin(sd.CurrentUser.IdUser);
 
-                if (DaoFactory.getUserDao().isAdmin(u.IdUser))
+            if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
+            {
+                IUserDao dao = DaoFactory.getUserDao();
+                int lid = dao.confirmUser(u.Username, u.Password);
+                if (lid != -1)
                 {
-                    btnAddAdmin.Visible = true;
-                }
-                else
-                {
-                    btnAddAdmin.Visible = false;
-                }
-
-                if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
-                {
-                    IUserDao dao = DaoFactory.getUserDao();
-                    int lid = dao.confirmUser(u.Username, u.Password);
-                    if (lid != -1)
-                    {
-                        bool luser = dao.isAdmin(lid);
-                        if (luser || lid == id)
-                        {
-                            updateConfirm.Visible = true;
-       
-                        }
-                        else
-                        {
-                            updateConfirm.Visible = false;
-       
-                        }
-                        registerConfirm.Visible = false;                 
-                        
-                        return;
-                    }
+                    updateConfirm.Visible = dao.isAdmin(lid) || lid == id;
+                    registerConfirm.Visible = false;
+                    return;
                 }
             }
             Response.Redirect("default.aspx");
+            return;
         }
         catch (Exception)
         {
             SessionData sd = Session[SessionData.SessionName] as SessionData;
-            if (sd != null && sd.CurrentUser != null)
+            if (sd == null || sd.CurrentUser == null)
             {
-                User u = sd.CurrentUser;
-                if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
+                Response.Redirect("default.aspx");
+                return;                
+            }
+            User u = sd.CurrentUser;
+            if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
+            {
+                IUserDao dao = DaoFactory.getUserDao();
+                int id = dao.confirmUser(u.Username, u.Password);
+                if (id != -1 && !dao.isAdmin(id))
                 {
-                    IUserDao dao = DaoFactory.getUserDao();
-                    int id = dao.confirmUser(u.Username, u.Password);
-                    if (id != -1 && !dao.isAdmin(id))
-                    {
-                        reload(id);
-                    }                    
+                    reload(id);
                 }
             }
             panelComments.Visible = false;
             updateConfirm.Visible = false;
-            btnAddAdmin.Visible = false;
+            btnChangeAdmin.Visible = false;
             registerConfirm.Visible = true;
         }
     }
@@ -107,9 +94,8 @@ public partial class UserManager : System.Web.UI.Page
             Response.Write("<script>alert('用户添加错误,可能同名用户已存在')</script>");
             return;
         }
-
         
-        Response.Redirect("userlist.aspx");
+        Response.Redirect("user.aspx");
     }
 
     protected void update(object sender, EventArgs e)
@@ -178,18 +164,17 @@ public partial class UserManager : System.Web.UI.Page
                 cell1.Controls.Add(box);
                 row.Controls.Add(cell1);
                 comments.Controls.Add(row);
-                //description.Text += u.ToString();
+                
             }
-            btnAddAdmin.Text = "取消管理员";
+            btnChangeAdmin.Text = "取消管理员";
         }
         else
         {
-            btnAddAdmin.Text = "设置管理员";
+            btnChangeAdmin.Text = "设置管理员";
             panelComments.Visible = false;
             
         }
         username.Enabled = false;
-
 
 
     }
@@ -224,10 +209,10 @@ public partial class UserManager : System.Web.UI.Page
     }
 
 
-    protected void AddAdmin(object sender, EventArgs e)
+    protected void ChangeAdmin(object sender, EventArgs e)
     {
         int id =int.Parse( idUser.Text);
-        DaoFactory.getUserDao().setAdmin(id);
+        DaoFactory.getUserDao().changeAdmin(id);
         Response.Redirect("userlist.aspx");
     }
 }

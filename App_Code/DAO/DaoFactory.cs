@@ -9,35 +9,40 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
 /// <summary>
-/// DaoFactory 的摘要说明
+/// DaoFactory 非强制性的Dao对象的Singleton Factory
 /// </summary>
 public class DaoFactory
 {
 	public DaoFactory(){
 	}
 
+    private static IUserDao userDao = null;
     public static IUserDao getUserDao()
     {
-        return new UserDaoImpl();
+        return (userDao!=null)?userDao:userDao=new UserDaoImpl();
     }
 
+    private static IBookDao bookDao = null;
     public static IBookDao getBookDao()
     {
-        return new BookDaoImpl();
+        return (bookDao != null) ? bookDao : bookDao = new BookDaoImpl();
     }
 
+    private static IBorrowDao borrowDao = null;
     public static IBorrowDao getBorrowDao()
     {
-        return new BorrowDaoImpl();
+        return (borrowDao != null) ? borrowDao : borrowDao = new BorrowDaoImpl();
     }
 
+    private static IACommentDao aCommentDao = null;
     public static IACommentDao getAdminCommentDao()
     {
-        return new ACommentDaoImpl();
+        return (aCommentDao != null) ? aCommentDao : aCommentDao = new ACommentDaoImpl();
     }
 
+    private static IBCommentDao bookCommentDao = null;
     public static IBCommentDao getBookCommentDao()
     {
-        return new BCommentDaoImpl();
+        return (bookCommentDao != null) ? bookCommentDao : bookCommentDao = new BCommentDaoImpl();
     }
 }

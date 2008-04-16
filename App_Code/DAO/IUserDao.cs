@@ -17,5 +17,5 @@ public interface IUserDao : IBaseDao
     int confirmUser(string username, string password);
     bool isAdmin(int idUser);
     int borrowedBookCount(int idUser);
-    bool setAdmin(int idUser);
+    bool changeAdmin(int idUser);
 }

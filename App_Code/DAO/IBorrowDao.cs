@@ -6,8 +6,8 @@ using System.ComponentModel;
 
 public interface IBorrowDao : global::IBaseDao
 {
-     void RegisteById(int idUser, int idBook);
-     void RegisteByName(string userName, string bookName);
+    void RegisteById(int idUser, int idBook);
+    void RegisteByName(string userName, string bookName);
     void ReturnBookById(int idUser, int idBook);
     double DeadLinePeriod
     {

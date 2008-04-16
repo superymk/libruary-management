@@ -85,8 +85,7 @@
             </tr>
         </table>
         <asp:Button ID="btnAdd" runat="server" Text="添加" OnClick="register" />
-        <asp:Button ID="btnUpdate" runat="server" Text="修改" OnClick="update" />
-        <asp:Button ID="btnBorrow" runat="server" OnClick="borrow" Text="Borrow" Visible="False" />
+        <asp:Button ID="btnUpdate" runat="server" Text="修改" OnClick="update" />&nbsp;
         <asp:Button ID="btnAddCart" runat="server" OnClick="btnAddCart_Click" Text="加至借书车" />&nbsp;
         </td>
      

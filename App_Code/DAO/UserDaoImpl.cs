@@ -64,7 +64,7 @@ public class UserDaoImpl : BaseDao, IUserDao{
 
     }
 
-    public bool setAdmin(int idUser)
+    public bool changeAdmin(int idUser)
     {
         if (!isAdmin(idUser))
         {

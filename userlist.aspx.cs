@@ -39,20 +39,6 @@ public partial class userlist : System.Web.UI.Page
         }
         catch (FormatException) { }
         IUserDao dao = DaoFactory.getUserDao();
-        //IList<BaseObject> list = dao.find(u);
-        //for (int i = 0; i < list.Count; i++)
-        //{
-        //    User user = (User)list[i];
-        //    TableRow row = new TableRow();
-        //    TableCell cell1 = new TableCell();
-        //    Label box = new Label();
-        //    box.Text = "<a href=user.aspx?id=" + user.IdUser + " >" + user.Username + "</a>";
-        //    cell1.Controls.Add(box);
-        //    row.Controls.Add(cell1);
-        //    users.Controls.Add(row);
-        //}
-
-        //IUserDao userdao = DaoFactory.getUserDao();
         DataSet ds = dao.findDataSet(u);
         GridView1.DataSource = ds;
         GridView1.DataBind();
@@ -62,18 +48,15 @@ public partial class userlist : System.Web.UI.Page
             int iduser = int.Parse(iduserstr);
             row.Cells[row.Cells.Count - 3].Text = DaoFactory.getUserDao().isAdmin(iduser) ? "是" : "否";
         }
-
         
         SessionData sd = Session[SessionData.SessionName] as SessionData;
-        if (DaoFactory.getUserDao().isAdmin(sd.CurrentUser.IdUser))
+        if (sd == null)
         {
-            GridView1.Columns[GridView1.Columns.Count - 1].Visible = true;
+            Response.Redirect("Default.aspx");
+            return;
         }
-        else
-        {
-            GridView1.Columns[GridView1.Columns.Count - 1].Visible = false;
-        }
-
+        GridView1.Columns[GridView1.Columns.Count - 1].Visible = DaoFactory.getUserDao().isAdmin(sd.CurrentUser.IdUser);
+       \
         if (GridView1.Rows.Count == 0)
         {
             lblMessage.Text = "用户列表为空！";
@@ -101,7 +84,6 @@ public partial class userlist : System.Web.UI.Page
         userdao.delete(id);
         GridView1.Rows[e.RowIndex].Visible = false;
         
-
         Page_Load(sender, new EventArgs());
     }
     protected void GridView1_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
