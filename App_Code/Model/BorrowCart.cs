@@ -39,18 +39,30 @@ public class BorrowCart
     {
         IBorrowDao borrowdao = DaoFactory.getBorrowDao();
 
-        foreach (Book book in bookList)
+        for (;bookList.Count>0; )
         {
-            borrowdao.RegisteById(user.IdUser, book.IdBook);
+            borrowdao.RegisteById(user.IdUser, bookList.First.Value.IdBook);
+            bookList.RemoveFirst();
         }
-        bookList = new LinkedList<Book>();
+        
     }
     public void cancel(int idBook)
     {
         for (LinkedListNode<Book> i = bookList.First; i != null; i = i.Next)
         {
             if (i.Value.IdBook == idBook)
+            {
                 bookList.Remove(i);
+                return;
+            }
+        }
+    }
+    public void refresh()
+    {
+        IBookDao bookdao = DaoFactory.getBookDao();
+        for (LinkedListNode<Book> i = bookList.First; i != null; i = i.Next)
+        {
+            i.Value = bookdao.getById(i.Value.IdBook)as Book;
         }
     }
 

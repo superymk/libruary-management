@@ -20,7 +20,7 @@ public partial class borrowcart : System.Web.UI.Page
             btnSubmit.Visible = false;
             return;
         }
-
+        sd.Cart.refresh();
         GridView1.DataSource = sd.Cart.BookList;
         GridView1.DataBind();
         btnSubmit.Visible = true;
@@ -36,9 +36,11 @@ public partial class borrowcart : System.Web.UI.Page
         catch (DaoException de)
         {
             Response.Write("<script>alert('"+de.Message+"')</script>");
-            return;
+            Page_Load(sender,e);
+            return;            
         }
         Response.Redirect("borrowlist.aspx?id="+sd.CurrentUser.IdUser);
+        
     }
 
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)

@@ -1,4 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="user.aspx.cs" Inherits="UserManager" %>
+
+<%@ Register Src="Broadcast.ascx" TagName="Broadcast" TagPrefix="uc1" %>
 <%@ Register Src="navigator.ascx" TagName="navigator" TagPrefix="uc2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -109,8 +111,7 @@
     <asp:Label id="Admin"  runat="server" text="" /> 
         <asp:Button ID="btnChangeAdmin" runat="server" OnClick="ChangeAdmin" Text="设置管理员" /></td>
                     <td style="width: 100px" valign="top">
-                   
-            <asp:Panel ID="panelComments" runat="server" Width="100%">
+                        &nbsp;<asp:Panel ID="panelComments" runat="server" Width="100%">
             <asp:Label ID="Label11" runat="server" Text="新评论"></asp:Label><br/>
             <asp:textbox ID="newCBox" runat="server" TextMode="MultiLine"></asp:textbox><br/>
             <asp:Button ID="Button1" Text="添加评论" runat="server" OnClick="addComment"/><br/>

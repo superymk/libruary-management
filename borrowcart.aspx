@@ -16,7 +16,7 @@
         <br />
         <asp:Label ID="lblMessage" runat="server"></asp:Label><br />
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowDeleting="GridView1_RowDeleting"
-            PageSize="5">
+            PageSize="5" Width="800px">
             <Columns>
                 <asp:BoundField DataField="idBook" HeaderText="书籍编号" />
                 <asp:BoundField DataField="bookName" HeaderText="书名" />
@@ -27,7 +27,6 @@
                 <asp:BoundField DataField="numCopies" HeaderText="数量" />
                 <asp:BoundField DataField="donatePerson" HeaderText="捐献人" />
                 <asp:BoundField DataField="abstract" HeaderText="描述" />
-                <asp:ButtonField CommandName="select" Text="选择" />
                 <asp:ButtonField ButtonType="Button" CommandName="delete" Text="取消" />
             </Columns>
         </asp:GridView>

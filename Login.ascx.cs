@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using System.Collections.Generic;
 
 public partial class Login : System.Web.UI.UserControl
 {
@@ -64,8 +65,30 @@ public partial class Login : System.Web.UI.UserControl
         if (sd == null) sd = new SessionData();
         sd.CurrentUser = u;
         Session[SessionData.SessionName] = sd;
-        Response.Redirect("booklist.aspx");
         
+        checkBorrowList(DaoFactory.getUserDao().isAdmin(u.IdUser));
+        
+    }
+    private void checkBorrowList(bool isAdmin)
+    {
+        if (!isAdmin)
+        {
+            Response.Redirect("booklist.aspx");
+            return;
+        }
+        IList<BaseObject> borrowlist = DaoFactory.getBorrowDao().find(new Borrow());
+        for (int i = 0; i < borrowlist.Count; i++)
+        {
+            if ((borrowlist[i]as Borrow).DeadLine < DateTime.Now)
+            {
+                SessionData sd = Session[SessionData.SessionName] as SessionData;
+                sd.Alert = "有用户借书逾期！";
+                Session[SessionData.SessionName] = sd;
+                Response.Redirect("borrowlist.aspx");
+                return;
+            }
+        }
+        Response.Redirect("booklist.aspx");
     }
     protected void logout(object sender, EventArgs e)
     {

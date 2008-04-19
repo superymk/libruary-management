@@ -15,7 +15,7 @@ public class SessionData
 {
     //private static SessionData instance;
     private User currentUser = null;
-   
+    private string alert = null;
     private BorrowCart borrowCart = null;
     
 	//private SessionData(){}
@@ -25,7 +25,17 @@ public class SessionData
     //    return instance;
     //}
 
-    
+    public string Alert
+    {
+        set
+        {
+            alert = value;
+        }
+        get
+        {
+            return alert;
+        }
+    }
 
     public static String SessionName
     {

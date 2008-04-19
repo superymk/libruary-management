@@ -24,7 +24,7 @@ public partial class booklist : System.Web.UI.Page
     private void gridViewBind(Book b)
     {
         IBaseDao bookdao = DaoFactory.getBookDao();
-        DataSet ds = bookdao.findDataSet(b);
+        DataSet ds = bookdao.findDataSet(b,"BookName");
         GridView1.DataSource = ds;
         IUserDao userdao = DaoFactory.getUserDao();
         SessionData sd = Session[SessionData.SessionName] as SessionData;

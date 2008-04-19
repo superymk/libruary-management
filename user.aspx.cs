@@ -64,12 +64,20 @@ public partial class UserManager : System.Web.UI.Page
                 if (id != -1 && !dao.isAdmin(id))
                 {
                     reload(id);
+
                 }
+                else if (id == -1)
+                {
+                    Response.Redirect("Default.aspx");
+                }
+                panelComments.Visible = false;
+                updateConfirm.Visible = false;
+                btnChangeAdmin.Visible = false;
+                registerConfirm.Visible = dao.isAdmin(id);
+                return;
             }
-            panelComments.Visible = false;
-            updateConfirm.Visible = false;
-            btnChangeAdmin.Visible = false;
-            registerConfirm.Visible = true;
+            else
+                Response.Redirect("Default.aspx");
         }
     }
 

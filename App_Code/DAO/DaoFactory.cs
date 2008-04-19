@@ -45,4 +45,10 @@ public class DaoFactory
     {
         return (bookCommentDao != null) ? bookCommentDao : bookCommentDao = new BCommentDaoImpl();
     }
+
+    private static IBoardDao boardDao = null;
+    public static IBoardDao getBoardDao()
+    {
+        return (boardDao != null) ? boardDao : boardDao = new BoardDaoImpl();
+    }
 }

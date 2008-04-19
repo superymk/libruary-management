@@ -45,6 +45,7 @@ public partial class navigator : System.Web.UI.UserControl
                 btnAddUser.Visible = false;
                 lblUsername.Text += " 用户";
             }
+
         }
     }
     protected void btnNewUser_Click(object sender, EventArgs e)

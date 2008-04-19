@@ -56,7 +56,7 @@ public partial class userlist : System.Web.UI.Page
             return;
         }
         GridView1.Columns[GridView1.Columns.Count - 1].Visible = DaoFactory.getUserDao().isAdmin(sd.CurrentUser.IdUser);
-       \
+       
         if (GridView1.Rows.Count == 0)
         {
             lblMessage.Text = "用户列表为空！";

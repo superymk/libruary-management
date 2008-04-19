@@ -21,6 +21,7 @@ public abstract class BaseDao:IBaseDao
     protected string[] key;
     protected string objectName;
     protected bool autoKey = true;
+   
 
     #region IBaseDao 成员
 
@@ -78,7 +79,7 @@ public abstract class BaseDao:IBaseDao
         return delete(new int[] { id });
     }
 
-    public bool update(BaseObject obj)
+    public virtual bool update(BaseObject obj)
     {
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
@@ -105,7 +106,7 @@ public abstract class BaseDao:IBaseDao
             }
         }
         command = command.Remove(command.Length - 1);
-        command += "where ";
+        command += " where ";
         for (int i = 0; i < key.Length; i++)
         {
             command += key[i] + "=" + t.GetProperty(key[i]).GetValue(obj, null);
@@ -160,6 +161,11 @@ public abstract class BaseDao:IBaseDao
 
     public IList<BaseObject> find(BaseObject information)
     {
+        return find(information, null);
+    }
+
+    public IList<BaseObject> find(BaseObject information,string orderby)
+    {
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
@@ -189,7 +195,10 @@ public abstract class BaseDao:IBaseDao
             }
             
         }
-        
+        if (orderby != null)
+        {
+            sqlquery += " order by " + orderby;
+        }
         cmd.CommandText = sqlquery;
         SqlDataReader reader = cmd.ExecuteReader();
         IList<BaseObject> result = new List<BaseObject>();
@@ -220,8 +229,12 @@ public abstract class BaseDao:IBaseDao
         return result;
     }
 
-
     public DataSet findDataSet(BaseObject information)
+    {
+        return findDataSet(information, null);
+    }
+
+    public DataSet findDataSet(BaseObject information,string orderby)
     {
         SqlConnection sconn = new SqlConnection(connsql);
         sconn.Open();
@@ -248,6 +261,10 @@ public abstract class BaseDao:IBaseDao
                 }
             }
 
+        }
+        if (orderby != null)
+        {
+            sqlquery += " order by " + orderby;
         }
         SqlDataAdapter da = new SqlDataAdapter(sqlquery, sconn);
         DataSet ds = new DataSet();

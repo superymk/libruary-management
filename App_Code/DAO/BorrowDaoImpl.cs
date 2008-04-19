@@ -12,13 +12,18 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
     {
         get
         {
-            return 10;
+            int i = 10;
+            
+            return int.TryParse(getAppSetting("DeadLinePeriod"), out i)?i:10;
         }
     }
 
-    public int InitialMark{
+    public int InitialMark
+    {
         get{
-            return 50;
+            int i = 50;
+            
+            return int.TryParse(getAppSetting("InitialMark"),out i) ? i : 50;
         }
     }
 
@@ -26,7 +31,9 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
     {
         get
         {
-            return 10;
+           int i = 10;
+           
+           return int.TryParse(getAppSetting("MarkPerBorrow"),out i) ? i : 10;
         }
     }
 
@@ -34,7 +41,9 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
     {
         get
         {
-            return 7;
+            int i = 7;
+            
+            return int.TryParse(getAppSetting("TimeLimit"),out i) ? i : 7;
         }
     }
 
@@ -42,8 +51,13 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
     {
         get
         {
-            return 5;
+            int i = 5;
+            return int.TryParse(getAppSetting("BorrowCountLimit"), out i) ? i : 5;
         }
+    }
+    private static string getAppSetting(string index)
+    {
+        return System.Configuration.ConfigurationManager.AppSettings[index];
     }
 
     public BorrowDaoImpl()
@@ -71,8 +85,8 @@ public class BorrowDaoImpl : BaseDao, IBorrowDao
         User user = userdao.getById(idUser)as User;
         int count = userdao.borrowedBookCount(idUser);
 
-        if (count > BorrowCountLimit)
-            throw new DaoException("User :" + user.Username + " has borrowed " + count+" more than "+BorrowCountLimit+ " books!");
+        if (count >= BorrowCountLimit)
+            throw new DaoException("User :" + user.Username + " has borrowed " + (count+1)+" more than "+BorrowCountLimit+ " books!");
 
         bookdao.update(book);
         DaoFactory.getBorrowDao().add(borrow);

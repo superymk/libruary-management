@@ -11,12 +11,22 @@ using System.Web.UI.HtmlControls;
 /// <summary>
 /// Board 的摘要说明
 /// </summary>
-public class Board
+public class Board:BaseObject
 {
+    private string context="";
+    public string Context
+    {
+        get
+        {
+            return context;
+        }
+        set
+        {
+            context = value;
+        }
+    }
 	public Board()
 	{
-		//
-		// TODO: 在此处添加构造函数逻辑
-		//
+		
 	}
 }

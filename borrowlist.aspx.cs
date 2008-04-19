@@ -31,6 +31,12 @@ public partial class borrowlist : System.Web.UI.Page
             }
             catch (Exception)
             {
+                if (sd.Alert != null)
+                {
+                    Response.Write("<script>alert('" + sd.Alert + "')</script>");
+                    sd.Alert = null;
+                    Session[SessionData.SessionName] = sd;
+                }
                 reload(new Borrow());
             }
             GridView1.Columns[GridView1.Columns.Count - 1].Visible = true;
@@ -45,7 +51,7 @@ public partial class borrowlist : System.Web.UI.Page
     {
         IBaseDao borrowdao = DaoFactory.getBorrowDao();
 
-        DataSet ds = borrowdao.findDataSet(borrow);
+        DataSet ds = borrowdao.findDataSet(borrow,"DeadLine");
 
 
         GridView1.DataSource = ds;
