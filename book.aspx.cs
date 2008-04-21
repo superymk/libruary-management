@@ -29,7 +29,7 @@ using System.Collections.Generic;
                 Int32 id = Int32.Parse(Request.QueryString["id"]);
                 reload(id);
                 panelComments.Visible = true;
-                btnAddCart.Visible = true;
+                
                 btnAdd.Visible = false;
                 btnUpdate.Visible = isAdmin;                
             }catch (Exception)
@@ -80,6 +80,8 @@ using System.Collections.Generic;
                 row.Controls.Add(cell1);
                 comments.Controls.Add(row);
             }
+
+            btnAddCart.Enabled = b.State.Trim().Equals(BookDaoImpl.Free);
         }
 
         protected void update(object sender, EventArgs e)
