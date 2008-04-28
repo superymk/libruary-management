@@ -15,9 +15,9 @@ public partial class Broadcast : System.Web.UI.UserControl
     {
         if (IsPostBack) return;
         SessionData sd = Session[SessionData.SessionName] as SessionData;
-        if (sd == null || sd.CurrentUser == null)
-            Response.Redirect("default.aspx");
-        
+        if (sd == null || sd.CurrentUser == null){
+            Response.Redirect("Default.aspx");
+        }
         string s = DaoFactory.getBoardDao().BoardCast;
         txtContext.Text = s==null?"":s;
         bool isAdmin = DaoFactory.getUserDao().isAdmin(sd.CurrentUser.IdUser);

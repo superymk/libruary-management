@@ -20,7 +20,9 @@ using System.Collections.Generic;
 
             SessionData sd = Session[SessionData.SessionName] as SessionData;
             if (sd == null || sd.CurrentUser == null)
+            {
                 Response.Redirect("Default.aspx");
+            }
             User user = sd.CurrentUser;
             bool isAdmin = DaoFactory.getUserDao().isAdmin(user.IdUser);
             

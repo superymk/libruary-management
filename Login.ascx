@@ -24,6 +24,7 @@
         <td style="width: 100px; height: 26px">
             <asp:Button ID="btnLogout" runat="server" Text="注销" OnClick="logout" CausesValidation="False" /></td>
         <td style="width: 100px; height: 26px">
-            </td>
+            <asp:Button ID="btnRegister" runat="server" Text="注册" OnClick="btnRegister_Click" CausesValidation="False" /></td>
+        </td>
     </tr>
 </table>

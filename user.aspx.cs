@@ -27,13 +27,14 @@ public partial class UserManager : System.Web.UI.Page
             SessionData sd = Session[SessionData.SessionName] as SessionData;
             if (sd == null || sd.CurrentUser == null)
             {
-                Response.Redirect("default.aspx");
+                Response.Redirect("Default.aspx");
                 return;
             }
             
             User u = sd.CurrentUser;
-            btnChangeAdmin.Visible = DaoFactory.getUserDao().isAdmin(sd.CurrentUser.IdUser);
-
+            bool isAdmin = DaoFactory.getUserDao().isAdmin(sd.CurrentUser.IdUser);
+            btnChangeAdmin.Visible = isAdmin;
+            mark.ReadOnly = !isAdmin;
             if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
             {
                 IUserDao dao = DaoFactory.getUserDao();
@@ -45,7 +46,7 @@ public partial class UserManager : System.Web.UI.Page
                     return;
                 }
             }
-            Response.Redirect("default.aspx");
+            Response.Redirect("Default.aspx");
             return;
         }
         catch (Exception)
@@ -53,8 +54,11 @@ public partial class UserManager : System.Web.UI.Page
             SessionData sd = Session[SessionData.SessionName] as SessionData;
             if (sd == null || sd.CurrentUser == null)
             {
-                Response.Redirect("default.aspx");
-                return;                
+                updateConfirm.Visible = false;
+                panelComments.Visible = false;
+                btnChangeAdmin.Visible = false;
+                registerConfirm.Visible = true;
+                return;
             }
             User u = sd.CurrentUser;
             if (!(u.Username == null || u.Username.Equals("") || u.Password == null || u.Password.Equals("")))
@@ -64,20 +68,24 @@ public partial class UserManager : System.Web.UI.Page
                 if (id != -1 && !dao.isAdmin(id))
                 {
                     reload(id);
-
+                    updateConfirm.Visible = true;
+                    registerConfirm.Visible = false;
                 }
-                else if (id == -1)
+                else
                 {
-                    Response.Redirect("Default.aspx");
+                    updateConfirm.Visible = false;
+                    registerConfirm.Visible = true;
                 }
-                panelComments.Visible = false;
-                updateConfirm.Visible = false;
-                btnChangeAdmin.Visible = false;
-                registerConfirm.Visible = dao.isAdmin(id);
-                return;
             }
             else
-                Response.Redirect("Default.aspx");
+            {
+                updateConfirm.Visible = false;
+                registerConfirm.Visible = true;
+            }
+            mark.ReadOnly = true;
+            panelComments.Visible = false;
+            btnChangeAdmin.Visible = false;
+            return;
         }
     }
 
@@ -86,6 +94,11 @@ public partial class UserManager : System.Web.UI.Page
         User u = new User();
         u.Username = username.Text;
         u.Password = password.Text;
+        if (u.Password != password2.Text)
+        {
+            error.Text = "两次输入密码不同";
+            return;
+        }
         u.TrueName = trueName.Text;
         u.College = college.Text;
         try {
@@ -93,17 +106,23 @@ public partial class UserManager : System.Web.UI.Page
         }
         catch (FormatException) { }
         u.Address = address.Text;
-        u.Sex = sex.Text;
+        u.Sex = sex.SelectedValue;
+        
         u.Email = email.Text;
         u.Description = description.Text;
+        u.Telnumber = telnumber.Text;
         u.Mark = DaoFactory.getBorrowDao().InitialMark;
         if (!DaoFactory.getUserDao().add(u)) 
         {
             Response.Write("<script>alert('用户添加错误,可能同名用户已存在')</script>");
             return;
         }
-        
-        Response.Redirect("user.aspx");
+        SessionData sd = Session[SessionData.SessionName] as SessionData;
+        if (sd == null) sd = new SessionData();
+        sd.CurrentUser = u;
+        Session[SessionData.SessionName] = sd;
+        Response.Redirect("booklist.aspx");
+        //Response.Redirect("user.aspx");
     }
 
     protected void update(object sender, EventArgs e)
@@ -122,14 +141,16 @@ public partial class UserManager : System.Web.UI.Page
         u.TrueName = trueName.Text;
         u.College = college.Text;
         u.Address = address.Text;
-        u.Sex = sex.Text;
+        u.Sex = sex.SelectedValue;
         u.Email = email.Text;
         u.Description = description.Text;
+        u.Telnumber = telnumber.Text;
+        u.Mark = Int32.Parse(mark.Text);
         try {
             u.Birthday = DateTime.Parse(birthday.Text);
         }
         catch (FormatException ee){
-            description.Text = ee.Message;
+            
         }
         DaoFactory.getUserDao().update(u);
         reload(u.IdUser);
@@ -147,11 +168,19 @@ public partial class UserManager : System.Web.UI.Page
         password.Attributes["value"] = password2.Attributes["value"] = u.Password;
         trueName.Text = u.TrueName;
         college.Text = u.College;
-        birthday.Text = u.Birthday.ToString();
+        if (!(u.Birthday > new DateTime()))
+        {
+            birthday.Text = "";
+        }
+        else
+        {
+            birthday.Text = u.Birthday.ToString();
+        }
         address.Text = u.Address;
-        sex.Text = u.Sex;
+        sex.SelectedValue = u.Sex;
+        mark.Text = u.Mark+"";
         email.Text = u.Email;
-        description.Text = idUser.Text;
+        description.Text = u.Description;
         
         bool admin = dao.isAdmin(u.IdUser);
         if (admin)

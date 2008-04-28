@@ -17,7 +17,9 @@ public partial class borrowlist : System.Web.UI.Page
 
         SessionData sd = Session[SessionData.SessionName] as SessionData;
         if (sd == null || sd.CurrentUser == null)
-            Response.Redirect("default.aspx");
+        {
+            Response.Redirect("Default.aspx");
+        }
         User user = sd.CurrentUser;
 
         if (DaoFactory.getUserDao().isAdmin(user.IdUser))

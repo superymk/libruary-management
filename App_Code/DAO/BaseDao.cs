@@ -14,7 +14,7 @@ using System.Collections.Generic;
 /// <summary>
 /// BaseDao 的摘要说明
 /// </summary>
-public abstract class BaseDao:IBaseDao
+public abstract class BaseDao : IBaseDao
 {
     protected string connsql = "server=.\\sqlexpress;uid=sa;pwd=admin1;database=libruary";
     //System.Configuration.ConfigurationManager.AppSettings["Connection"];
@@ -23,14 +23,14 @@ public abstract class BaseDao:IBaseDao
     protected string[] key;
     protected string objectName;
     protected bool autoKey = true;
-   
+
 
     #region IBaseDao 成员
 
 
     public virtual bool add(BaseObject obj)
     {
-        SqlConnection sconn = new SqlConnection(connsql) ;
+        SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
         try
@@ -50,10 +50,12 @@ public abstract class BaseDao:IBaseDao
                         Console.WriteLine("a");
                         if (!((DateTime)value > new DateTime()))
                         {
-                            value = DateTime.Now;
+                            value = null;// DateTime.Now;
                         }
                     }
-                    command += "'" + value + "',";
+                    if (value == null) { command += "NULL ,"; }
+                    else
+                        command += "'" + value + "',";
                 }
             }
             command = command.Remove(command.Length - 1);
@@ -121,10 +123,13 @@ public abstract class BaseDao:IBaseDao
                         Console.WriteLine("a");
                         if (!((DateTime)value > new DateTime()))
                         {
-                            value = DateTime.Now;
+                            value = null;// DateTime.Now;
                         }
                     }
-                    command += name + " ='" + value + "',";
+
+                    if (value == null) { command += name + " = NULL ,"; }
+                    else
+                        command += name + " ='" + value + "',";
                 }
             }
             command = command.Remove(command.Length - 1);
@@ -165,7 +170,15 @@ public abstract class BaseDao:IBaseDao
                 foreach (PropertyInfo p in t.GetProperties())
                 {
                     Type pType = p.PropertyType;
-                    p.SetValue(o, reader[lowerFirstChar(p.Name)], null);
+                    if (reader[lowerFirstChar(p.Name)] != DBNull.Value
+                        || pType.Name != "DateTime")
+                    {
+                        p.SetValue(o, reader[lowerFirstChar(p.Name)], null);
+                    }
+                    else
+                    {
+                        p.SetValue(o, new DateTime(), null);
+                    }
                     //casting may be not needed
                     //switch (pType.Name){
                     //    case "String":
@@ -189,8 +202,9 @@ public abstract class BaseDao:IBaseDao
         }
     }
 
-    public BaseObject getById(int id) {
-        return getById(new int[]{ id });
+    public BaseObject getById(int id)
+    {
+        return getById(new int[] { id });
     }
 
     public IList<BaseObject> find(BaseObject information)
@@ -198,7 +212,7 @@ public abstract class BaseDao:IBaseDao
         return find(information, null);
     }
 
-    public IList<BaseObject> find(BaseObject information,string orderby)
+    public IList<BaseObject> find(BaseObject information, string orderby)
     {
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
@@ -246,8 +260,15 @@ public abstract class BaseDao:IBaseDao
                 foreach (PropertyInfo p in t.GetProperties())
                 {
                     Type pType = p.PropertyType;
-                    Console.Write(lowerFirstChar(p.Name));
-                    p.SetValue(o, reader[lowerFirstChar(p.Name)], null);
+                    if (reader[lowerFirstChar(p.Name)] != DBNull.Value
+                        || pType.Name != "DateTime")
+                    {
+                        p.SetValue(o, reader[lowerFirstChar(p.Name)], null);
+                    }
+                    else
+                    {
+                        p.SetValue(o, new DateTime(), null);
+                    }
                     //casting may be not needed
                     //switch (pType.Name)
                     //{
@@ -277,7 +298,7 @@ public abstract class BaseDao:IBaseDao
         return findDataSet(information, null);
     }
 
-    public DataSet findDataSet(BaseObject information,string orderby)
+    public DataSet findDataSet(BaseObject information, string orderby)
     {
         SqlConnection sconn = new SqlConnection(connsql);
         sconn.Open();
@@ -322,7 +343,8 @@ public abstract class BaseDao:IBaseDao
         }
     }
 
-    private string lowerFirstChar(string ori) {
+    private string lowerFirstChar(string ori)
+    {
         string first = ori.Substring(0, 1);
         string after = ori.Substring(1, ori.Length - 1);
         return first.ToLower() + after;

@@ -21,6 +21,7 @@
                 </tr>
                 <tr>
                     <td style="width: 100px">
+        <asp:Label ID="error" runat="server"/>
         <asp:Table ID="Table1" runat="server" Height="284px" Width="564px">
             <asp:TableRow runat="server">
                 <asp:TableCell ID="TextCell0" runat="server">
@@ -81,7 +82,12 @@
                     <asp:Label id="Label7"  runat="server" text="性别: " /> 
                 </asp:TableCell>
                 <asp:TableCell ID="TableCell7" runat="server">
-                    <asp:textbox id="sex" textmode="SingleLine" runat="server" cssclass="textbox" /> 
+                    <asp:DropDownList ID="sex" runat="server" >
+                        <asp:ListItem Selected="True" Value="unselected"> 未选择</asp:ListItem>
+                        <asp:ListItem Value="male">男</asp:ListItem>
+                        <asp:ListItem Value="female">女</asp:ListItem>
+                    </asp:DropDownList>
+                    <%--<asp:textbox id="sex" textmode="SingleLine" runat="server" cssclass="textbox" /> --%>
                 </asp:TableCell>
                 <asp:TableCell ID="TextCell8" runat="server" >
                     <asp:Label id="Label8"  runat="server" text="Email: " /> 
@@ -97,6 +103,14 @@
                 <asp:TableCell ID="TableCell9" runat="server">
                     <asp:textbox id="telnumber" textmode="SingleLine" runat="server" cssclass="textbox" /> 
                 </asp:TableCell>
+                <asp:TableCell ID="TableCell11" runat="server" >
+                    <asp:Label id="Label12"  runat="server" text="积分: " /> 
+                </asp:TableCell>
+                <asp:TableCell ID="TableCell12" runat="server">
+                    <asp:textbox id="mark" textmode="SingleLine" runat="server" cssclass="textbox" /> 
+                </asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow runat="server">
                 <asp:TableCell ID="TextCell10" runat="server" >
                     <asp:Label id="Label10"  runat="server" text="描述: " /> 
                 </asp:TableCell>

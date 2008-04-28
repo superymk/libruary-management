@@ -21,6 +21,19 @@ public partial class navigator : System.Web.UI.UserControl
             {
                 Response.Redirect("Default.aspx");
             }
+            else
+            {
+                this.Controls.Remove(this.FindControl("Broadcast1"));
+                btnAddUser.Visible = false;
+                btnReturnBook.Visible = false;
+                btnShopingList.Visible = false;
+                btnUserList.Visible = false;
+                btnBookSearch.Visible = false;
+                btnShopingList.Visible = false;
+                btnBorrowList.Visible = false;
+                btnAddBook.Visible = false;
+                btnLogout.Visible = false;
+            }
             
         }
         else
