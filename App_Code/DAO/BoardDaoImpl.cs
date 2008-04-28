@@ -45,13 +45,20 @@ public class BoardDaoImpl: BaseDao, IBoardDao
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
-        cmd.Connection = sconn;
-        string command = "update " + relateTable + " set ";
-        command += "context='"+(obj as Board).Context+"' ";
-        
-        cmd.CommandText = command;
-        int result = cmd.ExecuteNonQuery();
-        return result != 0;
+        try
+        {
+            cmd.Connection = sconn;
+            string command = "update " + relateTable + " set ";
+            command += "context='" + (obj as Board).Context + "' ";
+
+            cmd.CommandText = command;
+            int result = cmd.ExecuteNonQuery();
+            return result != 0;
+        }
+        finally
+        {
+            sconn.Close();
+        }
     }
 
 }

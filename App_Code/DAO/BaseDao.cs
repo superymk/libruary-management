@@ -17,6 +17,8 @@ using System.Collections.Generic;
 public abstract class BaseDao:IBaseDao
 {
     protected string connsql = "server=.\\sqlexpress;uid=sa;pwd=admin1;database=libruary";
+    //System.Configuration.ConfigurationManager.AppSettings["Connection"];
+    //"server=.\\sqlexpress;uid=sa;pwd=admin1;database=libruary";
     protected string relateTable;
     protected string[] key;
     protected string objectName;
@@ -28,34 +30,43 @@ public abstract class BaseDao:IBaseDao
 
     public virtual bool add(BaseObject obj)
     {
-        SqlConnection sconn = new SqlConnection(connsql);
+        SqlConnection sconn = new SqlConnection(connsql) ;
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
-        cmd.Connection = sconn;
-        string command = "insert into " + relateTable + " values (";
-        Type t = obj.GetType();
-        foreach(PropertyInfo p in t.GetProperties()){
-            Type pt = p.PropertyType;
-            string name = p.Name;
-            object value = p.GetValue(obj,null);
-            if ( !autoKey || !inArray(name, key)) {
-                if (pt.Equals(typeof(DateTime)))
+        try
+        {
+            cmd.Connection = sconn;
+            string command = "insert into " + relateTable + " values (";
+            Type t = obj.GetType();
+            foreach (PropertyInfo p in t.GetProperties())
+            {
+                Type pt = p.PropertyType;
+                string name = p.Name;
+                object value = p.GetValue(obj, null);
+                if (!autoKey || !inArray(name, key))
                 {
-                    Console.WriteLine("a");
-                    if (!((DateTime)value > new DateTime()))
+                    if (pt.Equals(typeof(DateTime)))
                     {
-                        value = DateTime.Now;
+                        Console.WriteLine("a");
+                        if (!((DateTime)value > new DateTime()))
+                        {
+                            value = DateTime.Now;
+                        }
                     }
+                    command += "'" + value + "',";
                 }
-                command += "'" + value + "',";
             }
-        }
-        command = command.Remove(command.Length - 1);
-        command += ")";
-        cmd.CommandText = command;
+            command = command.Remove(command.Length - 1);
+            command += ")";
+            cmd.CommandText = command;
 
-        int result = cmd.ExecuteNonQuery();
-        return result != 0;
+            int result = cmd.ExecuteNonQuery();
+            return result != 0;
+        }
+        finally
+        {
+            sconn.Close();
+        }
     }
 
 
@@ -65,13 +76,22 @@ public abstract class BaseDao:IBaseDao
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
-        cmd.Connection = sconn;
-        cmd.CommandText = "delete from " + relateTable + " where 1=1";
-        for (int i = 0; i < key.Length; i++) {
-            cmd.CommandText +=" and "+ key[i] + "=" + ids[i];
+        try
+        {
+
+            cmd.Connection = sconn;
+            cmd.CommandText = "delete from " + relateTable + " where 1=1";
+            for (int i = 0; i < key.Length; i++)
+            {
+                cmd.CommandText += " and " + key[i] + "=" + ids[i];
+            }
+            int result = cmd.ExecuteNonQuery();
+            return result != 0;
         }
-        int result = cmd.ExecuteNonQuery();
-        return result != 0;
+        finally
+        {
+            sconn.Close();
+        }
     }
 
     public bool delete(int id)
@@ -84,36 +104,43 @@ public abstract class BaseDao:IBaseDao
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
-        cmd.Connection = sconn;
-        string command = "update " + relateTable + " set ";
-        Type t = obj.GetType();
-        foreach (PropertyInfo p in t.GetProperties())
+        try
         {
-            Type pt = p.PropertyType;
-            string name = p.Name;
-            object value = p.GetValue(obj, null);
-            if (!inArray(name, key))
+            cmd.Connection = sconn;
+            string command = "update " + relateTable + " set ";
+            Type t = obj.GetType();
+            foreach (PropertyInfo p in t.GetProperties())
             {
-                if (pt.Equals(typeof(DateTime)))
+                Type pt = p.PropertyType;
+                string name = p.Name;
+                object value = p.GetValue(obj, null);
+                if (!inArray(name, key))
                 {
-                    Console.WriteLine("a");
-                    if (!((DateTime)value > new DateTime()))
+                    if (pt.Equals(typeof(DateTime)))
                     {
-                        value = DateTime.Now;
+                        Console.WriteLine("a");
+                        if (!((DateTime)value > new DateTime()))
+                        {
+                            value = DateTime.Now;
+                        }
                     }
+                    command += name + " ='" + value + "',";
                 }
-                command += name + " ='" + value + "',";
             }
+            command = command.Remove(command.Length - 1);
+            command += " where ";
+            for (int i = 0; i < key.Length; i++)
+            {
+                command += key[i] + "=" + t.GetProperty(key[i]).GetValue(obj, null);
+            }
+            cmd.CommandText = command;
+            int result = cmd.ExecuteNonQuery();
+            return result != 0;
         }
-        command = command.Remove(command.Length - 1);
-        command += " where ";
-        for (int i = 0; i < key.Length; i++)
+        finally
         {
-            command += key[i] + "=" + t.GetProperty(key[i]).GetValue(obj, null);
+            sconn.Close();
         }
-        cmd.CommandText = command;
-        int result = cmd.ExecuteNonQuery();
-        return result != 0;
     }
 
     public BaseObject getById(int[] ids)
@@ -121,38 +148,45 @@ public abstract class BaseDao:IBaseDao
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
-        cmd.Connection = sconn;
-        string sqlquery = "select * from " + relateTable + " where 1=1";
-        for (int i = 0; i < key.Length; i++)
+        try
         {
-            sqlquery +=" and "+ key[i] + "=" + ids[i];
-        }
-        cmd.CommandText = sqlquery;
-        SqlDataReader reader = cmd.ExecuteReader();
-        if (reader.Read())
-        {
-            Type t = Type.GetType(objectName);
-            BaseObject o = System.Activator.CreateInstance(t) as BaseObject;
-            foreach (PropertyInfo p in t.GetProperties())
+            cmd.Connection = sconn;
+            string sqlquery = "select * from " + relateTable + " where 1=1";
+            for (int i = 0; i < key.Length; i++)
             {
-                Type pType = p.PropertyType;
-                p.SetValue(o, reader[lowerFirstChar(p.Name)], null);
-                //casting may be not needed
-                //switch (pType.Name){
-                //    case "String":
-                //        p.SetValue(o, (string)reader[lowerFirstChar(p.Name)], null);
-                //        break;
-                //    case "DateTime":
-                //        p.SetValue(o, (DateTime)reader[lowerFirstChar(p.Name)], null);
-                //        break;
-                //    case "Int32":
-                //        p.SetValue(o, (int)reader[lowerFirstChar(p.Name)], null);
-                //        break;
-                //}
+                sqlquery += " and " + key[i] + "=" + ids[i];
             }
-            return o;
+            cmd.CommandText = sqlquery;
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                Type t = Type.GetType(objectName);
+                BaseObject o = System.Activator.CreateInstance(t) as BaseObject;
+                foreach (PropertyInfo p in t.GetProperties())
+                {
+                    Type pType = p.PropertyType;
+                    p.SetValue(o, reader[lowerFirstChar(p.Name)], null);
+                    //casting may be not needed
+                    //switch (pType.Name){
+                    //    case "String":
+                    //        p.SetValue(o, (string)reader[lowerFirstChar(p.Name)], null);
+                    //        break;
+                    //    case "DateTime":
+                    //        p.SetValue(o, (DateTime)reader[lowerFirstChar(p.Name)], null);
+                    //        break;
+                    //    case "Int32":
+                    //        p.SetValue(o, (int)reader[lowerFirstChar(p.Name)], null);
+                    //        break;
+                    //}
+                }
+                return o;
+            }
+            return null;
         }
-        return null;
+        finally
+        {
+            sconn.Close();
+        }
     }
 
     public BaseObject getById(int id) {
@@ -169,64 +203,73 @@ public abstract class BaseDao:IBaseDao
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
-        cmd.Connection = sconn;
-        string sqlquery = "select * from "+relateTable+" where 1=1";
-        Type t = information.GetType();
-        foreach (PropertyInfo p in t.GetProperties()) {
-            Type pt = p.PropertyType;
-            string name = p.Name;
-            object value = p.GetValue(information, null);
-            if ((!autoKey || !inArray(name, key)) && value != null && !value.Equals(""))
-            {
-                if (!pt.Equals(typeof(DateTime)) && !pt.Equals(typeof(Int32))) {
-                    sqlquery += " and " + name + " like '%" + value + "%'";
-                }
-                else if (pt.Equals(typeof(DateTime)) && ((DateTime)value > new DateTime()))
-                {
-                    sqlquery += " and " + name + " like '" + value + "'";
-                }
-                else
-                {
-                    if (!pt.Equals(typeof(DateTime)) && !value.Equals(0))
-                    {
-                        sqlquery += " and " + name + " = '" + value + "'";
-                    }
-                }
-            }
-            
-        }
-        if (orderby != null)
+        try
         {
-            sqlquery += " order by " + orderby;
-        }
-        cmd.CommandText = sqlquery;
-        SqlDataReader reader = cmd.ExecuteReader();
-        IList<BaseObject> result = new List<BaseObject>();
-        while (reader.Read())
-        {
-            BaseObject o = System.Activator.CreateInstance(t) as BaseObject;
+            cmd.Connection = sconn;
+            string sqlquery = "select * from " + relateTable + " where 1=1";
+            Type t = information.GetType();
             foreach (PropertyInfo p in t.GetProperties())
             {
-                Type pType = p.PropertyType;
-                Console.Write(lowerFirstChar(p.Name));
-                p.SetValue(o, reader[lowerFirstChar(p.Name)], null);
-                //casting may be not needed
-                //switch (pType.Name)
-                //{
-                //    case "String":
-                //        p.SetValue(o, (string)reader[lowerFirstChar(p.Name)], null);
-                //        break;
-                //    case "DateTime":
-                //        p.SetValue(o, (DateTime)reader[lowerFirstChar(p.Name)], null);
-                //        break;
-                //    case "Int32":
-                //        p.SetValue(o, (int)reader[lowerFirstChar(p.Name)], null);
-                //        break;
-                //}
+                Type pt = p.PropertyType;
+                string name = p.Name;
+                object value = p.GetValue(information, null);
+                if ((!autoKey || !inArray(name, key)) && value != null && !value.Equals(""))
+                {
+                    if (!pt.Equals(typeof(DateTime)) && !pt.Equals(typeof(Int32)))
+                    {
+                        sqlquery += " and " + name + " like '%" + value + "%'";
+                    }
+                    else if (pt.Equals(typeof(DateTime)) && ((DateTime)value > new DateTime()))
+                    {
+                        sqlquery += " and " + name + " like '" + value + "'";
+                    }
+                    else
+                    {
+                        if (!pt.Equals(typeof(DateTime)) && !value.Equals(0))
+                        {
+                            sqlquery += " and " + name + " = '" + value + "'";
+                        }
+                    }
+                }
+
             }
-            result.Add(o);
+            if (orderby != null)
+            {
+                sqlquery += " order by " + orderby;
+            }
+            cmd.CommandText = sqlquery;
+            SqlDataReader reader = cmd.ExecuteReader();
+            IList<BaseObject> result = new List<BaseObject>();
+            while (reader.Read())
+            {
+                BaseObject o = System.Activator.CreateInstance(t) as BaseObject;
+                foreach (PropertyInfo p in t.GetProperties())
+                {
+                    Type pType = p.PropertyType;
+                    Console.Write(lowerFirstChar(p.Name));
+                    p.SetValue(o, reader[lowerFirstChar(p.Name)], null);
+                    //casting may be not needed
+                    //switch (pType.Name)
+                    //{
+                    //    case "String":
+                    //        p.SetValue(o, (string)reader[lowerFirstChar(p.Name)], null);
+                    //        break;
+                    //    case "DateTime":
+                    //        p.SetValue(o, (DateTime)reader[lowerFirstChar(p.Name)], null);
+                    //        break;
+                    //    case "Int32":
+                    //        p.SetValue(o, (int)reader[lowerFirstChar(p.Name)], null);
+                    //        break;
+                    //}
+                }
+                result.Add(o);
+            }
+            return result;
         }
-        return result;
+        finally
+        {
+            sconn.Close();
+        }
     }
 
     public DataSet findDataSet(BaseObject information)
@@ -238,38 +281,45 @@ public abstract class BaseDao:IBaseDao
     {
         SqlConnection sconn = new SqlConnection(connsql);
         sconn.Open();
-        string sqlquery = "select * from " + relateTable + " where 1=1";
-        Type t = information.GetType();
-        foreach (PropertyInfo p in t.GetProperties())
+        try
         {
-            Type pt = p.PropertyType;
-            string name = p.Name;
-            object value = p.GetValue(information, null);
-            if ((!autoKey || !inArray(name, key)) && value != null && !value.Equals(""))
+            string sqlquery = "select * from " + relateTable + " where 1=1";
+            Type t = information.GetType();
+            foreach (PropertyInfo p in t.GetProperties())
             {
-                if (!pt.Equals(typeof(DateTime)) && !pt.Equals(typeof(Int32)))
+                Type pt = p.PropertyType;
+                string name = p.Name;
+                object value = p.GetValue(information, null);
+                if ((!autoKey || !inArray(name, key)) && value != null && !value.Equals(""))
                 {
-                    sqlquery += " and " + name + " like '%" + value + "%'";
-                }
-                else if (pt.Equals(typeof(DateTime)) && ((DateTime)value > new DateTime()))
-                {
-                    sqlquery += " and " + name + " like '" + value + "'";
-                }
-                else if(pt.Equals(typeof(Int32)) && !value.Equals(0))
-                {
+                    if (!pt.Equals(typeof(DateTime)) && !pt.Equals(typeof(Int32)))
+                    {
+                        sqlquery += " and " + name + " like '%" + value + "%'";
+                    }
+                    else if (pt.Equals(typeof(DateTime)) && ((DateTime)value > new DateTime()))
+                    {
+                        sqlquery += " and " + name + " like '" + value + "'";
+                    }
+                    else if (pt.Equals(typeof(Int32)) && !value.Equals(0))
+                    {
                         sqlquery += " and " + name + " = '" + value + "'";
+                    }
                 }
-            }
 
+            }
+            if (orderby != null)
+            {
+                sqlquery += " order by " + orderby;
+            }
+            SqlDataAdapter da = new SqlDataAdapter(sqlquery, sconn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            return ds;
         }
-        if (orderby != null)
+        finally
         {
-            sqlquery += " order by " + orderby;
+            sconn.Close();
         }
-        SqlDataAdapter da = new SqlDataAdapter(sqlquery, sconn);
-        DataSet ds = new DataSet();
-        da.Fill(ds);
-        return ds;
     }
 
     private string lowerFirstChar(string ori) {
@@ -283,12 +333,19 @@ public abstract class BaseDao:IBaseDao
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
-        cmd.Connection = sconn;
-        string sqlquery = "select * from " + relateTable + " where 1=1";
-        SqlDataAdapter da = new SqlDataAdapter(sqlquery, sconn);
-        DataSet ds = new DataSet();
-        da.Fill(ds);
-        return ds;
+        try
+        {
+            cmd.Connection = sconn;
+            string sqlquery = "select * from " + relateTable + " where 1=1";
+            SqlDataAdapter da = new SqlDataAdapter(sqlquery, sconn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            return ds;
+        }
+        finally
+        {
+            sconn.Close();
+        }
     }
 
     #endregion

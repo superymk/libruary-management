@@ -28,18 +28,26 @@ public class UserDaoImpl : BaseDao, IUserDao{
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
-        cmd.Connection = sconn;
-        cmd.CommandText = "select * from userinformation where username='" + username + "' and password='" + password+"'";
-        //Console.WriteLine(cmd.CommandText);
-        SqlDataReader reader = cmd.ExecuteReader();
-        while (reader.Read()) {
-            int userid = (int)reader["idUser"];
-            //save the userid in somewhere
-            sconn.Close();
-            return userid;
+        try
+        {
+            cmd.Connection = sconn;
+            cmd.CommandText = "select * from userinformation where username='" + username + "' and password='" + password + "'";
+            //Console.WriteLine(cmd.CommandText);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int userid = (int)reader["idUser"];
+                //save the userid in somewhere
+                sconn.Close();
+                return userid;
+            }
+
+            return -1;
         }
-        sconn.Close();
-        return -1;
+        finally
+        {
+            sconn.Close();
+        }
     }
 
 
@@ -48,20 +56,24 @@ public class UserDaoImpl : BaseDao, IUserDao{
         SqlConnection sconn = new SqlConnection(connsql);
         SqlCommand cmd = new SqlCommand();
         sconn.Open();
-        cmd.Connection = sconn;
-        cmd.CommandText = "select * from admininformation where idAdmin='" + idUser + "'";
-        //Console.WriteLine(cmd.CommandText);
-        SqlDataReader reader = cmd.ExecuteReader();
-        while (reader.Read())
+        try
         {
-            int adminid = (int)reader["idAdmin"];
-            //save the userid in somewhere
-            sconn.Close();
-            return true;
-        }
-        sconn.Close();
-        return false;
 
+            cmd.Connection = sconn;
+            cmd.CommandText = "select * from admininformation where idAdmin='" + idUser + "'";
+            //Console.WriteLine(cmd.CommandText);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int adminid = (int)reader["idAdmin"];
+                //save the userid in somewhere
+                sconn.Close();
+                return true;
+            }
+            
+            return false;
+        }
+        finally { sconn.Close(); }
     }
 
     public bool changeAdmin(int idUser)
