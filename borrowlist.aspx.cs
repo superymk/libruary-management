@@ -72,6 +72,14 @@ public partial class borrowlist : System.Web.UI.Page
             User user = userdao.getById(iduser) as User;
             row.Cells[1].Text = "<a href='book.aspx?id="+idbook+"'>"+book.BookName+"<a/>";
             row.Cells[3].Text = "<a href='user.aspx?id=" + iduser + "'>" + user.Username + "<a/>";
+            DateTime deadline;
+            DateTime.TryParse(row.Cells[4].Text, out deadline);
+
+            if (deadline < DateTime.Now.AddDays(-DaoFactory.getBorrowDao().TimeLimit))
+                row.Cells[4].Attributes.Add("style", "color:red");
+            else if (deadline < DateTime.Now)
+                row.Cells[4].Attributes.Add("style", "color:green");
+            
         }
 
         if (GridView1.Rows.Count == 0)

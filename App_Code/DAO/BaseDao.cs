@@ -16,9 +16,8 @@ using System.Collections.Generic;
 /// </summary>
 public abstract class BaseDao : IBaseDao
 {
-    protected string connsql = "server=.\\sqlexpress;uid=sa;pwd=admin1;database=libruary";
-    //System.Configuration.ConfigurationManager.AppSettings["Connection"];
-    //"server=.\\sqlexpress;uid=sa;pwd=admin1;database=libruary";
+    protected string connsql = System.Configuration.ConfigurationManager.AppSettings["Connection"];
+    //@"server=.\sqlexpress;uid=sa;pwd=admin1;database=libruary";
     protected string relateTable;
     protected string[] key;
     protected string objectName;
@@ -53,7 +52,7 @@ public abstract class BaseDao : IBaseDao
                             value = null;// DateTime.Now;
                         }
                     }
-                    if (value == null) { command += "NULL ,"; }
+                    if (value == null) { command += "'"+DateTime.Now+"' ,"; }
                     else
                         command += "'" + value + "',";
                 }

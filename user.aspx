@@ -83,9 +83,8 @@
                 </asp:TableCell>
                 <asp:TableCell ID="TableCell7" runat="server">
                     <asp:DropDownList ID="sex" runat="server" >
-                        <asp:ListItem Selected="True" Value="unselected"> 未选择</asp:ListItem>
-                        <asp:ListItem Value="male">男</asp:ListItem>
-                        <asp:ListItem Value="female">女</asp:ListItem>
+                        <asp:ListItem Value="MALE">男</asp:ListItem>
+                        <asp:ListItem Value="FEMALE">女</asp:ListItem>
                     </asp:DropDownList>
                     <%--<asp:textbox id="sex" textmode="SingleLine" runat="server" cssclass="textbox" /> --%>
                 </asp:TableCell>

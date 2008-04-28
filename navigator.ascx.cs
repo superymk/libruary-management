@@ -17,7 +17,8 @@ public partial class navigator : System.Web.UI.UserControl
         if (sd == null || sd.CurrentUser == null)
         {
             string a = Request.Url.LocalPath;
-            if (!a.ToLower().Equals("/libsys/user.aspx"))
+            a = a.Substring(a.LastIndexOf('/')+1);
+            if (!a.ToLower().Equals("user.aspx"))
             {
                 Response.Redirect("Default.aspx");
             }

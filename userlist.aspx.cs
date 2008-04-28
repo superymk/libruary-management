@@ -30,7 +30,7 @@ public partial class userlist : System.Web.UI.Page
         u.TrueName = trueName.Text;
         u.College = college.Text;
         u.Address = address.Text;
-        u.Sex = sex.Text;
+        u.Sex = DropDownList1.SelectedValue.Equals("") ? null : DropDownList1.SelectedValue;
         u.Email = email.Text;
         u.Description = description.Text;
         try
@@ -39,14 +39,19 @@ public partial class userlist : System.Web.UI.Page
         }
         catch (FormatException) { }
         IUserDao dao = DaoFactory.getUserDao();
-        DataSet ds = dao.findDataSet(u);
+        DataSet ds = dao.findDataSet(u,"iduser asc");
         GridView1.DataSource = ds;
         GridView1.DataBind();
         foreach (GridViewRow row in GridView1.Rows)
         {
-            string iduserstr = row.Cells[0].Text;
-            int iduser = int.Parse(iduserstr);
+            int iduser = int.Parse(row.Cells[0].Text);
             row.Cells[row.Cells.Count - 3].Text = DaoFactory.getUserDao().isAdmin(iduser) ? "是" : "否";
+
+            int mark = 0;
+            int.TryParse(row.Cells[8].Text,out mark);
+           
+            if (mark < 0)
+                row.Cells[8].Attributes.Add("style","color:red");
         }
         
         SessionData sd = Session[SessionData.SessionName] as SessionData;

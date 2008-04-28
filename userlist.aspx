@@ -84,7 +84,12 @@
                     <asp:Label id="Label7"  runat="server" text="性别: " /> 
                 </asp:TableCell>
                 <asp:TableCell ID="TableCell7" runat="server">
-                    <asp:textbox id="sex" runat="server" cssclass="textbox" /> 
+                    <asp:DropDownList ID="DropDownList1" runat="server" >
+                        <asp:ListItem Value=""></asp:ListItem>
+                        <asp:ListItem Value="MALE">男</asp:ListItem>
+                        <asp:ListItem Value="FEMALE">女</asp:ListItem>
+                    </asp:DropDownList>
+                    <!--<asp:textbox id="sex" runat="server" cssclass="textbox" /> -->
                 </asp:TableCell>
                 <asp:TableCell ID="TextCell8" runat="server" >
                     <asp:Label id="Label8"  runat="server" text="Email: " /> 
