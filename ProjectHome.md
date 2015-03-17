@@ -1,0 +1,1 @@
+A Libruary Management System for MSTC in SJTU, which provide basic libruary functions for SJTU MSTC Members.
